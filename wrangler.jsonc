@@ -3,6 +3,12 @@
   // Static Astro build served by Workers Static Assets (no Worker script needed).
   "name": "edtrek-web",
   "compatibility_date": "2026-11-01",
+  // Custom domains: Cloudflare creates the DNS records and certificates.
+  // The zone edtrek.digital is in this Cloudflare account.
+  "routes": [
+    { "pattern": "edtrek.digital", "custom_domain": true },
+    { "pattern": "www.edtrek.digital", "custom_domain": true }
+  ],
   "assets": {
     "directory": "./dist",
     "not_found_handling": "404-page"

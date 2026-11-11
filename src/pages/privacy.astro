@@ -1,0 +1,119 @@
+---
+/**
+ * Privacy Policy — PLACEHOLDER. Plain-language draft describing what the site
+ * does today; not legal advice. Have it reviewed and fill the [bracketed]
+ * items before launch, then drop `noindex`.
+ *
+ * Facts it relies on (re-check if they change):
+ *   - the only data collected is the email from the contact popup
+ *     (ContactModal), sent to an external form provider (not chosen yet)
+ *   - no analytics, no cookies, no local storage; fonts are self-hosted
+ *   - hosted on Cloudflare Workers (standard request logs)
+ *
+ * Same chrome as the 404: TopoMap backdrop, SiteNav, Footer.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopoMap from '../components/site/TopoMap.astro';
+import SiteNav from '../components/site/SiteNav.astro';
+import Footer from '../components/site/Footer.astro';
+
+const updated = 'November 12, 2026';
+---
+
+<BaseLayout
+  title="Privacy Policy — EdTrek Digital"
+  description="How EdTrek Digital handles the information you share through this website."
+  noindex
+>
+  <TopoMap slot="backdrop" />
+  <SiteNav slot="header" />
+
+  <article class="pp container-site above-map" aria-labelledby="pp-title">
+    <header class="pp-header">
+      <p class="type-eyebrow text-lagoon">Last updated {updated}</p>
+      <h1 id="pp-title" class="type-h1">Privacy Policy</h1>
+      <p class="type-body">
+        EdTrek Digital is run by me, Kirk Pettinga. more to come...
+      </p>
+    </header>
+
+    <section>
+      <h2 class="type-h3">What I collect</h2>
+      <p>
+        lorem ipsum...
+      </p>
+    </section>
+  </article>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  import { initScrollScene } from '../scripts/scroll-scene';
+  import { initTopoReveal } from '../scripts/topo-reveal';
+  initScrollScene();
+  initTopoReveal();
+</script>
+
+<style>
+  @reference "../styles/global.css";
+
+  @layer components {
+    /* Single reading column; top clears the fixed nav like the 404. */
+    .pp {
+      --nav-clear: 88px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: calc(720px + 2 * var(--section-padding-inline));
+      padding-top: calc(var(--nav-clear) + var(--section-padding-block) / 2);
+      padding-bottom: var(--section-padding-block);
+
+      @variant tablet {
+        --nav-clear: 132px;
+        gap: 48px;
+      }
+      @variant wide {
+        max-width: 720px;
+      }
+    }
+
+    .pp-header {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--color-hairline);
+
+      @variant tablet {
+        gap: 20px;
+        padding-bottom: 48px;
+      }
+    }
+
+    .pp section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pp section ul li {
+      position: relative;
+      padding-left: 17px;
+
+      & + li {
+        margin-top: 4px;
+      }
+      /* 5px Lagoon square bullets, as in Three Yeses / FAQ */
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.62em;
+        width: 5px;
+        height: 5px;
+        background: var(--color-lagoon);
+      }
+    }
+  }
+</style>
