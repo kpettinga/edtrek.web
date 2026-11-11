@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# anything claude relies on
+claude/
+
+# cloudflare / wrangler
+.wrangler/
+.dev.vars*

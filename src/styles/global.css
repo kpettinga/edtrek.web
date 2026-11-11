@@ -1,0 +1,307 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   EdTrek Digital — design tokens
+   Source: claude/edtrek-dev-handoff.md §3 + Figma variables (CWaseClsXhlYbUNMiz28uz)
+   ========================================================================== */
+
+@theme {
+  /* ---- Breakpoints (replace Tailwind defaults) ---- */
+  --breakpoint-*: initial;
+  --breakpoint-tablet: 45rem;   /* 720px */
+  --breakpoint-desktop: 64rem;  /* 1024px */
+  --breakpoint-wide: 86rem;     /* 1376px */
+
+  /* ---- Color (Figma variables) ---- */
+  --color-bedrock: #36464a;
+  --color-lagoon: #3b7b8b;
+  --color-air: #cde4ef;
+  --color-fire: #ff5e1b;
+  --color-fire-tint: #ffece4;
+  /* Supporting (not Figma variables yet) */
+  --color-paper: #f6f4ee;
+  --color-mist: #c6cfcc;
+  --color-hairline: rgb(54 70 74 / 0.14); /* Bedrock @ 14% — dividers */
+  --color-card-border: rgb(54 70 74 / 0.12); /* Bedrock @ 12% — cards */
+
+  /* ---- Fonts (CSS vars provided by Astro Fonts API, see astro.config.mjs) ---- */
+  --font-display: var(--font-zilla-slab), Georgia, serif;
+  --font-sans: var(--font-karla), system-ui, sans-serif;
+
+  /* Brand weights only: Zilla Slab 300/700, Karla 400/700. No semibold/medium/etc. */
+  --font-weight-*: initial;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* ---- Type scale (fluid 360 → 1440, rem fixed part so zoom works) ---- */
+  --text-h1: clamp(2rem, 1.25rem + 3.333vw, 4.25rem);       /* 32 → 68 */
+  --text-h2: clamp(1.75rem, 1.417rem + 1.481vw, 2.75rem);   /* 28 → 44 */
+  --text-h3: clamp(1.375rem, 1.208rem + 0.741vw, 1.875rem); /* 22 → 30 */
+  --text-h4: clamp(1.125rem, 1.042rem + 0.37vw, 1.375rem);  /* 18 → 22 */
+  --text-quote: clamp(1.125rem, 1.042rem + 0.37vw, 1.375rem); /* 18 → 22 */
+  --text-body: clamp(1rem, 0.958rem + 0.185vw, 1.125rem);   /* 16 → 18 */
+  --text-body-sm: 1rem;     /* 16 */
+  --text-label: 1rem;       /* 16 */
+  --text-caption: 0.875rem; /* 14 */
+  --text-eyebrow: 0.8125rem; /* 13 */
+
+  /* ---- Effects ---- */
+  --shadow-fire: 6px 6px 0 var(--color-fire);
+  --shadow-fire-sm: 4px 4px 0 var(--color-fire);
+  --shadow-fire-pressed: 2px 2px 0 var(--color-fire);
+  --shadow-tile: 6px 6px 0 rgb(54 70 74 / 0.14);
+
+  --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---- Layout tokens (Figma "Responsive" collection) ----
+   CSS can't read var() inside @media, so breakpoints come from the @theme
+   --breakpoint-* tokens via Tailwind's @variant (resolved at build time). */
+:root {
+  --grid-columns: 4;
+  --grid-gutter: 20px;
+  --section-padding-inline: 20px;
+  --section-padding-block: 100px;
+  --container-max: 1600px;
+
+  @variant tablet {
+    --grid-columns: 8;
+    --grid-gutter: 32px;
+    --section-padding-inline: 40px;
+    --section-padding-block: 120px;
+  }
+  @variant desktop {
+    --grid-columns: 12;
+    --grid-gutter: 40px;
+    --section-padding-inline: 60px;
+    --section-padding-block: 160px;
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* keep anchor targets clear of the fixed nav (compact height: 64 mobile / 88 tablet+) */
+    scroll-padding-top: 64px;
+
+    @variant tablet {
+      scroll-padding-top: 88px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    background: #fff;
+    color: var(--color-bedrock);
+    font-family: var(--font-sans);
+    /* Only brand cuts are loaded; never fake bold or italic for missing faces */
+    font-synthesis: none;
+    font-size: var(--text-body);
+    line-height: 1.46;
+    letter-spacing: -0.03em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lagoon);
+    outline-offset: 4px;
+  }
+
+  ::selection {
+    background: var(--color-air);
+    color: var(--color-bedrock);
+  }
+}
+
+/* ==========================================================================
+   Type styles — one utility per Figma text style
+   ========================================================================== */
+@utility type-h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--text-h1);
+  line-height: 1;
+  letter-spacing: 0;
+}
+@utility type-h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--text-h2);
+  line-height: 1.17;
+  letter-spacing: 0;
+}
+@utility type-h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-h3);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+@utility type-h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-h4);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+@utility type-quote {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: var(--text-quote);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+@utility type-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-body);
+  line-height: 1.46;
+  letter-spacing: -0.03em;
+}
+@utility type-body-sm {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-body-sm);
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+@utility type-label {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-label);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+@utility type-caption {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: var(--text-caption);
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+@utility type-caption-bold {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-caption);
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+@utility type-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-eyebrow);
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Layout utilities
+   ========================================================================== */
+
+/* Page container: full width minus section padding; fixed fluid width ≥1376 */
+@utility container-site {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--section-padding-inline);
+
+  @variant wide {
+    width: clamp(1256px, 87.22vw, 1600px);
+    padding-inline: 0;
+  }
+}
+
+/* Responsive column grid (12 / 8 / 4) */
+@utility grid-site {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+
+/* Standard section vertical rhythm */
+/* Page layering around the fixed topo map (TopoMap.astro):
+     section backgrounds < map (z 1) < veil (z 2) < content (z 3)
+   `veil` = a white wash over the map for white sections, so they read as
+   distinct bands instead of bare page. Strength via --veil (0–1; 1 = solid). */
+@utility veil {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    /* --veil-fade: optional length over which the veil fades in from the top
+       edge (0 = solid), for blending into an unveiled section above. */
+    background: linear-gradient(
+      rgb(255 255 255 / 0),
+      rgb(255 255 255 / var(--veil, 0.55)) var(--veil-fade, 0px)
+    );
+    pointer-events: none;
+  }
+}
+@utility above-map {
+  position: relative;
+  z-index: 3;
+}
+@utility section-pad {
+  padding-block: var(--section-padding-block);
+}
+
+/* ==========================================================================
+   Page trail — the dashed route that runs down the centre of the page,
+   section to section, through each X waypoint (Figma motion study 52:727).
+   Pieces are created and sized by scripts/trail.ts; Services' mid-section
+   piece sits in the markup (.page-trail--flow). --fill (0 → 1, set on scroll) is
+   how much of the piece has been travelled.
+   Same line as the Roadmap's step trail: 2px, 4px dashes / 4px gaps, Mist road
+   ahead, Bedrock travelled.
+   Colours per band: --trail-done, --trail-ahead, --trail-mark (start squares).
+   ========================================================================== */
+@layer components {
+  .page-trail {
+    --trail-dash: repeating-linear-gradient(to bottom, currentColor 0 4px, transparent 4px 8px);
+    position: absolute;
+    left: 50%;
+    z-index: 3; /* above the white veil */
+    width: 2px;
+    margin-left: -1px;
+    color: var(--trail-ahead, var(--color-mist));
+    background: var(--trail-dash);
+    pointer-events: none;
+  }
+  .page-trail::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    color: var(--trail-done, var(--color-bedrock));
+    background: var(--trail-dash);
+    clip-path: inset(0 0 calc((1 - var(--fill, 0)) * 100%) 0);
+  }
+  /* Solid 12px square where a section's bottom piece starts; the dashes begin
+     8px below it (keep in sync with SQUARE / CLEAR in trail.ts) */
+  .page-trail-square {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    background: var(--trail-mark, var(--color-bedrock));
+  }
+  .page-trail--flow {
+    position: relative;
+    left: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

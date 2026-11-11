@@ -1,0 +1,322 @@
+---
+/**
+ * Abstract trip page + callouts (Figma 53:726, chips 49:623 / 49:630 / 49:1071).
+ * Photo: src/assets/images/atikh-bana-Ycds6emp7BA.jpg (replaces the Figma Colosseum placeholder).
+ * Not in Figma: a slim address bar (globe + URL line) above the photo, so the
+ * card reads as a browser window; the photo starts lower to make room.
+ *
+ * Built at the Figma design size (560×540 stage) and scaled as one unit with
+ * --s = containerWidth / 560 (pure CSS via tan(atan2()), capped at 1).
+ *   mobile:  card scales to the column; callouts stack full-width below it
+ *   tablet+: callouts float over the card at their Figma positions, scaled with it
+ *
+ * Entrance (Motion notes, Note 01): the page assembles block by block (~600ms),
+ * then callouts pop in one at a time and hold still. None under reduced motion.
+ * Decorative — hidden from assistive tech except the callout copy.
+ */
+import { Image } from 'astro:assets';
+import Icon from '../ui/Icon.astro';
+import trip from '../../assets/images/atikh-bana-Ycds6emp7BA.jpg';
+
+// Front-card blocks at Figma px (x, y, w, h, radius, fill)
+const blocks = [
+  { x: 33, y: 281, w: 230, h: 14, r: 7, c: 'bedrock' },
+  { x: 33, y: 305, w: 170, h: 10, r: 5, c: 'bedrock' },
+  { x: 33, y: 325, w: 200, h: 10, r: 5, c: 'bedrock' },
+  { x: 299, y: 285, w: 106, h: 34, r: 17, c: 'fire' },
+  ...[17, 155, 293].flatMap((x, i) => [
+    { x, y: 361, w: 128, h: 90, r: 18, c: 'air' },
+    { x: x + 16, y: 377, w: 26, h: 26, r: 13, c: i === 1 ? 'fire' : 'lagoon' },
+    { x: x + 16, y: 413, w: 80, h: 8, r: 4, c: 'bedrock' },
+    { x: x + 16, y: 429, w: 56, h: 6, r: 3, c: 'bedrock' },
+  ]),
+];
+
+const callouts = [
+  { key: 'speed', icon: 'bolt', title: 'Lightning-fast pages', text: 'Quick on any device or connection' },
+  { key: 'integrations', icon: 'plug-connected', title: 'Connected to your booking system', text: 'Custom integrations' },
+  { key: 'trust', icon: 'shield-check', title: 'Design that signals trust', text: 'Safety, accreditation & reviews' },
+] as const;
+---
+
+<div class="trip">
+  <div class="trip-box" aria-hidden="true">
+    <div class="trip-stage">
+      <div class="trip-back anim" style="--i: 0"></div>
+      <div class="trip-front anim" style="--i: 1">
+        <span class="trip-bar anim" style="--i: 2">
+          <Icon name="world" size={16} />
+          <span class="trip-url"></span>
+        </span>
+        <Image
+          src={trip}
+          alt=""
+          width={404}
+          widths={[404, 808]}
+          sizes="404px"
+          format="webp"
+          quality={78}
+          loading="eager"
+          class="trip-photo anim"
+          style="--i: 3"
+        />
+        {
+          blocks.map((b, n) => (
+            <span
+              class:list={['trip-block anim', `bg-${b.c}`]}
+              style={`--i:${4 + Math.floor(n / 2)};left:${b.x}px;top:${b.y}px;width:${b.w}px;height:${b.h}px;border-radius:${b.r}px`}
+            />
+          ))
+        }
+        <span class="trip-fade"></span>
+      </div>
+    </div>
+  </div>
+
+  <ul class="callouts" role="list" data-callouts>
+    {
+      callouts.map((c, i) => (
+        <li class:list={['callout', `callout--${c.key}`]} style={`--c:${i}`}>
+          <span class="callout-icon" aria-hidden="true">
+            <Icon name={c.icon} size={20} />
+          </span>
+          <span class="flex min-w-0 flex-col gap-0.5">
+            <span class="type-label">{c.title}</span>
+            <span class="type-caption">{c.text}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<script>
+  // Mobile only (callouts stacked under the card, i.e. not absolutely positioned):
+  // hold the pop-in until the list scrolls into view, then play it once.
+  const list = document.querySelector<HTMLElement>('[data-callouts]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (list && !reduce && getComputedStyle(list).position !== 'absolute' && 'IntersectionObserver' in window) {
+    list.dataset.reveal = 'pending';
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          list.dataset.reveal = 'in';
+          io.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    io.observe(list);
+  }
+</script>
+
+<style>
+  @reference "../../styles/global.css";
+
+  @layer components {
+    .trip {
+      position: relative;
+      width: min(100%, 560px);
+      container-type: inline-size;
+      /* unitless scale: rendered width ÷ design width, ≤ 1 */
+      --s: min(1, tan(atan2(100cqw, 560px)));
+    }
+
+    /* ---- the abstract trip page ---- */
+    .trip-box {
+      position: relative;
+      aspect-ratio: 560 / 540;
+    }
+    .trip-stage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 560px;
+      height: 540px;
+      transform: scale(var(--s));
+      transform-origin: 0 0;
+      opacity: 0.9;
+    }
+    .trip-back {
+      position: absolute;
+      left: 84.9px;
+      top: 90.7px;
+      width: 420px;
+      height: 460px;
+      border-radius: 32px;
+      background: var(--color-air);
+      rotate: 6deg;
+    }
+    .trip-front {
+      position: absolute;
+      left: 50px;
+      top: 30px;
+      width: 440px;
+      height: 470px;
+      overflow: hidden;
+      border: 1px solid var(--color-bedrock);
+      border-radius: 32px;
+      background: rgb(255 255 255 / 0.92);
+      box-shadow: 0 30px 60px 0 rgb(54 69 74 / 0.06);
+    }
+    .trip-bar {
+      position: absolute;
+      left: 16px;
+      top: 14px;
+      width: 404px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-inline: 10px;
+      border-radius: 14px;
+      background: var(--color-air);
+      color: var(--color-lagoon);
+    }
+    .trip-url {
+      width: 148px;
+      height: 6px;
+      border-radius: 3px;
+      background: rgb(54 70 74 / 0.35);
+    }
+    .trip-photo {
+      position: absolute;
+      left: 16px;
+      top: 52px; /* below the address bar; bottom edge unchanged (252) */
+      width: 404px;
+      height: 200px;
+      object-fit: cover;
+      object-position: 50% 40%; /* keep the face clear of the crop */
+      border-radius: 22px;
+    }
+    .trip-block {
+      position: absolute;
+    }
+    .trip-fade {
+      position: absolute;
+      left: -1px;
+      top: 329px;
+      width: 440px;
+      height: 140px;
+      background: linear-gradient(to bottom, rgb(255 255 255 / 0), rgb(255 255 255 / 0.9));
+    }
+
+    /* ---- callouts ---- */
+    /* mobile: stacked full-width under the card.
+       tablet+: float over the card at Figma positions, scaled with it.
+       (@variant is nested per selector so Astro's scoping applies.) */
+    .callouts {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: -36px; /* overlaps the card's faded foot (Figma mobile) */
+
+      @variant tablet {
+        position: absolute;
+        inset: 0 auto auto 0;
+        display: block;
+        width: 560px;
+        height: 540px;
+        margin: 0;
+        transform: scale(var(--s));
+        transform-origin: 0 0;
+        pointer-events: none;
+      }
+    }
+    .callout {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px 16px 14px;
+      background: #fff;
+      color: var(--color-bedrock);
+      box-shadow:
+        0 24px 48px -8px rgb(54 69 74 / 0.2),
+        0 2px 6px 0 rgb(54 69 74 / 0.1);
+
+      @variant tablet {
+        position: absolute;
+        white-space: nowrap;
+      }
+    }
+    /* Callouts drift outward as the layout widens (offsets are in stage px, so
+       they scale with the card). At the narrow end of each breakpoint they sit
+       at the Figma positions; as they spread they keep clear of the Eiffel Tower
+       (speed sits over the address bar, integrations drops below the tower's base).
+         --p: main spread, ramps 0 → 70px across the breakpoint
+         --q: extra sideways spread — tablet: follows --p; desktop: only once the
+              visual column gains real room past 1440 (it bleeds to the edge). */
+    .callouts {
+      @variant tablet {
+        --p: clamp(0px, (100vw - 720px) * 0.23, 70px);
+        --q: calc(var(--p) * 0.75);
+      }
+      @variant desktop {
+        --p: clamp(0px, (100vw - 1024px) * 0.17, 70px);
+        --q: clamp(0px, (100vw - 1440px) * 0.25, 110px);
+      }
+    }
+    .callout--speed {
+      @variant tablet {
+        left: calc(247px + var(--q));
+        top: calc(2px - var(--p) * 0.36);
+      }
+    }
+    .callout--integrations {
+      @variant tablet {
+        left: calc(-54px - var(--p) * 0.9 - var(--q) * 0.4);
+        top: calc(222px + var(--p) * 0.5);
+      }
+    }
+    .callout--trust {
+      @variant tablet {
+        left: calc(265px + var(--q) * 0.8);
+        top: calc(446px + var(--p) * 0.2);
+      }
+    }
+    .callout-icon {
+      display: grid;
+      place-items: center;
+      flex: none;
+      width: 40px;
+      height: 40px;
+      background: var(--color-lagoon);
+      color: #fff;
+    }
+
+    /* ---- entrance ---- */
+    @media (prefers-reduced-motion: no-preference) {
+      .anim {
+        animation: trip-block-in 320ms var(--ease-brand) both;
+        animation-delay: calc(var(--i) * 45ms);
+      }
+      .callout {
+        animation: callout-pop 420ms var(--ease-brand) both;
+        animation-delay: calc(720ms + var(--c) * 200ms);
+      }
+      /* Mobile: callouts sit below the fold, so they pop in when scrolled into
+         view instead (script below sets data-reveal; without JS they just show). */
+      .callouts[data-reveal='pending'] .callout {
+        animation: none;
+        opacity: 0;
+      }
+      .callouts[data-reveal='in'] .callout {
+        animation-delay: calc(var(--c) * 160ms);
+      }
+    }
+    @keyframes trip-block-in {
+      from {
+        opacity: 0;
+        translate: 0 10px;
+      }
+    }
+    @keyframes callout-pop {
+      from {
+        opacity: 0;
+        scale: 0.92;
+        translate: 0 8px;
+      }
+    }
+  }
+</style>

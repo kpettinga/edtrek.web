@@ -1,0 +1,24 @@
+---
+/**
+ * Brand page section — mirrors the Brand Foundations board section header
+ * (1px Bedrock rule, number eyebrow + H2 left, Body Small intro right).
+ */
+interface Props {
+  id: string;
+  number: string;
+  title: string;
+  intro?: string;
+}
+const { id, number, title, intro } = Astro.props;
+---
+
+<section id={id} class="container-site pb-24 desktop:pb-36" aria-labelledby={`${id}-title`}>
+  <header class="border-t border-bedrock pt-6 mb-10 desktop:mb-14 flex flex-col gap-4 tablet:flex-row tablet:items-end tablet:justify-between">
+    <div class="flex flex-col gap-3">
+      <p class="type-eyebrow text-lagoon">{number}</p>
+      <h2 id={`${id}-title`} class="type-h2">{title}</h2>
+    </div>
+    {intro && <p class="type-body-sm max-w-[520px]">{intro}</p>}
+  </header>
+  <slot />
+</section>

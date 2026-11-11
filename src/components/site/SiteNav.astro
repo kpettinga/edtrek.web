@@ -1,0 +1,201 @@
+---
+/**
+ * SiteNav — fixed navbar that starts as part of the hero and compresses into
+ * the sticky bar (Figma: hero 49:559 / 113:1136 / 119:680, sticky 50:743).
+ *
+ * States (data-state, set by scroll-scene.ts):
+ *   top     — at the top of the page; tall (132px), transparent: reads as part of
+ *             the hero, with the page topo map showing through
+ *   compact — scrolled (sticky); 88px band (64px mobile), solid white, with
+ *             the Fire trail progress line along the bottom edge
+ *
+ * Desktop: logo · links · Book a Call. Tablet: logo · menu · Book a Call.
+ * Mobile: logo · menu. (The open menu isn't designed yet — icon only.)
+ */
+import Logo from '../ui/Logo.astro';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+
+const links = [
+  { label: 'Services', href: '/#services' },
+  { label: 'About', href: '/#about' },
+  { label: 'FAQs', href: '/#faq' },
+];
+---
+
+<header id="site-nav" class="site-nav" data-state="top">
+  <div class="nav-row container-site">
+    <span class="nav-mark nav-mark--start" aria-hidden="true"></span>
+
+    <Logo size={28.5} class="text-bedrock" />
+
+    <nav aria-label="Primary" class="ml-auto flex items-center">
+      <ul class="hidden desktop:flex items-center gap-9" role="list">
+        {
+          links.map((l) => (
+            <li>
+              <a href={l.href} class="nav-link type-label text-bedrock">
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-4 desktop:ml-9">
+      <button
+        type="button"
+        class="menu-btn desktop:hidden"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="site-menu"
+      >
+        <Icon name="menu-2" />
+      </button>
+      <Button data-modal-open="contact-modal" aria-haspopup="dialog" size="small" icon="phone-call" class="max-tablet:hidden">Book a Call</Button>
+    </div>
+
+    <span class="nav-mark nav-mark--end" aria-hidden="true"></span>
+  </div>
+
+  <!-- Bottom edge = trail progress line (visible once compact/sticky) -->
+  <div class="nav-trail" aria-hidden="true">
+    <span class="nav-trail__done"></span>
+    <span class="nav-trail__head"></span>
+  </div>
+</header>
+
+<style>
+  @reference "../../styles/global.css";
+
+  @layer components {
+    .site-nav {
+      --nav-h: 88px;
+      --nav-h-compact: 64px;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 50;
+      height: var(--nav-h);
+      background: rgb(255 255 255 / 0);
+      transition:
+        height 320ms var(--ease-brand),
+        background-color 320ms var(--ease-brand);
+
+      @variant tablet {
+        --nav-h: 132px;
+        --nav-h-compact: 88px;
+      }
+    }
+    .site-nav:not([data-state='top']) {
+      height: var(--nav-h-compact);
+      background: #fff;
+    }
+
+    .nav-row {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    /* Corner square marks — sit in the margin, a fixed gap outside the content edge.
+       --content-inset = the container's inline padding (0 once it switches to a fixed width). */
+    .nav-mark {
+      --mark-gap: 14px;
+      --content-inset: var(--section-padding-inline);
+      position: absolute;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      margin-top: -6px;
+      background: var(--color-bedrock);
+      display: none;
+
+      @variant tablet {
+        display: block;
+      }
+      @variant desktop {
+        --mark-gap: 24px;
+      }
+      @variant wide {
+        --content-inset: 0px;
+      }
+    }
+    .nav-mark--start {
+      left: calc(var(--content-inset) - var(--mark-gap) - 12px);
+    }
+    .nav-mark--end {
+      right: calc(var(--content-inset) - var(--mark-gap) - 12px);
+    }
+
+    .nav-link {
+      text-decoration: underline 2px transparent;
+      text-underline-offset: 6px;
+      transition: text-decoration-color 160ms ease-out;
+    }
+    @media (hover: hover) {
+      .nav-link:hover {
+        text-decoration-color: currentColor;
+      }
+    }
+
+    .menu-btn {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      margin-right: -8px; /* optical: icon edge aligns with container edge on mobile */
+      color: var(--color-bedrock);
+      cursor: pointer;
+
+      @variant tablet {
+        margin-right: 0;
+      }
+    }
+
+    /* ---- Bottom edge = trail progress (Figma 50:757–50:759, simplified) ----
+       One 2px line across the bottom: Fire for the part of the page travelled,
+       Bedrock for the road ahead (2px = brand trail weight), plus the trail head. */
+    .nav-trail {
+      --trail-w: 2px;
+      --head: 8px;
+      position: absolute;
+      inset: auto 0 0;
+      height: var(--trail-w);
+      background: var(--color-mist); /* road ahead */
+      opacity: 0;
+      transition: opacity 200ms ease-out;
+      pointer-events: none;
+    }
+    .site-nav[data-state='compact'] .nav-trail {
+      opacity: 1;
+    }
+    .nav-trail__done {
+      /* path travelled, grows with page progress */
+      position: absolute;
+      inset: 0;
+      background: var(--color-fire);
+      transform-origin: left center;
+      transform: scaleX(var(--scroll-progress, 0));
+    }
+    .nav-trail__head {
+      position: absolute;
+      top: calc((var(--trail-w) - var(--head)) / 2);
+      left: 0;
+      width: var(--head);
+      height: var(--head);
+      border-radius: 50%;
+      margin-left: calc(var(--head) / -2);
+      background: var(--color-fire);
+      transform: translateX(calc(var(--scroll-progress, 0) * 100vw));
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .site-nav,
+      .nav-trail {
+        transition: none;
+      }
+    }
+  }
+</style>

@@ -20,3 +20,7 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Design handoff
+
+Before building any UI, read `claude/edtrek-dev-handoff.md`. It holds the brand rules, design tokens, component specs, responsive behavior, and Figma node IDs (file `CWaseClsXhlYbUNMiz28uz`) for the homepage.

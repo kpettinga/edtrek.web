@@ -1,0 +1,543 @@
+---
+/**
+ * /brand — a brief, live version of the Brand Foundations board (Figma 13:237).
+ * Everything renders from the real tokens (global.css) and UI components, so this
+ * page doubles as a visual regression check. Internal: noindex.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandSection from '../components/brand/BrandSection.astro';
+import Logo from '../components/ui/Logo.astro';
+import Button from '../components/ui/Button.astro';
+import Icon, { type IconName } from '../components/ui/Icon.astro';
+import BrandMark from '../components/ui/BrandMark.astro';
+import Modal from '../components/ui/Modal.astro';
+
+const swatches = [
+  { name: 'Bedrock', token: 'color.bedrock', cls: 'bg-bedrock text-white', hex: '#36464A', rgb: '54 · 70 · 74', contrast: 'White text · 9.9 : 1 · AAA', use: 'Headlines, body text, footer background.' },
+  { name: 'Lagoon', token: 'color.lagoon', cls: 'bg-lagoon text-white', hex: '#3B7B8B', rgb: '59 · 123 · 139', contrast: 'White text · 4.8 : 1 · AA', use: 'Icon tiles, eyebrows, secondary accents.' },
+  { name: 'Air', token: 'color.air', cls: 'bg-air text-bedrock', hex: '#CDE4EF', rgb: '205 · 228 · 239', contrast: 'Bedrock text · 7.5 : 1 · AAA', use: 'Section bands, tags, soft surfaces.' },
+  { name: 'Fire', token: 'color.fire', cls: 'bg-fire text-white', hex: '#FF5E1B', rgb: '255 · 94 · 27', contrast: 'White text · 3.1 : 1 · Large text only', use: 'Calls to action, X markers, trail line. Nothing else.' },
+];
+
+const neutrals = [
+  { name: 'White', value: '#FFFFFF', cls: 'bg-white', use: 'Page background' },
+  { name: 'Paper', value: '#F6F4EE', cls: 'bg-paper', use: 'Headlines on Bedrock' },
+  { name: 'Mist', value: '#C6CFCC', cls: 'bg-mist', use: 'Muted text on Bedrock' },
+  { name: 'Hairline', value: 'Bedrock @ 14%', cls: 'bg-hairline', use: 'Borders & dividers' },
+  { name: 'Fire Tint', value: '#FFECE4', cls: 'bg-fire-tint', use: 'Primary button hover' },
+];
+
+const balance = [
+  { name: 'White', pct: 60, cls: 'bg-white text-bedrock' },
+  { name: 'Air', pct: 16, cls: 'bg-air text-bedrock' },
+  { name: 'Bedrock', pct: 14, cls: 'bg-bedrock text-white' },
+  { name: 'Lagoon', pct: 7, cls: 'bg-lagoon text-white' },
+  { name: 'Fire', pct: 3, cls: 'bg-fire text-white' },
+];
+
+const typeStyles = [
+  { name: 'Heading/H1', cls: 'type-h1', spec: 'Zilla Slab Light · 68 / 100%', fluid: '32 → 68', use: 'Hero and closing headlines. One per view. Emphasis: Fire, Light Italic or Bold.' },
+  { name: 'Heading/H2', cls: 'type-h2', spec: 'Zilla Slab Light · 44 / 117%', fluid: '28 → 44', use: 'Section headlines. Emphasis: Bold on the key phrase.' },
+  { name: 'Heading/H3', cls: 'type-h3', spec: 'Zilla Slab Bold · 30 / 110%', fluid: '22 → 30', use: 'Card titles, process steps.' },
+  { name: 'Heading/H4', cls: 'type-h4', spec: 'Zilla Slab Bold · 22 / 120%', fluid: '18 → 22', use: 'Service titles, FAQ questions, stat values.' },
+  { name: 'Heading/Quote', cls: 'type-quote', spec: 'Zilla Slab Light Italic · 22 / 150%', fluid: '18 → 22', use: 'Testimonials and pull quotes.' },
+  { name: 'Text/Body', cls: 'type-body', spec: 'Karla Regular · 18 / 146% · −3%', fluid: '16 → 18', use: 'Paragraphs and intros. Emphasis: Bold.' },
+  { name: 'Text/Body Small', cls: 'type-body-sm', spec: 'Karla Regular · 16 / 130% · −3%', use: 'Card copy, lists, FAQ answers.' },
+  { name: 'Text/Label', cls: 'type-label', spec: 'Karla Bold · 16 / 120%', use: 'Buttons, navigation, callout titles.' },
+  { name: 'Text/Caption', cls: 'type-caption', spec: 'Karla Regular · 14 / 140%', use: 'Stat labels, supporting meta, footer.' },
+  { name: 'Text/Caption Bold', cls: 'type-caption-bold', spec: 'Karla Bold · 14 / 140%', use: 'Names, tags.' },
+  { name: 'Text/Eyebrow', cls: 'type-eyebrow text-lagoon', spec: 'Karla Bold · 13 / 120% · +8% · Caps', use: 'Labels above headings. Lagoon on light, Mist on Bedrock.' },
+];
+
+const marks = [
+  { shape: 'square', role: 'Start & stop', name: 'Square', color: 'text-bedrock', note: 'Outline on the trail; Solid for nav corners and the footer stop.' },
+  { shape: 'circle', role: 'Start here', name: 'Circle', color: 'text-fire', note: 'Start here — the first step of a process.' },
+  { shape: 'triangle', role: 'Milestone', name: 'Triangle', color: 'text-fire', note: 'Milestones along the way.' },
+  { shape: 'x', role: 'Destination', name: 'X', color: 'text-fire', note: 'Anchors every section at 48px display size in Fire.' },
+] as const;
+
+const iconGroups: { title: string; icons: IconName[] }[] = [
+  { title: 'Services — hand-picked Tabler', icons: ['tools', 'terminal-2', 'plug-connected', 'database-export', 'gauge', 'lifebuoy', 'cloud-code', 'zoom-question'] },
+  { title: 'Interface — Tabler', icons: ['rocket', 'phone-call', 'arrow-down', 'browser-check', 'code', 'tool', 'transfer-in', 'chevron-down', 'menu-2'] },
+  { title: 'Custom — drawn to Tabler’s grid', icons: ['school', 'heart', 'mood-excited', 'bolt', 'shield-check', 'quote-open'] },
+];
+
+const breakpoints = [
+  { range: '0 – 719px', name: 'Mobile', lines: ['4 columns · 20 gutter', 'Inline padding 20', 'Block padding 100', 'Container 100%'] },
+  { range: '720 – 1023px', name: 'Tablet', lines: ['8 columns · 32 gutter', 'Inline padding 40', 'Block padding 120', 'Container 100%'] },
+  { range: '1024 – 1375px', name: 'Desktop', lines: ['12 columns · 40 gutter', 'Inline padding 60', 'Block padding 160', 'Container 100% (up to 1256)'] },
+  { range: '1376px +', name: 'Wide', lines: ['12 columns · 40 gutter', 'clamp(1256px, 87.22vw, 1600px)', 'Holds 1256 until 1440, then scales', 'Caps at 1600'] },
+];
+
+const shadows = [
+  { name: 'Offset Fire', token: 'shadow-fire', value: '6 6 0 Fire', cls: 'shadow-fire border-2 border-bedrock', use: 'Primary button' },
+  { name: 'Offset Fire Small', token: 'shadow-fire-sm', value: '4 4 0 Fire', cls: 'shadow-fire-sm border-2 border-bedrock', use: 'Small button' },
+  { name: 'Offset Fire Pressed', token: 'shadow-fire-pressed', value: '2 2 0 Fire', cls: 'shadow-fire-pressed border-2 border-bedrock', use: 'Button :active' },
+  { name: 'Offset Tile', token: 'shadow-tile', value: '6 6 0 Bedrock 14%', cls: 'shadow-tile border border-card-border', use: 'Stat tiles, hovered cards' },
+];
+---
+
+<BaseLayout title="Brand foundations — EdTrek Digital" noindex>
+  <!-- Header -->
+  <header class="container-site pt-16 pb-20 desktop:pt-24 desktop:pb-32 flex flex-col gap-6">
+    <p class="type-eyebrow text-lagoon flex items-center gap-3">
+      <span class="size-2 bg-fire" aria-hidden="true"></span>EdTrek Digital · Brand &amp; type system
+    </p>
+    <h1 class="type-h1">Brand foundations</h1>
+    <p class="type-body max-w-[860px]">
+      The building blocks for edtrek.digital — logotype, color, brand marks, typography, buttons, icons and layout.
+      Everything on this page renders from the live design tokens and components, so if it looks right here, it's right
+      everywhere.
+    </p>
+    <nav aria-label="Brand sections" class="flex flex-wrap gap-x-6 gap-y-2 type-caption-bold">
+      <a class="underline-offset-4 hover:underline" href="#logotype">01 Logotype</a>
+      <a class="underline-offset-4 hover:underline" href="#color">02 Color</a>
+      <a class="underline-offset-4 hover:underline" href="#typography">03 Typography</a>
+      <a class="underline-offset-4 hover:underline" href="#marks">04 Brand marks</a>
+      <a class="underline-offset-4 hover:underline" href="#buttons">05 Buttons &amp; effects</a>
+      <a class="underline-offset-4 hover:underline" href="#icons">06 Iconography</a>
+      <a class="underline-offset-4 hover:underline" href="#layout">07 Layout</a>
+    </nav>
+  </header>
+
+  <!-- 01 Logotype -->
+  <BrandSection
+    id="logotype"
+    number="01"
+    title="Logotype"
+    intro="“Ed” in Zilla Slab Bold, “Trek Digital” in Zilla Slab Light, tracking 0. Never orange, no outlines or shadows. Below 20px tall, use “Ed” alone."
+  >
+    <div class="grid gap-6 desktop:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+      <div class="relative flex min-h-[280px] items-center justify-center border border-bedrock bg-white px-6 py-16 desktop:min-h-[440px]">
+        <p class="type-eyebrow text-lagoon absolute top-6 left-6">Primary</p>
+        <Logo href={false} size={104} class="text-bedrock text-[clamp(2.25rem,1.25rem+5.5vw,6.5rem)]!" />
+      </div>
+      <div class="grid gap-6">
+        <div class="relative flex min-h-[208px] items-center justify-center bg-bedrock px-6">
+          <p class="type-eyebrow text-mist absolute top-6 left-6">Reversed</p>
+          <Logo href={false} size={52} class="text-paper text-[clamp(2.25rem,1.75rem+1.5vw,3.25rem)]!" />
+        </div>
+        <div class="relative flex min-h-[208px] items-center justify-center bg-air px-6">
+          <p class="type-eyebrow text-lagoon absolute top-6 left-6">On Air</p>
+          <Logo href={false} size={52} class="text-bedrock text-[clamp(2.25rem,1.75rem+1.5vw,3.25rem)]!" />
+        </div>
+      </div>
+    </div>
+  </BrandSection>
+
+  <!-- 02 Color -->
+  <BrandSection
+    id="color"
+    number="02"
+    title="Color"
+    intro="Four core colors, each bound to a variable. Orange is reserved for calls to action and brand markers — everything else is built from Bedrock, Lagoon, Air and white."
+  >
+    <div class="grid gap-6 tablet:grid-cols-2 desktop:grid-cols-4">
+      {
+        swatches.map((s) => (
+          <article class="flex flex-col border border-bedrock bg-white">
+            <div class:list={['flex h-48 flex-col justify-end gap-1.5 p-7 desktop:h-[260px]', s.cls]}>
+              <h3 class="type-h3">{s.name}</h3>
+              <p class="type-caption">Aa&nbsp;&nbsp;{s.contrast}</p>
+            </div>
+            <dl class="flex flex-col gap-2.5 px-7 pt-6 pb-7 type-caption">
+              <div class="flex justify-between"><dt class="text-lagoon">HEX</dt><dd class="font-bold">{s.hex}</dd></div>
+              <div class="flex justify-between"><dt class="text-lagoon">RGB</dt><dd class="font-bold">{s.rgb}</dd></div>
+              <div class="flex justify-between"><dt class="text-lagoon">Token</dt><dd class="font-bold">{s.token}</dd></div>
+              <div class="h-px bg-bedrock" role="presentation" />
+              <p>{s.use}</p>
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 flex flex-col gap-4">
+      <h3 class="type-caption-bold">Balance on a typical page</h3>
+      <div class="flex h-16 border border-bedrock" role="img" aria-label="White 60%, Air 16%, Bedrock 14%, Lagoon 7%, Fire 3%">
+        {
+          balance.map((b) => (
+            <div
+              class:list={['flex items-center overflow-hidden whitespace-nowrap type-caption-bold max-tablet:px-2 tablet:pr-2 tablet:pl-4', b.cls]}
+              style={`flex: ${b.pct} 0 0`}
+            >
+              {b.pct >= 7 && (
+                <span class:list={[b.pct < 16 && 'max-tablet:hidden']}>
+                  {b.name}&nbsp;&nbsp;<span class="max-tablet:hidden">{b.pct}%</span>
+                </span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+      <p class="type-caption text-lagoon">Fire (3%) is the smallest slice on purpose — the less orange there is, the harder each button pulls.</p>
+    </div>
+
+    <div class="mt-14 flex flex-col gap-6 desktop:flex-row desktop:items-center desktop:gap-10">
+      <h3 class="type-caption-bold shrink-0">Supporting neutrals</h3>
+      <ul class="grid grid-cols-1 gap-x-10 gap-y-5 tablet:grid-cols-3 desktop:flex desktop:flex-wrap">
+        {
+          neutrals.map((n) => (
+            <li class="flex items-center gap-3">
+              <span class:list={['size-9 shrink-0 border border-bedrock', n.cls]} aria-hidden="true" />
+              <span class="type-caption flex flex-col gap-0.5">
+                <span class="font-bold">{n.name}&nbsp;&nbsp;{n.value}</span>
+                <span class="text-lagoon">{n.use}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </BrandSection>
+
+  <!-- 03 Typography -->
+  <BrandSection
+    id="typography"
+    number="03"
+    title="Typography"
+    intro="Two families, five cuts, eleven styles. Headings and body scale fluidly between a 360px and 1440px viewport, so type shrinks smoothly instead of jumping at breakpoints."
+  >
+    <div class="grid gap-6 desktop:grid-cols-2">
+      <div class="flex flex-col gap-6 bg-bedrock p-8 text-paper tablet:flex-row tablet:items-center tablet:gap-10 desktop:p-10">
+        <span class="font-display text-[7.5rem] leading-none font-light" aria-hidden="true">Aa</span>
+        <div class="flex flex-col gap-3">
+          <p class="type-eyebrow text-mist">Headings · Quotes · Wordmark</p>
+          <p class="type-h3">Zilla Slab</p>
+          <p class="font-display flex gap-4 text-base"><span class="font-light">Light</span><span class="font-light italic">Light Italic</span><span class="font-bold">Bold</span></p>
+          <p class="type-caption text-mist break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz 0123456789 &amp; ? ! “ ”</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-6 border border-bedrock p-8 tablet:flex-row tablet:items-center tablet:gap-10 desktop:p-10">
+        <span class="font-sans text-[7.5rem] leading-none tracking-normal" aria-hidden="true">Aa</span>
+        <div class="flex flex-col gap-3">
+          <p class="type-eyebrow text-lagoon">Body · Interface · Labels</p>
+          <p class="font-sans text-[1.875rem] leading-[1.1] tracking-normal">Karla</p>
+          <p class="font-sans flex gap-4 text-base tracking-normal"><span>Regular</span><span class="font-bold">Bold</span></p>
+          <p class="type-caption text-lagoon break-all">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br />abcdefghijklmnopqrstuvwxyz 0123456789 &amp; ? ! “ ”</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-14">
+      <div class="hidden desktop:grid grid-cols-[minmax(0,3fr)_minmax(0,9fr)_minmax(0,3fr)] gap-10 border-b border-bedrock pb-3 type-eyebrow text-lagoon">
+        <span>Style &amp; spec</span><span>Sample</span><span>Use for</span>
+      </div>
+      {
+        typeStyles.map((t) => (
+          <div class="grid gap-3 border-b border-hairline py-8 desktop:grid-cols-[minmax(0,3fr)_minmax(0,9fr)_minmax(0,3fr)] desktop:gap-10">
+            <div class="type-caption flex flex-col gap-0.5">
+              <span class="font-bold">{t.name}</span>
+              <span>{t.spec}</span>
+              {t.fluid && <span>Fluid {t.fluid}</span>}
+              <code class="text-lagoon">.{t.cls.split(' ')[0]}</code>
+            </div>
+            <div class="min-w-0">
+              {t.cls.startsWith('type-h1') ? (
+                <p class={t.cls}>Websites that make <span class="text-fire">schools</span> say <em class="font-light text-fire">yes</em></p>
+              ) : t.cls.startsWith('type-h2') ? (
+                <p class={t.cls}><strong class="font-bold">Your roadmap</strong> to a website that works</p>
+              ) : t.cls.startsWith('type-h3') ? (
+                <p class={t.cls}>Educators</p>
+              ) : t.cls.startsWith('type-h4') ? (
+                <p class={t.cls}>Custom Integrations</p>
+              ) : t.cls.startsWith('type-quote') ? (
+                <p class={t.cls}>Working with Kirk means having someone who genuinely cares about getting to the right solution.</p>
+              ) : t.cls === 'type-body' ? (
+                <p class={t.cls}><strong>Hi, I'm Kirk, founder of EdTrek Digital.</strong> I design and build turnkey, lightning-fast websites, integrated directly with your booking systems.</p>
+              ) : t.cls === 'type-body-sm' ? (
+                <p class={t.cls}>Clear safety and supervision policies, transparent pricing, and straight answers to common questions.</p>
+              ) : t.cls === 'type-label' ? (
+                <p class={t.cls}>Book a Call</p>
+              ) : t.cls === 'type-caption' ? (
+                <p class={t.cls}>Design &amp; Engineering · Quick on any device or connection</p>
+              ) : t.cls === 'type-caption-bold' ? (
+                <p class={t.cls}>Chief Technology Officer</p>
+              ) : (
+                <p class={t.cls}>The deciding yes</p>
+              )}
+            </div>
+            <p class="type-caption">{t.use}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-14 grid gap-6 desktop:grid-cols-3">
+      <div class="bg-air p-7 flex flex-col gap-3">
+        <h3 class="type-h4">Two families, five cuts</h3>
+        <p class="type-caption">Zilla Slab Light, Light Italic and Bold. Karla Regular and Bold. Nothing else is loaded — no Regular, SemiBold or Bold Italic, no third family.</p>
+      </div>
+      <div class="bg-air p-7 flex flex-col gap-3">
+        <h3 class="type-h4">Emphasis lives in headlines</h3>
+        <p class="type-caption">Mix weights only inside H1, H2 and Body. Everything else is a single weight — if it needs emphasis, it needs a different style.</p>
+      </div>
+      <div class="bg-air p-7 flex flex-col gap-3">
+        <h3 class="type-h4">Color follows role</h3>
+        <p class="type-caption">Bedrock for reading text. Lagoon for eyebrows and meta. Fire only for headline emphasis and actions. On Bedrock, use Paper and Mist.</p>
+      </div>
+    </div>
+  </BrandSection>
+
+  <!-- 04 Brand marks -->
+  <BrandSection
+    id="marks"
+    number="04"
+    title="Brand marks"
+    intro="Trail-map marks drawn on the same 24px grid and 2px stroke as the icons, so they sit naturally beside each other. Each has one wayfinding job."
+  >
+    <div class="grid gap-6 tablet:grid-cols-2 desktop:grid-cols-4">
+      {
+        marks.map((m) => (
+          <article class="flex flex-col border border-bedrock bg-white">
+            <div class="relative flex h-44 items-center justify-center gap-8 bg-air">
+              <span class={m.color}><BrandMark shape={m.shape} size={72} /></span>
+              {m.shape !== 'x' && <span class={m.color}><BrandMark shape={m.shape} variant="solid" size={72} /></span>}
+              <p class="type-caption absolute bottom-3 left-3 text-lagoon">24px grid · shown at 3×</p>
+            </div>
+            <div class="flex flex-col gap-1.5 px-5 pt-5 pb-6">
+              <p class="type-eyebrow text-lagoon">{m.role}</p>
+              <h3 class="type-h4">{m.name}</h3>
+              <p class="type-caption">{m.note}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-6 grid gap-6 desktop:grid-cols-2">
+      <div class="flex flex-col gap-6 border border-bedrock p-6">
+        <div class="flex items-center gap-4">
+          <span class="text-fire"><BrandMark shape="x" size={48} /></span>
+          <span class="type-h4">Section headline</span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3 class="type-caption-bold">Section marker</h3>
+          <p class="type-caption">X mark in Fire at 48px display size (4px stroke), centered 24px above every H2.</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-6 border border-bedrock p-6">
+        <div class="flex h-12 items-center" aria-hidden="true">
+          <span class="text-fire"><BrandMark shape="circle" size={24} /></span>
+          <span class="h-0.5 flex-1 bg-fire"></span>
+          <span class="text-fire"><BrandMark shape="triangle" size={24} /></span>
+          <span class="flex-[2] border-t-2 border-dotted border-bedrock"></span>
+          <span class="text-bedrock"><BrandMark shape="square" size={24} /></span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3 class="type-caption-bold">Trail line</h3>
+          <p class="type-caption">The trail is 2px — the same weight as every icon and mark. Solid Fire for the path travelled, dotted Bedrock for the road ahead. (The nav progress trail is solid both ways.)</p>
+        </div>
+      </div>
+    </div>
+  </BrandSection>
+
+  <!-- 05 Buttons & effects -->
+  <BrandSection
+    id="buttons"
+    number="05"
+    title="Buttons & effects"
+    intro="Primary: white, 2px Bedrock border, hard Fire offset shadow. Secondary: outline only. Hover a button to see the fill scale in from the center; press it to see it sink into its shadow."
+  >
+    <div class="grid gap-6 desktop:grid-cols-2">
+      <div class="flex flex-col gap-8 border border-bedrock p-8">
+        <p class="type-eyebrow text-lagoon">Primary</p>
+        <div class="flex flex-wrap items-center gap-8">
+          <Button icon="rocket">Let's Build Your Site</Button>
+          <Button icon="phone-call" size="small">Book a Call</Button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-8 border border-bedrock p-8">
+        <p class="type-eyebrow text-lagoon">Secondary</p>
+        <div class="flex flex-wrap items-center gap-8">
+          <Button icon="rocket" variant="secondary">Let's Build Your Site</Button>
+          <Button icon="phone-call" variant="secondary" size="small">Book a Call</Button>
+        </div>
+      </div>
+    </div>
+    <dl class="mt-6 grid gap-x-10 gap-y-4 type-caption tablet:grid-cols-2 desktop:grid-cols-4">
+      <div><dt class="font-bold">Standard</dt><dd>16 / 24 padding · 12 gap · 20px icon · Label</dd></div>
+      <div><dt class="font-bold">Small</dt><dd>10 / 16 padding · 8 gap · 16px icon · Caption Bold</dd></div>
+      <div><dt class="font-bold">Hover</dt><dd>::before scales 0 → 1, 220ms · Fire Tint / Air</dd></div>
+      <div><dt class="font-bold">Active · Focus</dt><dd>Press into shadow, 80ms · 2px Lagoon ring, 4px offset</dd></div>
+    </dl>
+
+    <div class="mt-14 grid grid-cols-2 gap-x-6 gap-y-10 desktop:grid-cols-4">
+      {
+        shadows.map((s) => (
+          <div class="flex flex-col gap-5">
+            <div class:list={['h-28 bg-white', s.cls]} />
+            <div class="type-caption flex flex-col gap-0.5">
+              <span class="font-bold">{s.name}</span>
+              <span>{s.value} · {s.use}</span>
+              <code class="text-lagoon">.{s.token}</code>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+    <p class="type-caption mt-8 text-lagoon">Corners are square everywhere (radius 0). Orange shadows are for buttons only — tiles and cards use Offset Tile.</p>
+  </BrandSection>
+
+  <!-- 06 Iconography -->
+  <BrandSection
+    id="icons"
+    number="06"
+    title="Iconography"
+    intro="Tabler Icons as the base set, plus custom icons drawn to the same rules. One grid, one stroke weight, four sizes — so hand-picked and custom icons read as one family."
+  >
+    <div class="grid gap-6 tablet:grid-cols-2">
+      <div class="flex flex-col gap-5 border border-bedrock p-6">
+        <div class="flex h-28 items-center justify-center gap-8 bg-air text-lagoon">
+          {[16, 20, 24, 32].map((size) => (
+            <span class="flex flex-col items-center gap-2">
+              <Icon name="rocket" size={size as 16 | 20 | 24 | 32} />
+              <span class="type-caption">{size}</span>
+            </span>
+          ))}
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3 class="type-caption-bold">Four sizes, 2px stroke always</h3>
+          <p class="type-caption">16 small buttons · 20 buttons & callout tiles · 24 inline UI and markers · 32 feature cards. Round caps and joins. Only brand marks at 48px scale their stroke (4px).</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-5 border border-bedrock p-6">
+        <div class="flex h-28 items-center justify-center gap-8 bg-air">
+          <span class="text-bedrock"><Icon name="browser-check" /></span>
+          <span class="text-lagoon"><Icon name="school" /></span>
+          <span class="flex size-10 items-center justify-center bg-lagoon text-white"><Icon name="bolt" size={20} /></span>
+          <span class="text-fire"><BrandMark shape="x" /></span>
+        </div>
+        <div class="flex flex-col gap-2">
+          <h3 class="type-caption-bold">Color by role</h3>
+          <p class="type-caption">Bedrock by default · Lagoon on feature cards and quotes · white on Lagoon tiles · Fire only for brand marks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-8 border border-bedrock p-6 desktop:p-8">
+      {
+        iconGroups.map((g) => (
+          <div class="flex flex-col gap-3">
+            <h3 class="type-eyebrow text-lagoon">{g.title}</h3>
+            <ul class="grid grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] gap-2.5">
+              {g.icons.map((name) => (
+                <li class="flex h-[4.25rem] flex-col items-center justify-center gap-2 bg-air">
+                  <Icon name={name} />
+                  <span class="type-caption">{name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </BrandSection>
+
+  <!-- 07 Layout -->
+  <BrandSection
+    id="layout"
+    number="07"
+    title="Layout"
+    intro="A 12-column grid with 40px gutters inside generous section padding. Every value is a variable with Desktop, Tablet and Mobile modes. Resize the window to watch the live readout change."
+  >
+    <div class="grid gap-1 tablet:grid-cols-2 wide:grid-cols-4">
+      {
+        breakpoints.map((b, i) => (
+          <div class="flex flex-col gap-2 bg-air p-5 relative" data-bp={b.name}>
+            <p class="type-eyebrow text-lagoon">{b.range}</p>
+            <h3 class="type-h4">{b.name}</h3>
+            <ul class="type-caption flex flex-col gap-1">{b.lines.map((l) => <li>{l}</li>)}</ul>
+            <span
+              class:list={[
+                'type-caption-bold absolute top-5 right-5 bg-bedrock px-2 py-0.5 text-white',
+                ['tablet:hidden', 'hidden tablet:block desktop:hidden', 'hidden desktop:block wide:hidden', 'hidden wide:block'][i],
+              ]}
+            >
+              You are here
+            </span>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-10 flex flex-col gap-4">
+      <h3 class="type-caption-bold">Live readout</h3>
+      <dl id="layout-readout" class="grid grid-cols-2 gap-x-6 gap-y-3 border border-bedrock p-5 type-caption tablet:grid-cols-3 desktop:grid-cols-6">
+        <div><dt class="text-lagoon">Viewport</dt><dd class="font-bold" data-k="viewport">—</dd></div>
+        <div><dt class="text-lagoon">--grid-columns</dt><dd class="font-bold" data-k="--grid-columns">—</dd></div>
+        <div><dt class="text-lagoon">--grid-gutter</dt><dd class="font-bold" data-k="--grid-gutter">—</dd></div>
+        <div><dt class="text-lagoon">--section-padding-inline</dt><dd class="font-bold" data-k="--section-padding-inline">—</dd></div>
+        <div><dt class="text-lagoon">--section-padding-block</dt><dd class="font-bold" data-k="--section-padding-block">—</dd></div>
+        <div><dt class="text-lagoon">Container</dt><dd class="font-bold" data-k="container">—</dd></div>
+      </dl>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-4">
+      <h3 class="type-caption-bold">Grid · <code class="font-normal text-lagoon">.grid-site</code> inside <code class="font-normal text-lagoon">.container-site</code></h3>
+      <div class="grid-site" aria-hidden="true">
+        {Array.from({ length: 12 }, (_, i) => (
+          <div
+            class:list={[
+              'flex h-24 items-end justify-center bg-air pb-2 type-caption text-bedrock',
+              i >= 4 && i < 8 && 'hidden tablet:flex',
+              i >= 8 && 'hidden desktop:flex',
+            ]}
+          >
+            {i + 1}
+          </div>
+        ))}
+      </div>
+    </div>
+  </BrandSection>
+  <!-- 08 Modal -->
+  <BrandSection
+    id="modal"
+    number="08"
+    title="Modal"
+    intro="A popup styled as the Three Yeses tile in its hover state. It fades up over a white scrim that fades the site back. Close with ×, Esc, a click on the scrim, or an action."
+  >
+    <div class="flex flex-wrap gap-5">
+      <Button data-modal-open="demo-modal" variant="secondary">Open modal</Button>
+      <Button data-modal-open="demo-modal-long" variant="secondary">Open long modal</Button>
+    </div>
+
+    <Modal id="demo-modal" eyebrow="Let’s talk" title="Ready to build your site?">
+      <p>Tell me a little about your trips and your current website, and I’ll get back to you within one business day.</p>
+      <Fragment slot="actions">
+        <Button data-modal-close variant="secondary">Not now</Button>
+        <Button data-modal-close icon="rocket">Let’s Build Your Site</Button>
+      </Fragment>
+    </Modal>
+
+    <Modal id="demo-modal-long" eyebrow="Overflow test" title="A modal with a lot of content" size="wide">
+      {Array.from({ length: 12 }, () => (
+        <p class="mb-4">The panel scrolls inside itself when its content is taller than the viewport, while the page behind stays locked in place.</p>
+      ))}
+      <Fragment slot="actions">
+        <Button data-modal-close>Close</Button>
+      </Fragment>
+    </Modal>
+  </BrandSection>
+</BaseLayout>
+
+<script>
+  const readout = document.getElementById('layout-readout');
+  const container = readout?.closest('.container-site') as HTMLElement | null;
+
+  function update() {
+    if (!readout) return;
+    const root = getComputedStyle(document.documentElement);
+    readout.querySelectorAll<HTMLElement>('[data-k]').forEach((el) => {
+      const k = el.dataset.k!;
+      if (k === 'viewport') el.textContent = `${window.innerWidth}px`;
+      else if (k === 'container' && container) {
+        const cs = getComputedStyle(container);
+        const inner = container.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+        el.textContent = `${Math.round(inner)}px`;
+      } else el.textContent = root.getPropertyValue(k).trim() || '—';
+    });
+  }
+  update();
+  window.addEventListener('resize', update, { passive: true });
+</script>

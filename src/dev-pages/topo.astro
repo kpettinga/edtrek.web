@@ -1,0 +1,79 @@
+---
+/**
+ * Dev-only: preview topo map seeds side by side (routed by `astro dev` only).
+ *
+ *   /topo                     → seeds 7, 21, 42, 88
+ *   /topo?seeds=3,5,8,13      → any seeds
+ *   /topo?seeds=42&levels=26  → other generator options (see DEFAULTS)
+ *
+ * Each map is drawn as it reads on the site's white sections. To use one:
+ *   npm run topo -- --seed <n>
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { generateTopo, DEFAULTS } from '../../scripts/generate-topo.mjs';
+
+const params = Astro.url.searchParams;
+const seeds = (params.get('seeds') ?? '7,21,42,88')
+  .split(',')
+  .map(Number)
+  .filter((n) => Number.isFinite(n));
+const overrides = Object.fromEntries(
+  Object.keys(DEFAULTS)
+    .filter((k) => k !== 'seed' && params.has(k))
+    .map((k) => [k, Number(params.get(k))]),
+);
+const maps = seeds.map((seed) => {
+  const svg = generateTopo({ seed, ...overrides }).replaceAll('#fff', '#36464a');
+  return { seed, src: `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}` };
+});
+---
+
+<BaseLayout title="Topo seeds (dev)" noindex>
+  <main class="topo-dev">
+    <h1 class="type-h3">Topo map seeds</h1>
+    <p class="type-body-sm">
+      Current file uses seed {DEFAULTS.seed}. Pick one, then run
+      <code>npm run topo -- --seed &lt;n&gt;</code>. Try others with <code>?seeds=1,2,3,4</code>.
+      {Object.keys(overrides).length > 0 && <span> Overrides: <code>{JSON.stringify(overrides)}</code></span>}
+    </p>
+    <div class="topo-grid">
+      {
+        maps.map((m) => (
+          <figure>
+            <img src={m.src} alt={`Topo map, seed ${m.seed}`} />
+            <figcaption class="type-label">Seed {m.seed}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .topo-dev {
+    display: grid;
+    gap: 16px;
+    padding: 32px;
+    background: #fff;
+  }
+  .topo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(560px, 1fr));
+    gap: 24px;
+  }
+  figure {
+    display: grid;
+    gap: 8px;
+  }
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    border: 1px solid var(--color-hairline);
+    opacity: 0.45; /* roughly how the lines read on the site */
+  }
+  code {
+    font-family: ui-monospace, monospace;
+    font-size: 0.9em;
+  }
+</style>

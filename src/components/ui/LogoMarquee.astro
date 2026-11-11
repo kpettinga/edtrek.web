@@ -1,0 +1,167 @@
+---
+/**
+ * Client logos (from the former "Trusted by" strip, Figma 49:642 / 119:744),
+ * now placed under the testimonials in About, with its Lagoon eyebrow above.
+ *
+ * Desktop: one centered row of logos (max 1024px, spread evenly).
+ * Tablet/mobile: auto-scrolling marquee with an 80px right-edge fade. It breaks
+ *   out of the site container to run edge to edge (the container is full width
+ *   below desktop, so pulling back by the section padding reaches the viewport).
+ *   The logo list is rendered twice and the track slides by exactly one copy
+ *   (-50%) for a seamless loop; the copy is aria-hidden. Pauses on hover.
+ *   Reduced motion: no animation, the copy is dropped, and the row scrolls by hand.
+ *
+ * Logos are black at 60% opacity (as in Figma), applied in CSS rather than baked
+ * into the files. SVGs come from Figma via SVGO; Watson Adventures and
+ * WorldStrides are Figma PNGs (WorldStrides is low-res: swap for an SVG).
+ */
+import { Image } from 'astro:assets';
+import bps from '../../assets/logos/boston-public-schools.svg';
+import watson from '../../assets/logos/watson-adventures.png';
+import worldstrides from '../../assets/logos/worldstrides.png';
+import nyt from '../../assets/logos/new-york-times.svg';
+import oakland from '../../assets/logos/city-of-oakland.svg';
+
+// Display sizes from Figma (px)
+const logos = [
+  { src: bps, alt: 'Boston Public Schools', w: 190, h: 19 },
+  { src: watson, alt: 'Watson Adventures', w: 160, h: 23 },
+  { src: worldstrides, alt: 'WorldStrides', w: 134, h: 20 },
+  { src: nyt, alt: 'The New York Times', w: 144, h: 19 },
+  { src: oakland, alt: 'City of Oakland', w: 108, h: 29 },
+];
+---
+
+<div class="clients">
+  <p id="clients-title" class="type-eyebrow clients-title">Brands &amp; people I’ve had the privilege to work with</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      {
+        [false, true].map((clone) => (
+          <ul
+            class:list={['logos', clone && 'logos--clone']}
+            role={clone ? undefined : 'list'}
+            aria-labelledby={clone ? undefined : 'clients-title'}
+            aria-hidden={clone ? 'true' : undefined}
+          >
+            {logos.map((l) => (
+              <li class="logo">
+                <Image
+                  src={l.src}
+                  alt={clone ? '' : l.alt}
+                  width={l.w}
+                  height={l.h}
+                  {...(l.src.format === 'svg' ? {} : { densities: [1, 2], format: 'webp' })}
+                  loading="lazy"
+                />
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  @reference "../../styles/global.css";
+
+  @layer components {
+    /* ---- marquee (tablet/mobile) ---- */
+    .clients {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      align-self: stretch;
+    }
+    .clients-title {
+      color: var(--color-lagoon);
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .marquee {
+      align-self: stretch;
+      overflow: hidden;
+      margin-inline: calc(-1 * var(--section-padding-inline)); /* full bleed */
+      padding-left: var(--section-padding-inline); /* first logo starts on the content edge */
+      mask-image: linear-gradient(to right, #000 calc(100% - 80px), transparent);
+
+      @variant desktop {
+        overflow: visible;
+        margin-inline: 0;
+        padding-inline: 0;
+        mask-image: none;
+      }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+
+      @variant desktop {
+        width: auto;
+        justify-content: center;
+      }
+    }
+    .logos {
+      display: flex;
+      flex: none;
+      align-items: center;
+      gap: 48px;
+      padding-right: 48px; /* = gap, so both copies are the same width */
+
+      @variant desktop {
+        flex: 0 1 1024px;
+        justify-content: space-between;
+        gap: 40px;
+        padding-right: 0;
+      }
+    }
+    .logos--clone {
+      @variant desktop {
+        display: none;
+      }
+    }
+    .logo {
+      flex: none;
+      opacity: 0.6;
+
+      & img {
+        display: block;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .marquee-track {
+        animation: marquee 32s linear infinite;
+
+        @variant desktop {
+          animation: none;
+        }
+      }
+      @media (hover: hover) {
+        .marquee:hover .marquee-track {
+          animation-play-state: paused;
+        }
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee {
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .logos {
+        padding-right: 80px; /* last logo can scroll clear of the edge fade */
+      }
+      .logos--clone {
+        display: none;
+      }
+    }
+    @keyframes marquee {
+      to {
+        translate: -50% 0;
+      }
+    }
+  }
+</style>

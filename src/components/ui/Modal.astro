@@ -1,0 +1,260 @@
+---
+/**
+ * Modal — reusable popup on the native <dialog> (showModal): focus trap, Esc,
+ * top layer (above the fixed nav) and an inert page come from the browser.
+ *
+ * Look: the Three Yeses tile in its hover state — white, 1px Bedrock border,
+ * Bedrock 14% offset shadow (--shadow-tile). No Fire (§2: Fire is for CTAs).
+ * Placement: the popup's centre sits about a third of the way down the viewport.
+ * The <dialog> fills the screen as an invisible flex column with 1:3 spacers
+ * above/below the panel; tall content shrinks the spacers away (16px margin).
+ * Motion: fades up 16px (260ms brand ease) over a semi-opaque white scrim that
+ * fades the site back. Reduced motion: no transitions.
+ *
+ * Usage:
+ *   <Button data-modal-open="contact">Open</Button>
+ *   <Modal id="contact" eyebrow="Let’s talk" title="Book a call">
+ *     …content…
+ *     <Fragment slot="actions"><Button data-modal-close>Done</Button></Fragment>
+ *   </Modal>
+ *
+ * Open:  any element with data-modal-open="<id>", or window.edtrekModal.open(id).
+ * Close: × button, Esc, a click on the scrim, any [data-modal-close] inside,
+ *        or a <form method="dialog"> inside.
+ */
+import Icon from './Icon.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  /** Optional Lagoon eyebrow above the title. */
+  eyebrow?: string;
+  /** Max width: standard 560px, wide 800px. */
+  size?: 'standard' | 'wide';
+  class?: string;
+}
+
+const { id, title, eyebrow, size = 'standard', class: className } = Astro.props;
+const titleId = `${id}-title`;
+const hasActions = Astro.slots.has('actions');
+---
+
+<dialog id={id} class:list={['modal', `modal--${size}`, className]} aria-labelledby={titleId} data-modal>
+  <div class="modal-panel">
+    <button type="button" class="modal-close" aria-label="Close" data-modal-close>
+      <Icon name="x" size={24} />
+    </button>
+
+    <div class="modal-scroll">
+    <header class="modal-header">
+      {eyebrow && <p class="type-eyebrow text-lagoon">{eyebrow}</p>}
+      <h2 id={titleId} class="type-h3">{title}</h2>
+    </header>
+
+    <div class="modal-body type-body-sm">
+      <slot />
+    </div>
+
+    {
+      hasActions && (
+        <div class="modal-actions">
+          <slot name="actions" />
+        </div>
+      )
+    }
+    </div>
+  </div>
+</dialog>
+
+<script>
+  // One delegated listener set for every modal on the page (Astro bundles this once).
+  const get = (id: string) => document.getElementById(id) as HTMLDialogElement | null;
+
+  function open(id: string) {
+    const dialog = get(id);
+    if (dialog && !dialog.open) dialog.showModal();
+  }
+  function close(id: string) {
+    get(id)?.close();
+  }
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as Element;
+
+    const opener = target.closest<HTMLElement>('[data-modal-open]');
+    if (opener) {
+      e.preventDefault();
+      open(opener.dataset.modalOpen!);
+      return;
+    }
+
+    const dialog = target.closest<HTMLDialogElement>('dialog[data-modal]');
+    if (!dialog) return;
+
+    // Click on the scrim: the event target is the <dialog> itself (it fills the
+    // screen around the panel).
+    if (target === dialog || target.closest('[data-modal-close]')) dialog.close();
+  });
+
+  (window as unknown as { edtrekModal: object }).edtrekModal = { open, close };
+</script>
+
+<style>
+  @reference "../../styles/global.css";
+
+  @layer components {
+    .modal {
+      --modal-dur: 260ms;
+      /* reset UA dialog box; the panel carries the look */
+      /* Full-screen, invisible layout box (the panel carries the look):
+         free space splits 1:3 above/below the panel, which puts its centre
+         about a third of the way down. */
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      max-width: none;
+      max-height: none;
+      margin: 0;
+      padding: 16px var(--section-padding-inline, 16px);
+      border: 0;
+      background: transparent;
+      color: var(--color-bedrock);
+      overflow: visible; /* let the offset shadow show */
+      flex-direction: column;
+      align-items: center;
+
+      &::before,
+      &::after {
+        content: '';
+        flex: 1 1 0;
+      }
+      &::after {
+        flex-grow: 3;
+      }
+
+      /* closed state (also the exit target) */
+      opacity: 0;
+      translate: 0 16px;
+      transition:
+        opacity var(--modal-dur) var(--ease-brand),
+        translate var(--modal-dur) var(--ease-brand),
+        overlay var(--modal-dur) allow-discrete,
+        display var(--modal-dur) allow-discrete;
+    }
+    .modal--wide .modal-panel {
+      max-width: 800px;
+    }
+    .modal[open] {
+      display: flex;
+      opacity: 1;
+      translate: 0 0;
+
+      @starting-style {
+        opacity: 0;
+        translate: 0 16px;
+      }
+    }
+
+    /* Semi-opaque white scrim: the site fades back behind the popup */
+    .modal::backdrop {
+      background: rgb(255 255 255 / 0);
+      transition:
+        background-color var(--modal-dur) var(--ease-brand),
+        overlay var(--modal-dur) allow-discrete,
+        display var(--modal-dur) allow-discrete;
+    }
+    .modal[open]::backdrop {
+      background: rgb(255 255 255 / 0.75);
+
+      @starting-style {
+        background: rgb(255 255 255 / 0);
+      }
+    }
+
+    /* The panel = Three Yeses tile, hover state. The close button sits on the
+       panel; only .modal-scroll scrolls, so × stays put on long content. */
+    .modal-panel {
+      position: relative;
+      display: flex;
+      flex: 0 1 auto;
+      flex-direction: column;
+      width: 100%;
+      max-width: 560px;
+      min-height: 0; /* shrink to the screen; .modal-scroll scrolls */
+      background: #fff;
+      border: 1px solid var(--color-bedrock);
+      box-shadow: var(--shadow-tile);
+    }
+    .modal-scroll {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 28px 24px;
+
+      @variant tablet {
+        gap: 24px;
+        padding: 40px 36px;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-right: 40px; /* clear the close button */
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 20px;
+      margin-top: 4px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      color: var(--color-bedrock);
+      z-index: 1;
+      background: #fff;
+      cursor: pointer;
+      transition: background-color 160ms ease-out;
+
+      @variant tablet {
+        top: 24px;
+        right: 24px;
+      }
+    }
+    @media (hover: hover) {
+      .modal-close:hover {
+        background: var(--color-air);
+      }
+    }
+    .modal-close:focus-visible {
+      outline: 2px solid var(--color-lagoon);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .modal,
+      .modal::backdrop {
+        transition: none;
+      }
+    }
+  }
+
+  /* Lock page scroll while a modal is open; keep the scrollbar gutter so the
+     page doesn't shift sideways. */
+  :global(html:has(dialog[data-modal][open])) {
+    overflow: hidden;
+    scrollbar-gutter: stable;
+  }
+</style>

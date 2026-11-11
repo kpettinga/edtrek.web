@@ -1,0 +1,90 @@
+---
+/**
+ * ContactModal — the "Let's Build Your Site" popup: a single email field.
+ * Opened by any [data-modal-open="contact-modal"]: every primary CTA
+ * (Let’s Build Your Site, nav Book a Call).
+ *
+ * The form is hosted separately (no server code in this repo): set
+ * FORM_ACTION to the provider's POST endpoint. Until it's set, submitting is
+ * blocked so nothing gets sent to this static site.
+ */
+import Modal from '../ui/Modal.astro';
+import Button from '../ui/Button.astro';
+
+// TODO: external form endpoint (e.g. Formspree / Basin / Tally URL).
+const FORM_ACTION = '';
+---
+
+<Modal id="contact-modal" eyebrow="Step 1" title="Provide your email address to get started.">
+  <form class="cm-form" method="post" action={FORM_ACTION || undefined} data-contact-form>
+    <label for="cm-email" class="type-label">Email</label>
+    <div class="cm-row">
+      <input
+        id="cm-email"
+        name="email"
+        type="email"
+        required
+        autocomplete="email"
+        inputmode="email"
+        placeholder="you@company.com"
+        class="cm-input"
+      />
+      <Button type="submit" icon="rocket">Start</Button>
+    </div>
+  </form>
+</Modal>
+
+<script>
+  // No endpoint yet: keep native validation, but don't post to the static site.
+  for (const form of document.querySelectorAll<HTMLFormElement>('[data-contact-form]')) {
+    form.addEventListener('submit', (e) => {
+      if (!form.getAttribute('action')) {
+        e.preventDefault();
+        console.warn('ContactModal: FORM_ACTION is not set; submission skipped.');
+      }
+    });
+  }
+</script>
+
+<style>
+  @reference "../../styles/global.css";
+
+  @layer components {
+    .cm-form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .cm-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+
+      @variant tablet {
+        flex-direction: row;
+        gap: 20px;
+      }
+    }
+    /* Same frame as the buttons: 2px Bedrock border, 16/24 padding, Karla 16 */
+    .cm-input {
+      flex: 1;
+      min-width: 0;
+      padding: 16px;
+      border: 2px solid var(--color-bedrock);
+      border-radius: 0;
+      background: #fff;
+      color: var(--color-bedrock);
+      font-family: var(--font-sans);
+      font-size: 1rem; /* 16px: no iOS zoom on focus */
+      line-height: 1.2;
+    }
+    .cm-input::placeholder {
+      color: rgb(54 70 74 / 0.55);
+    }
+    .cm-input:focus-visible {
+      outline: 2px solid var(--color-lagoon);
+      outline-offset: 4px;
+    }
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+/**
+ * Wordmark (Brand board 78:186): "Ed" Zilla Slab Bold + "Trek Digital" Zilla Slab Light,
+ * tracking 0. Never orange, no outlines/shadows. Color follows currentColor
+ * (Bedrock on white/Air, Paper on Bedrock).
+ * Min 20px tall on screen — below that, use "Ed" alone (favicon).
+ */
+interface Props {
+  /** Font size in px. */
+  size?: number;
+  /** Link target; pass `false` to render the wordmark without a link. */
+  href?: string | false;
+  class?: string;
+}
+
+const { size = 28, href = '/', class: className } = Astro.props;
+const Tag = href === false ? 'span' : 'a';
+---
+
+<Tag
+  href={href === false ? undefined : href}
+  class:list={['inline-block font-display leading-none tracking-normal whitespace-nowrap no-underline', className]}
+  style={`font-size:${size / 16}rem`}
+  aria-label={href === false ? undefined : 'EdTrek Digital — home'}
+>
+  <span class="font-bold">Ed</span><span class="font-light">Trek Digital</span>
+</Tag>

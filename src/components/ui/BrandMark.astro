@@ -1,0 +1,37 @@
+---
+/**
+ * Brand mark (Figma 101:82) — trail-map wayfinding marks on the 24px icon grid.
+ * Square = start & stop · Circle = start here · Triangle = milestone · X = destination / section marker.
+ * Geometry matches the Figma component exports. Unlike Icon, the stroke scales
+ * with size: at 48px (section X markers) it renders at 4px, per handoff §4.
+ * Color comes from currentColor (Bedrock default; Fire for markers / completed steps).
+ */
+interface Props {
+  shape: 'square' | 'circle' | 'triangle' | 'x';
+  variant?: 'outline' | 'solid';
+  size?: number;
+  class?: string;
+}
+
+const { shape, variant = 'outline', size = 24, class: className } = Astro.props;
+const solid = variant === 'solid' && shape !== 'x';
+const fill = solid ? 'currentColor' : 'none';
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  width={size}
+  height={size}
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  class:list={['shrink-0', className]}
+  aria-hidden="true"
+  focusable="false"
+>
+  {shape === 'square' && <rect x="5" y="5" width="14" height="14" fill={fill} />}
+  {shape === 'circle' && <circle cx="12" cy="12" r="8" fill={fill} stroke-linecap="round" />}
+  {shape === 'triangle' && <path d="M12 4.5L20 18.5H4L12 4.5Z" fill={fill} stroke-linecap="round" />}
+  {shape === 'x' && <path d="M6.5 6.5L17.5 17.5M17.5 6.5L6.5 17.5" stroke-linecap="square" />}
+</svg>

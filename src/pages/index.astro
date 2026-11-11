@@ -1,16 +1,34 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TopoMap from '../components/site/TopoMap.astro';
+import SiteNav from '../components/site/SiteNav.astro';
+import Footer from '../components/site/Footer.astro';
+import Hero from '../components/sections/Hero.astro';
+import ThreeYeses from '../components/sections/ThreeYeses.astro';
+import Services from '../components/sections/Services.astro';
+import Roadmap from '../components/sections/Roadmap.astro';
+import About from '../components/sections/About.astro';
+import Faq from '../components/sections/Faq.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <TopoMap slot="backdrop" />
+  <SiteNav slot="header" />
+
+  <Hero />
+  <ThreeYeses />
+  <Services />
+  <Roadmap />
+  <About />
+  <Faq />
+  <Footer slot="footer" />
+</BaseLayout>
+
+<script>
+  import { initScrollScene } from '../scripts/scroll-scene';
+  import { initTopoReveal } from '../scripts/topo-reveal';
+  import { initTrail } from '../scripts/trail';
+  initScrollScene();
+  initTopoReveal();
+  initTrail();
+</script>
