@@ -8,7 +8,7 @@
  * Each item: <h3><button aria-expanded aria-controls> with a "Q" label, the
  * question (H4) and the shared chevron-down caret (rotates 180° when open,
  * 200ms; none under reduced motion). The answer (Body) sits under the question
- * text, clear of the caret. First item open by default. Without JS every
+ * text, clear of the caret. All items start collapsed. Without JS every
  * answer simply shows.
  */
 import Icon from '../ui/Icon.astro';
@@ -87,7 +87,7 @@ const faqs: { q: string; a: Block[] }[] = [
               <button
                 type="button"
                 class="faq-q"
-                aria-expanded={i === 0 ? 'true' : 'false'}
+                aria-expanded="false"
                 aria-controls={`faq-a-${i}`}
                 id={`faq-q-${i}`}
               >

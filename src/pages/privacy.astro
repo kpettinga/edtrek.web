@@ -1,14 +1,13 @@
 ---
 /**
- * Privacy Policy — PLACEHOLDER. Plain-language draft describing what the site
- * does today; not legal advice. Have it reviewed and fill the [bracketed]
- * items before launch, then drop `noindex`.
+ * Privacy Policy — content from `claude/EdTrek Digital Privacy Policy.md`
+ * (AI-generated draft, not legal advice). The draft note and the "Notes for
+ * you" checklist from that file are intentionally left out. Keep `noindex`
+ * until the policy has been reviewed and matches what the site actually runs.
  *
- * Facts it relies on (re-check if they change):
- *   - the only data collected is the email from the contact popup
- *     (ContactModal), sent to an external form provider (not chosen yet)
- *   - no analytics, no cookies, no local storage; fonts are self-hosted
- *   - hosted on Cloudflare Workers (standard request logs)
+ * The policy describes Go High Level (forms, booking calendar, email), the
+ * Meta Pixel and Google Analytics, plus a cookie banner and a "Do Not Sell or
+ * Share" footer link. If any of those change, update the copy here.
  *
  * Same chrome as the 404: TopoMap backdrop, SiteNav, Footer.
  */
@@ -17,31 +16,339 @@ import TopoMap from '../components/site/TopoMap.astro';
 import SiteNav from '../components/site/SiteNav.astro';
 import Footer from '../components/site/Footer.astro';
 
-const updated = 'November 12, 2026';
+const updated = 'November 3, 2026';
+const email = 'privacy@edtrek.digital';
+const site = 'https://edtrek.digital';
+
+const collected = [
+  {
+    what: 'Name and email address (and anything else you type into a form)',
+    how: 'Contact form, newsletter signup, or freebie opt-in',
+    why: 'To reply to you, send you what you asked for, and (if you opt in) send you emails',
+  },
+  {
+    what: 'Name, email, phone number, and booking details',
+    how: 'When you book a call using the calendar on our site',
+    why: 'To schedule and hold the call, and to follow up about your project',
+  },
+  {
+    what: 'Website usage data, such as pages viewed, time on site, device and browser type, approximate location, and IP address',
+    how: 'Cookies and tracking tools (Meta Pixel and Google Analytics)',
+    why: 'To understand how our site is used, improve it, and measure and run our advertising',
+  },
+  {
+    what: 'Ad interaction data, such as whether you clicked one of our Facebook or Instagram ads and what you did afterwards',
+    how: 'Meta Pixel',
+    why: 'To measure how well our ads work and show our ads to relevant people',
+  },
+];
 ---
 
 <BaseLayout
   title="Privacy Policy — EdTrek Digital"
-  description="How EdTrek Digital handles the information you share through this website."
+  description="What personal information EdTrek Digital collects, why, who it's shared with, how long it's kept, and your choices."
   noindex
 >
-  <TopoMap slot="backdrop" />
   <SiteNav slot="header" />
 
-  <article class="pp container-site above-map" aria-labelledby="pp-title">
+  <article class="pp above-map" aria-labelledby="pp-title">
     <header class="pp-header">
       <p class="type-eyebrow text-lagoon">Last updated {updated}</p>
       <h1 id="pp-title" class="type-h1">Privacy Policy</h1>
-      <p class="type-body">
-        EdTrek Digital is run by me, Kirk Pettinga. more to come...
-      </p>
     </header>
 
-    <section>
-      <h2 class="type-h3">What I collect</h2>
+    <section aria-labelledby="pp-who">
+      <h2 id="pp-who" class="type-h3">1. Who we are</h2>
       <p>
-        lorem ipsum...
+        EdTrek Digital (“we”, “us”) is a web design and development business
+        that builds websites for student travel providers. We are registered in
+        Michigan, USA, and operate from Hong Kong. Our website is <a href={site}>{site}</a>.
       </p>
+      <p>
+        This policy explains what personal information we collect when you
+        visit our website or get in touch, why we collect it, who we share it
+        with, how long we keep it, and what choices you have.
+      </p>
+      <p>
+        You can reach us about anything in this policy at <a href={`mailto:${email}`}><strong>{email}</strong></a>.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-collect">
+      <h2 id="pp-collect" class="type-h3">2. What information we collect, and why</h2>
+      <table class="pp-table">
+        <thead>
+          <tr>
+            <th scope="col">What we collect</th>
+            <th scope="col">How we get it</th>
+            <th scope="col">Why we use it</th>
+          </tr>
+        </thead>
+        <tbody>
+          {collected.map((row) => (
+            <tr>
+              <td data-label="What we collect">{row.what}</td>
+              <td data-label="How we get it">{row.how}</td>
+              <td data-label="Why we use it">{row.why}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p>
+        We do not sell products or take payments on our website, so we do not
+        collect payment card details here.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-tools">
+      <h2 id="pp-tools" class="type-h3">3. The tools and services we use</h2>
+      <p>
+        We use these specific services, and they may process your information
+        on our behalf or in connection with our site:
+      </p>
+      <ul>
+        <li>
+          <strong>Go High Level (HighLevel Inc.):</strong> our CRM and email
+          marketing tool. It stores your contact details, powers our website
+          forms and booking calendar, and sends our emails.
+        </li>
+        <li>
+          <strong>Meta Pixel and Meta advertising (Facebook and Instagram):</strong> lets us run and measure ads. Meta receives information about your
+          visit to our site and may use it for its own purposes under its own
+          privacy policy.
+        </li>
+        <li>
+          <strong>Google Analytics (Google LLC):</strong> gives us statistics
+          about how people use our site. Google receives usage data such as
+          your IP address and device information.
+        </li>
+      </ul>
+      <p>
+        These companies have their own privacy policies, and we encourage you
+        to read them.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-cookies">
+      <h2 id="pp-cookies" class="type-h3">4. Cookies</h2>
+      <p>
+        We use cookies, which are small files stored on your device. They are
+        used for:
+      </p>
+      <ul>
+        <li>
+          <strong>Essential functions,</strong> such as making our forms and
+          booking calendar work.
+        </li>
+        <li>
+          <strong>Analytics,</strong> through Google Analytics, to understand
+          how visitors use our site.
+        </li>
+        <li>
+          <strong>Advertising,</strong> through the Meta Pixel, to measure and
+          improve our Facebook and Instagram ads.
+        </li>
+      </ul>
+      <p>
+        You can block or delete cookies in your browser settings, and you can
+        opt out of Google Analytics with Google’s browser add-on. You can
+        manage ad personalization in your Facebook and Instagram settings.
+        Blocking some cookies may affect how parts of the site work.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-retention">
+      <h2 id="pp-retention" class="type-h3">5. How long we keep your information</h2>
+      <ul>
+        <li>
+          <strong>Contact form messages and enquiries:</strong> up to 2 years
+          after our last conversation, then deleted.
+        </li>
+        <li>
+          <strong>Booking and client records:</strong> for the length of our
+          working relationship plus 3 years, so we can handle follow-up
+          questions and keep basic business records.
+        </li>
+        <li>
+          <strong>Newsletter and marketing emails:</strong> until you
+          unsubscribe. After that, we keep only a minimal record (your email
+          address) so we don’t email you again, then delete the rest.
+        </li>
+        <li>
+          <strong>Google Analytics data:</strong> up to 14 months.
+        </li>
+        <li>
+          <strong>Meta Pixel data:</strong> held by Meta according to its own
+          policies. We can stop collecting it at any time by removing the Pixel.
+        </li>
+      </ul>
+      <p>
+        We may keep information longer if the law requires it or if we need it
+        to resolve a dispute.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-sharing">
+      <h2 id="pp-sharing" class="type-h3">6. Who we share your information with</h2>
+      <p>
+        We will never sell your information to third parties. We share it only
+        with the services named in <a href="#pp-tools">Section 3</a> (Go High
+        Level, Meta, and Google), and with authorities or professional advisers
+        if the law requires it or we need to protect our rights.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-transfers">
+      <h2 id="pp-transfers" class="type-h3">7. Where your information is processed</h2>
+      <p>
+        We operate from Hong Kong, and the tools we use are mostly based in the
+        United States. This means your information may be transferred to,
+        stored in, and accessed from the US and Hong Kong, which may have
+        different data protection laws from your country. Where the law
+        requires it, we rely on appropriate safeguards, such as the EU–US Data
+        Privacy Framework (where the provider is certified) or Standard
+        Contractual Clauses.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-rights">
+      <h2 id="pp-rights" class="type-h3">8. Your choices and how to access, correct, or delete your data</h2>
+      <p>Wherever you live, you can ask us to:</p>
+      <ul>
+        <li>tell you what information we hold about you,</li>
+        <li>correct anything that’s wrong,</li>
+        <li>delete your information, and</li>
+        <li>
+          stop sending you marketing emails (you can also click “unsubscribe”
+          in any email).
+        </li>
+      </ul>
+      <p>
+        Just email <a href={`mailto:${email}`}><strong>{email}</strong></a>.
+        We’ll reply within 30 days. We may need to confirm your identity first.
+      </p>
+      <p>
+        If you are in Hong Kong, you also have rights under the Personal Data
+        (Privacy) Ordinance, including the right to access and correct your
+        personal data.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-gdpr">
+      <h2 id="pp-gdpr" class="type-h3">9. Extra information for people in the EU, EEA, and UK</h2>
+      <p>
+        If you are in the European Union, European Economic Area, or United
+        Kingdom, the GDPR (or UK GDPR) applies to how we handle your
+        information.
+      </p>
+      <h3 class="type-h4">Our lawful bases for using your information</h3>
+      <ul>
+        <li><strong>Newsletter and marketing emails:</strong> your consent.</li>
+        <li>
+          <strong>Responding to enquiries and booking calls:</strong> our
+          legitimate interests in running our business and replying to people
+          who contact us (and, if you become a client, to carry out our
+          contract with you).
+        </li>
+        <li><strong>Google Analytics:</strong> your consent (through cookies).</li>
+        <li>
+          <strong>Meta Pixel and ad measurement:</strong> your consent (through
+          cookies).
+        </li>
+      </ul>
+      <p>
+        <strong>Withdrawing consent:</strong> where we rely on your consent,
+        you can withdraw it at any time by unsubscribing, changing your cookie
+        settings, or emailing us. This won’t affect anything we did before you
+        withdrew.
+      </p>
+      <p>
+        <strong>Your rights:</strong> you have the right to access,
+        rectification (correction), erasure, restriction of processing, data
+        portability, and objection to processing.
+      </p>
+      <p>
+        <strong>Complaints:</strong> you can complain to your local data
+        protection authority. In the UK, that is the Information Commissioner’s
+        Office (ICO). In the EU/EEA, it is the authority in your country of
+        residence. You can find yours on the European Data Protection Board’s
+        website.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-ccpa">
+      <h2 id="pp-ccpa" class="type-h3">10. Extra information for California residents</h2>
+      <p class="pp-note type-body-sm">
+        A quick note: California’s privacy law (CCPA/CPRA) only legally applies
+        to businesses above certain thresholds (very roughly, over about $26.6
+        million in annual revenue, or handling data of 100,000 or more
+        Californians a year, or earning 50% or more of revenue from selling or
+        sharing data). We don’t expect to meet these thresholds, but we include
+        this section as good practice because we may serve California
+        customers.
+      </p>
+      <p>
+        <strong>Categories of personal information we collect:</strong> identifiers (name, email, phone number, IP address), internet activity
+        (pages viewed, ad interactions), and approximate location.
+      </p>
+      <p>
+        <strong>Where it comes from:</strong> directly from you (forms and
+        bookings) and automatically from your browser (cookies and pixels).
+      </p>
+      <p>
+        <strong>Why we use it:</strong> to respond to you, run our business,
+        measure our site, and advertise our services.
+      </p>
+      <p>
+        <strong>Who we share it with:</strong> Go High Level (CRM and email),
+        Meta (advertising pixel), and Google (analytics).
+      </p>
+      <p>
+        <strong>Sale and sharing:</strong> we do not sell your personal
+        information for money. However, because we use the Meta Pixel for
+        advertising, this may count as “sharing” personal information for
+        cross-context behavioural advertising under California law. You can opt
+        out at any time (see below).
+      </p>
+      <p>
+        <strong>Your California rights:</strong> to know and access your
+        personal information, to delete it, to correct it, to opt out of the
+        sale or sharing of it, to limit the use of sensitive personal
+        information (we do not knowingly collect any), and to not be
+        discriminated against for exercising these rights.
+      </p>
+      <p>
+        <strong>How to exercise them:</strong> email <a href={`mailto:${email}`}><strong>{email}</strong></a> or use the
+        contact form at <a href={site}>{site}</a>. To opt out of sharing, use
+        the “Do Not Sell or Share My Personal Information” link in our website
+        footer. We also honour Global Privacy Control (GPC) browser signals.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-children">
+      <h2 id="pp-children" class="type-h3">11. Children</h2>
+      <p>
+        Our website is for businesses and is not aimed at children under 16. We
+        do not knowingly collect information from children. If you think we
+        have, please email us and we’ll delete it.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-changes">
+      <h2 id="pp-changes" class="type-h3">12. Changes to this policy</h2>
+      <p>
+        We may update this policy from time to time. We’ll change the “Last
+        updated” date at the top whenever we do.
+      </p>
+    </section>
+
+    <section aria-labelledby="pp-contact">
+      <h2 id="pp-contact" class="type-h3">13. Contact us</h2>
+      <address class="pp-contact">
+        <strong>EdTrek Digital</strong>
+        <span>Email: <a href={`mailto:${email}`}><strong>{email}</strong></a></span>
+        <span>Website: <a href={site}>{site}</a></span>
+      </address>
     </section>
   </article>
 
@@ -59,9 +366,13 @@ const updated = 'November 12, 2026';
   @reference "../styles/global.css";
 
   @layer components {
-    /* Single reading column; top clears the fixed nav like the 404. */
+    /* Single 720px reading column (own box, not container-site: that utility
+       would override max-width); top clears the fixed nav like the 404. */
     .pp {
       --nav-clear: 88px;
+      width: 100%;
+      margin-inline: auto;
+      padding-inline: var(--section-padding-inline);
       display: flex;
       flex-direction: column;
       gap: 40px;
@@ -75,6 +386,7 @@ const updated = 'November 12, 2026';
       }
       @variant wide {
         max-width: 720px;
+        padding-inline: 0;
       }
     }
 
@@ -97,6 +409,26 @@ const updated = 'November 12, 2026';
       gap: 12px;
     }
 
+    .pp section h3 {
+      margin-top: 8px;
+    }
+
+    .pp strong {
+      font-weight: 700;
+    }
+
+    .pp a {
+      color: var(--color-lagoon);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      overflow-wrap: anywhere;
+
+      &:hover {
+        color: var(--color-bedrock);
+      }
+    }
+
     .pp section ul li {
       position: relative;
       padding-left: 17px;
@@ -113,6 +445,75 @@ const updated = 'November 12, 2026';
         width: 5px;
         height: 5px;
         background: var(--color-lagoon);
+      }
+    }
+
+    /* Aside-style note (Karla has no italic cut, so it's set apart by a rule). */
+    .pp-note {
+      padding-left: 16px;
+      border-left: 2px solid var(--color-air);
+    }
+
+    .pp-contact {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-style: normal;
+    }
+
+    /* Collection table: a real table from tablet up; stacked label/value
+       blocks on phones so nothing scrolls sideways. */
+    .pp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+
+      & th {
+        @apply type-label;
+        padding: 0 16px 12px 0;
+        vertical-align: bottom;
+        border-bottom: 1px solid var(--color-bedrock);
+      }
+      & td {
+        @apply type-body-sm;
+        padding: 16px 16px 16px 0;
+        vertical-align: top;
+        border-bottom: 1px solid var(--color-hairline);
+      }
+      & th:last-child,
+      & td:last-child {
+        padding-right: 0;
+      }
+
+      @media not all and (width >= 45rem) {
+        & thead {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          overflow: hidden;
+          clip-path: inset(50%);
+        }
+        & tr {
+          display: block;
+          padding: 16px 0;
+          border-bottom: 1px solid var(--color-hairline);
+        }
+        & td {
+          display: block;
+          padding: 0;
+          border: 0;
+
+          & + td {
+            margin-top: 10px;
+          }
+          &::before {
+            content: attr(data-label);
+            display: block;
+            margin-bottom: 2px;
+            @apply type-caption-bold;
+            color: var(--color-lagoon);
+          }
+        }
       }
     }
   }

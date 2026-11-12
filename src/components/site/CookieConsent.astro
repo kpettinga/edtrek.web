@@ -1,0 +1,277 @@
+---
+/**
+ * CookieConsent — vanilla-cookieconsent (v3, pinned) consent box, lower right.
+ *
+ * Look: the Modal panel (white, 1px Bedrock border, --shadow-tile, square
+ * corners) without the scrim, and the page stays usable while it's open.
+ * Buttons follow Button "small": 2px Bedrock border. The box offers only
+ * Accept + Manage on one row (Reject lives in the preferences modal).
+ * The preferences modal shares the panel look and the Modal's white scrim.
+ *
+ * Categories match the Privacy Policy: necessary (always on), analytics
+ * (Google Analytics), marketing (Meta Pixel). Nothing is loaded yet. When a
+ * tracker is added, gate it with
+ *   <script type="text/plain" data-category="analytics" src="…"></script>
+ * and the library runs it only after consent.
+ *
+ * Reopen: any [data-cc="show-preferencesModal"] (the footer's Cookie Settings).
+ *
+ * The library's CSS is unlayered, so the overrides below are unlayered too
+ * and use `html #cc-main` to win on specificity regardless of load order.
+ */
+---
+
+<script>
+  import 'vanilla-cookieconsent/dist/cookieconsent.css';
+  import * as CookieConsent from 'vanilla-cookieconsent';
+
+  CookieConsent.run({
+    guiOptions: {
+      consentModal: {
+        layout: 'box inline',
+        position: 'bottom right',
+        equalWeightButtons: true,
+        flipButtons: false,
+      },
+      preferencesModal: {
+        layout: 'box',
+        equalWeightButtons: true,
+        flipButtons: false,
+      },
+    },
+
+    categories: {
+      necessary: { enabled: true, readOnly: true },
+      analytics: {
+        autoClear: { cookies: [{ name: /^_ga/ }, { name: '_gid' }] },
+      },
+      marketing: {
+        autoClear: { cookies: [{ name: '_fbp' }, { name: '_fbc' }] },
+      },
+    },
+
+    language: {
+      default: 'en',
+      translations: {
+        en: {
+          consentModal: {
+            title: '',
+            description:
+              '🍪 <strong>We use cookies</strong> for analytics and ads. Read our <a href="/privacy">Privacy Policy</a>.',
+            acceptAllBtn: 'Accept cookies',
+            showPreferencesBtn: 'Manage',
+          },
+          preferencesModal: {
+            title: 'Cookie preferences',
+            acceptAllBtn: 'Accept all',
+            acceptNecessaryBtn: 'Reject all',
+            savePreferencesBtn: 'Save preferences',
+            closeIconLabel: 'Close',
+            sections: [
+              {
+                description:
+                  'Choose which cookies we can use. You can change this any time from the Cookie Settings link in the footer. Details are in our <a href="/privacy">Privacy Policy</a>.',
+              },
+              {
+                title: 'Essential',
+                description: 'Needed for the site’s forms and booking calendar to work. Always on.',
+                linkedCategory: 'necessary',
+              },
+              {
+                title: 'Analytics',
+                description: 'Google Analytics, to understand how visitors use the site.',
+                linkedCategory: 'analytics',
+              },
+              {
+                title: 'Advertising',
+                description: 'Meta Pixel, to measure and improve our Facebook and Instagram ads.',
+                linkedCategory: 'marketing',
+              },
+            ],
+          },
+        },
+      },
+    },
+  });
+</script>
+
+<style is:global>
+  html #cc-main {
+    --cc-font-family: var(--font-sans);
+    --cc-modal-border-radius: 0;
+    --cc-btn-border-radius: 0;
+    --cc-pm-toggle-border-radius: 0;
+    --cc-modal-margin: 16px;
+    --cc-modal-transition-duration: 260ms;
+    --cc-z-index: 40;
+
+    --cc-bg: #fff;
+    --cc-primary-color: var(--color-bedrock);
+    --cc-secondary-color: var(--color-bedrock);
+    --cc-link-color: var(--color-lagoon);
+    --cc-separator-border-color: var(--color-hairline);
+    --cc-overlay-bg: rgb(255 255 255 / 0.75); /* preferences modal only */
+
+    --cc-btn-primary-bg: #fff;
+    --cc-btn-primary-color: var(--color-bedrock);
+    --cc-btn-primary-border-color: var(--color-bedrock);
+    --cc-btn-primary-hover-bg: var(--color-fire-tint);
+    --cc-btn-primary-hover-color: var(--color-bedrock);
+    --cc-btn-primary-hover-border-color: var(--color-bedrock);
+    --cc-btn-secondary-bg: transparent;
+    --cc-btn-secondary-color: var(--color-bedrock);
+    --cc-btn-secondary-border-color: var(--color-bedrock);
+    --cc-btn-secondary-hover-bg: var(--color-air);
+    --cc-btn-secondary-hover-color: var(--color-bedrock);
+    --cc-btn-secondary-hover-border-color: var(--color-bedrock);
+
+    --cc-toggle-on-bg: var(--color-lagoon);
+    --cc-toggle-off-bg: var(--color-mist);
+    --cc-toggle-readonly-bg: var(--color-mist);
+    --cc-toggle-on-knob-bg: #fff;
+    --cc-toggle-off-knob-bg: #fff;
+    --cc-toggle-enabled-icon-color: var(--color-lagoon);
+    --cc-toggle-disabled-icon-color: var(--color-bedrock);
+    --cc-toggle-readonly-knob-bg: #fff;
+    --cc-toggle-readonly-knob-icon-color: var(--color-bedrock);
+
+    --cc-cookie-category-block-bg: var(--color-paper);
+    --cc-cookie-category-block-border: var(--color-paper);
+    --cc-cookie-category-block-hover-bg: var(--color-air);
+    --cc-cookie-category-block-hover-border: var(--color-air);
+    --cc-cookie-category-expanded-block-bg: #fff;
+    --cc-cookie-category-expanded-block-hover-bg: var(--color-paper);
+    --cc-section-category-border: var(--color-hairline);
+    --cc-footer-bg: #fff;
+    --cc-footer-border-color: var(--color-hairline);
+    --cc-footer-color: var(--color-bedrock);
+
+    color-scheme: light;
+    letter-spacing: -0.03em;
+    font-synthesis: none;
+
+    @media (width >= 45rem) {
+      --cc-modal-margin: 24px;
+    }
+
+    /* Panels: the Modal look (no scrim on the consent box). */
+    & .cm,
+    & .pm {
+      border: 1px solid var(--color-bedrock);
+      box-shadow: var(--shadow-tile);
+      transition-timing-function: var(--ease-brand);
+    }
+
+    /* Consent box: small, 20px padding, no internal separator. */
+    & .cm {
+      max-width: 32rem;
+    }
+    & .cm__texts {
+      padding: 20px 20px 0;
+    }
+    & .cm__title {
+      padding: 0;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: var(--text-h4);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    & .cm__title + .cm__desc {
+      margin-top: 8px;
+    }
+    & .cm__desc a {
+      white-space: nowrap;
+    }
+    & .cm__desc {
+      padding: 0 0 16px;
+      font-size: var(--text-caption);
+      line-height: 1.4;
+      letter-spacing: 0;
+    }
+    /* Accept + Manage on one row: the library puts them in separate groups
+       stacked vertically, so lay the groups out side by side. */
+    & .cm__btns {
+      flex-direction: row;
+      gap: 8px;
+      padding: 0 20px 20px;
+      border-top: 0;
+    }
+    & .cm__btn-group {
+      flex: 1 1 0;
+    }
+    & .cm__btn-group + .cm__btn-group {
+      margin: 0;
+    }
+
+    /* Titles in the preferences modal */
+    & .pm__title,
+    & .pm__section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    & .pm__title {
+      font-size: var(--text-h4);
+    }
+    & .pm__section-desc,
+    & .pm__section-title {
+      font-size: var(--text-caption);
+      line-height: 1.4;
+    }
+
+    /* Buttons: Button "small" (2px Bedrock border, Karla Bold 14). */
+    & .cm__btn,
+    & .pm__btn {
+      min-height: 0;
+      padding: 10px 16px;
+      border-width: 2px;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: var(--text-caption);
+      line-height: 1.4;
+      letter-spacing: 0;
+      transition:
+        background-color 160ms var(--ease-brand),
+        transform 80ms ease-out;
+
+      &:active {
+        transform: translateY(2px);
+      }
+      &:focus-visible {
+        outline: 2px solid var(--color-lagoon);
+        outline-offset: 2px;
+      }
+    }
+    & .pm__close-btn {
+      border-radius: 0;
+      border: 0;
+      background: #fff;
+
+      &:hover {
+        background: var(--color-air);
+      }
+    }
+
+    & a {
+      color: var(--color-lagoon);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.2em;
+      background: none;
+
+      &:hover {
+        color: var(--color-bedrock);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      --cc-modal-transition-duration: 0s;
+
+      & .cm__btn,
+      & .pm__btn {
+        transition: none;
+      }
+    }
+  }
+</style>
