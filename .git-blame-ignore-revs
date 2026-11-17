@@ -1,0 +1,6 @@
+# Formatting-only commits for `git blame` to skip.
+# GitHub reads this file automatically; locally, run once:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# Reformat to 4-space indentation
+9f0c92e47b4d4c85db1b0823c9798b5821b0e8aa
