@@ -40,6 +40,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <meta name="generator" content={Astro.generator} />
         <Font cssVariable="--font-zilla-slab" preload={[{ weight: 300, style: "normal" }, { weight: 700, style: "normal" }]} />
         <Font cssVariable="--font-karla" preload />
+        <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-N2CV4KMX"></script>
+        <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+        </script>
     </head>
     <body>
         <a
