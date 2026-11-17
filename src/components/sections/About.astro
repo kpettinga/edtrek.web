@@ -29,324 +29,324 @@ import demandDrive from '../../assets/logos/demanddrive.svg';
 import ebay from '../../assets/logos/ebay.png';
 
 const stats = [
-  { value: '17 yrs', label: 'Design & Engineering' },
-  { value: '12+ yrs', label: 'Living Abroad' },
-  { value: '35', label: 'Countries Visited' },
+    { value: '17 yrs', label: 'Design & Engineering' },
+    { value: '12+ yrs', label: 'Living Abroad' },
+    { value: '35', label: 'Countries Visited' },
 ];
 
 const testimonials = [
-  {
-    quote:
-      'Over four years of working together, Kirk has consistently taken the time to understand our clients’ businesses, ask the right questions, and design creative solutions that fit not just today’s needs but where the business is headed.',
-    role: 'Chief Technology Officer',
-    headshot: ctoHeadshot,
-    logo: { src: demandDrive, alt: 'demandDrive', height: 15 },
-  },
-  {
-    quote:
-      'Working with Kirk means having someone who genuinely cares about getting to the right solution, not just delivering something that looks great.',
-    role: 'Director, Strategic Initiatives, Office of the CEO',
-    headshot: directorHeadshot,
-    logo: { src: ebay, alt: 'eBay', height: 21 },
-  },
+    {
+        quote:
+            'Over four years of working together, Kirk has consistently taken the time to understand our clients’ businesses, ask the right questions, and design creative solutions that fit not just today’s needs but where the business is headed.',
+        role: 'Chief Technology Officer',
+        headshot: ctoHeadshot,
+        logo: { src: demandDrive, alt: 'demandDrive', height: 15 },
+    },
+    {
+        quote:
+            'Working with Kirk means having someone who genuinely cares about getting to the right solution, not just delivering something that looks great.',
+        role: 'Director, Strategic Initiatives, Office of the CEO',
+        headshot: directorHeadshot,
+        logo: { src: ebay, alt: 'eBay', height: 21 },
+    },
 ];
 ---
 
 <Section id="about" tone="air" aria-labelledby="about-title" containerClass="about" data-trail-section>
-  <div class="about-intro">
-    <div class="about-head">
-      <Waypoint />
-      <p class="type-eyebrow text-lagoon">About</p>
-    </div>
-    <div class="about-row">
-      <div class="about-photo">
-        <Image
-          src={portrait}
-          alt="Kirk Pettinga, smiling, in a patterned short-sleeve shirt"
-          widths={[282, 345, 564, 690]}
-          sizes="(min-width: 45rem) 345px, 282px"
-          class="about-photo-img"
-        />
-      </div>
-
-      <div class="about-copy">
-        <h2 id="about-title" class="type-h2">
-          Hi! I’m <a class="about-name" href="https://www.kirkpettinga.com" target="_blank" rel="noopener"
-            ><em>Kirk Pettinga</em></a
-          >,
-        </h2>
-        <div class="type-body about-bio">
-          <p>
-            Founder of EdTrek Digital. I’ve been a designer and web engineer for nearly two decades and had the privilege
-            to work with globally recognized brands in the travel and education industries.
-          </p>
-          <p>
-            My connection to education and travel goes beyond the screen. Based in Hong Kong, I’ve lived abroad for over
-            12 years. I’m an avid traveler, hold a teaching certification, and am married to a career educator. I have
-            firsthand understanding of what educators and administrators value most. This helps me build platforms that
-            speak directly to the audience you need to reach.
-          </p>
-          <p>
-            If you have any questions about me, my process, or how I can take your business to the next level, I’d love
-            to talk more!
-          </p>
+    <div class="about-intro">
+        <div class="about-head">
+            <Waypoint />
+            <p class="type-eyebrow text-lagoon">About</p>
         </div>
-        <ul class="about-stats" role="list">
-          {
-            stats.map((s) => (
-              <li class="about-stat">
-                <span class="type-h4">{s.value}</span>
-                <span class="type-caption">{s.label}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="about-voices" data-trail-end>
-    <LogoMarquee />
-    <ul class="quotes" role="list" aria-label="Testimonials">
-      {
-        testimonials.map((t) => (
-          <li class="quote-card">
-            <figure class="quote-figure">
-              <Icon name="quote-open" size={32} class="quote-icon" />
-              <blockquote class="type-quote">
-                <p>{t.quote}</p>
-              </blockquote>
-              <figcaption class="quote-by">
-                <Image src={t.headshot} alt="" width={72} height={72} widths={[72, 144]} class="quote-headshot" />
-                <span class="type-caption-bold quote-role">{t.role}</span>
+        <div class="about-row">
+            <div class="about-photo">
                 <Image
-                  src={t.logo.src}
-                  alt={t.logo.alt}
-                  height={t.logo.height}
-                  class="quote-logo"
-                  style={`height:${t.logo.height}px`}
+                    src={portrait}
+                    alt="Kirk Pettinga, smiling, in a patterned short-sleeve shirt"
+                    widths={[282, 345, 564, 690]}
+                    sizes="(min-width: 45rem) 345px, 282px"
+                    class="about-photo-img"
                 />
-              </figcaption>
-            </figure>
-          </li>
-        ))
-      }
-    </ul>
-    <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket">Let’s Build Your Site</Button>
-  </div>
+            </div>
+
+            <div class="about-copy">
+                <h2 id="about-title" class="type-h2">
+                    Hi! I’m <a class="about-name" href="https://www.kirkpettinga.com" target="_blank" rel="noopener"
+                        ><em>Kirk Pettinga</em></a
+                    >,
+                </h2>
+                <div class="type-body about-bio">
+                    <p>
+                        Founder of EdTrek Digital. I’ve been a designer and web engineer for nearly two decades and had the privilege
+                        to work with globally recognized brands in the travel and education industries.
+                    </p>
+                    <p>
+                        My connection to education and travel goes beyond the screen. Based in Hong Kong, I’ve lived abroad for over
+                        12 years. I’m an avid traveler, hold a teaching certification, and am married to a career educator. I have
+                        firsthand understanding of what educators and administrators value most. This helps me build platforms that
+                        speak directly to the audience you need to reach.
+                    </p>
+                    <p>
+                        If you have any questions about me, my process, or how I can take your business to the next level, I’d love
+                        to talk more!
+                    </p>
+                </div>
+                <ul class="about-stats" role="list">
+                    {
+                        stats.map((s) => (
+                            <li class="about-stat">
+                                <span class="type-h4">{s.value}</span>
+                                <span class="type-caption">{s.label}</span>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-voices" data-trail-end>
+        <LogoMarquee />
+        <ul class="quotes" role="list" aria-label="Testimonials">
+            {
+                testimonials.map((t) => (
+                    <li class="quote-card">
+                        <figure class="quote-figure">
+                            <Icon name="quote-open" size={32} class="quote-icon" />
+                            <blockquote class="type-quote">
+                                <p>{t.quote}</p>
+                            </blockquote>
+                            <figcaption class="quote-by">
+                                <Image src={t.headshot} alt="" width={72} height={72} widths={[72, 144]} class="quote-headshot" />
+                                <span class="type-caption-bold quote-role">{t.role}</span>
+                                <Image
+                                    src={t.logo.src}
+                                    alt={t.logo.alt}
+                                    height={t.logo.height}
+                                    class="quote-logo"
+                                    style={`height:${t.logo.height}px`}
+                                />
+                            </figcaption>
+                        </figure>
+                    </li>
+                ))
+            }
+        </ul>
+        <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket">Let’s Build Your Site</Button>
+    </div>
 </Section>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    :global(.about) {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 120px;
-    }
-
-    /* ---- "About" eyebrow, centred on the page above the row ---- */
-    .about-intro {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 40px;
-      width: 100%;
-
-      @variant desktop {
-        gap: 48px;
-      }
-    }
-
-    .about-head {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
-
-    /* ---- about row ---- */
-    .about-row {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 48px;
-      width: 100%;
-
-      @variant tablet {
-        gap: 64px;
-      }
-      @variant desktop {
-        flex-direction: row;
-        gap: 148px;
-        max-width: 1040px;
-      }
-    }
-
-    /* Portrait + dotted Lagoon frame lines, 9px outside the photo, running
-       ~15px past each corner (Figma: 392 × 550 frame around a 345 × 496 photo). */
-    .about-photo {
-      --dot: repeating-linear-gradient(to bottom, var(--color-lagoon) 0 2px, transparent 2px 7px);
-      --dot-x: repeating-linear-gradient(to right, var(--color-lagoon) 0 2px, transparent 2px 7px);
-      flex: none;
-      padding: 24px;
-      background:
-        var(--dot) 15px 0 / 1px 100% no-repeat,
-        var(--dot) calc(100% - 15px) 0 / 1px 100% no-repeat,
-        var(--dot-x) 0 15px / 100% 1px no-repeat,
-        var(--dot-x) 0 calc(100% - 15px) / 100% 1px no-repeat;
-
-      @variant max-tablet {
-        padding: 20px;
-        background-position:
-          12px 0,
-          calc(100% - 12px) 0,
-          0 12px,
-          0 calc(100% - 12px);
-      }
-    }
-    :global(.about-photo-img) {
-      display: block;
-      width: 282px;
-      aspect-ratio: 345 / 496;
-      object-fit: cover;
-
-      @variant tablet {
-        width: 345px;
-      }
-    }
-
-    .about-copy {
-      display: flex;
-      flex: 1 1 0;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 24px;
-      width: 100%;
-      min-width: 0;
-    }
-    .about-name {
-      color: inherit;
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 0.15em;
-      transition: text-decoration-color 200ms var(--ease-brand);
-
-      &:hover {
-        text-decoration-color: currentColor;
-      }
-    }
-    .about-bio {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    .about-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-    .about-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      padding: 12px 16px;
-      background: #fff;
-      box-shadow: var(--shadow-tile);
-      white-space: nowrap;
-    }
-
-    /* ---- testimonials + CTA ---- */
-    .about-voices {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 64px;
-      width: 100%;
-    }
-    .quotes {
-      display: grid;
-      gap: 32px;
-      width: 100%;
-
-      @variant desktop {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 40px;
-        max-width: 1040px; /* = the photo + text row above */
-      }
-    }
-    /* Same tile as the Three Yeses audience cards: white, Bedrock 12% border,
-       28/24 → 40/36 padding; desktop hover lifts 4px with a Bedrock border,
-       Tile shadow, and the quote icon turns Fire. */
-    .quote-card {
-      display: flex;
-      padding: 28px 24px;
-      background: #fff;
-      border: 1px solid var(--color-card-border);
-
-      @variant tablet {
-        padding: 40px 36px;
-      }
-      @variant desktop {
-        min-height: 420px;
-        transition:
-          translate 220ms var(--ease-brand),
-          border-color 220ms var(--ease-brand),
-          box-shadow 220ms var(--ease-brand);
-      }
-    }
-    @media (hover: hover) {
-      .quote-card:hover {
-        @variant desktop {
-          translate: 0 -4px;
-          border-color: var(--color-bedrock);
-          box-shadow: var(--shadow-tile);
+    @layer components {
+        :global(.about) {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 120px;
         }
-      }
-      /* separate rule: Astro doesn't rewrite :global() nested under & */
-      .quote-card:hover :global(.quote-icon) {
-        @variant desktop {
-          color: var(--color-fire);
+
+        /* ---- "About" eyebrow, centred on the page above the row ---- */
+        .about-intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            width: 100%;
+
+            @variant desktop {
+                gap: 48px;
+            }
         }
-      }
+
+        .about-head {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+
+        /* ---- about row ---- */
+        .about-row {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 48px;
+            width: 100%;
+
+            @variant tablet {
+                gap: 64px;
+            }
+            @variant desktop {
+                flex-direction: row;
+                gap: 148px;
+                max-width: 1040px;
+            }
+        }
+
+        /* Portrait + dotted Lagoon frame lines, 9px outside the photo, running
+           ~15px past each corner (Figma: 392 × 550 frame around a 345 × 496 photo). */
+        .about-photo {
+            --dot: repeating-linear-gradient(to bottom, var(--color-lagoon) 0 2px, transparent 2px 7px);
+            --dot-x: repeating-linear-gradient(to right, var(--color-lagoon) 0 2px, transparent 2px 7px);
+            flex: none;
+            padding: 24px;
+            background:
+                var(--dot) 15px 0 / 1px 100% no-repeat,
+                var(--dot) calc(100% - 15px) 0 / 1px 100% no-repeat,
+                var(--dot-x) 0 15px / 100% 1px no-repeat,
+                var(--dot-x) 0 calc(100% - 15px) / 100% 1px no-repeat;
+
+            @variant max-tablet {
+                padding: 20px;
+                background-position:
+                    12px 0,
+                    calc(100% - 12px) 0,
+                    0 12px,
+                    0 calc(100% - 12px);
+            }
+        }
+        :global(.about-photo-img) {
+            display: block;
+            width: 282px;
+            aspect-ratio: 345 / 496;
+            object-fit: cover;
+
+            @variant tablet {
+                width: 345px;
+            }
+        }
+
+        .about-copy {
+            display: flex;
+            flex: 1 1 0;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            width: 100%;
+            min-width: 0;
+        }
+        .about-name {
+            color: inherit;
+            text-decoration: underline;
+            text-decoration-color: transparent;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.15em;
+            transition: text-decoration-color 200ms var(--ease-brand);
+
+            &:hover {
+                text-decoration-color: currentColor;
+            }
+        }
+        .about-bio {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .about-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .about-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 12px 16px;
+            background: #fff;
+            box-shadow: var(--shadow-tile);
+            white-space: nowrap;
+        }
+
+        /* ---- testimonials + CTA ---- */
+        .about-voices {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 64px;
+            width: 100%;
+        }
+        .quotes {
+            display: grid;
+            gap: 32px;
+            width: 100%;
+
+            @variant desktop {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 40px;
+                max-width: 1040px; /* = the photo + text row above */
+            }
+        }
+        /* Same tile as the Three Yeses audience cards: white, Bedrock 12% border,
+           28/24 → 40/36 padding; desktop hover lifts 4px with a Bedrock border,
+           Tile shadow, and the quote icon turns Fire. */
+        .quote-card {
+            display: flex;
+            padding: 28px 24px;
+            background: #fff;
+            border: 1px solid var(--color-card-border);
+
+            @variant tablet {
+                padding: 40px 36px;
+            }
+            @variant desktop {
+                min-height: 420px;
+                transition:
+                    translate 220ms var(--ease-brand),
+                    border-color 220ms var(--ease-brand),
+                    box-shadow 220ms var(--ease-brand);
+            }
+        }
+        @media (hover: hover) {
+            .quote-card:hover {
+                @variant desktop {
+                    translate: 0 -4px;
+                    border-color: var(--color-bedrock);
+                    box-shadow: var(--shadow-tile);
+                }
+            }
+            /* separate rule: Astro doesn't rewrite :global() nested under & */
+            .quote-card:hover :global(.quote-icon) {
+                @variant desktop {
+                    color: var(--color-fire);
+                }
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .quote-card,
+            :global(.quote-icon) {
+                transition: none !important;
+            }
+        }
+        .quote-figure {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            justify-content: space-between; /* desktop: equal-height cards spread like Figma */
+            gap: 24px;
+        }
+        :global(.quote-icon) {
+            color: var(--color-lagoon);
+            transition: color 220ms var(--ease-brand);
+        }
+        .quote-by {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        :global(.quote-headshot) {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .quote-role {
+            margin-top: 12px;
+        }
+        :global(.quote-logo) {
+            width: auto;
+            margin-top: 10px;
+        }
     }
-    @media (prefers-reduced-motion: reduce) {
-      .quote-card,
-      :global(.quote-icon) {
-        transition: none !important;
-      }
-    }
-    .quote-figure {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      justify-content: space-between; /* desktop: equal-height cards spread like Figma */
-      gap: 24px;
-    }
-    :global(.quote-icon) {
-      color: var(--color-lagoon);
-      transition: color 220ms var(--ease-brand);
-    }
-    .quote-by {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    :global(.quote-headshot) {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .quote-role {
-      margin-top: 12px;
-    }
-    :global(.quote-logo) {
-      width: auto;
-      margin-top: 10px;
-    }
-  }
 </style>

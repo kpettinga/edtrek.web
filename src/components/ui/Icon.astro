@@ -9,12 +9,12 @@ export type { IconName } from './icons';
 export { iconNames } from './icons';
 
 interface Props {
-  name: IconName;
-  /** Display size in px: 16 (small btn), 20 (btn, callouts), 24 (inline), 32 (cards), 48 (section markers, 404 graphic). */
-  size?: 16 | 20 | 24 | 32 | 48;
-  /** Accessible label. Omit for decorative icons (default). */
-  label?: string;
-  class?: string;
+    name: IconName;
+    /** Display size in px: 16 (small btn), 20 (btn, callouts), 24 (inline), 32 (cards), 48 (section markers, 404 graphic). */
+    size?: 16 | 20 | 24 | 32 | 48;
+    /** Accessible label. Omit for decorative icons (default). */
+    label?: string;
+    class?: string;
 }
 
 const { name, size = 24, label, class: className } = Astro.props;
@@ -24,19 +24,19 @@ const strokeWidth = +(48 / size).toFixed(3);
 ---
 
 <svg
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="0 0 24 24"
-  width={size}
-  height={size}
-  fill="none"
-  stroke="currentColor"
-  stroke-width={strokeWidth}
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  class:list={['shrink-0', className]}
-  role={label ? 'img' : undefined}
-  aria-label={label}
-  aria-hidden={label ? undefined : 'true'}
-  focusable="false"
-  set:html={body}
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    width={size}
+    height={size}
+    fill="none"
+    stroke="currentColor"
+    stroke-width={strokeWidth}
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class:list={['shrink-0', className]}
+    role={label ? 'img' : undefined}
+    aria-label={label}
+    aria-hidden={label ? undefined : 'true'}
+    focusable="false"
+    set:html={body}
 />

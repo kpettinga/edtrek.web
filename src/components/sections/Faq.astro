@@ -18,238 +18,238 @@ import Waypoint from '../ui/Waypoint.astro';
 // Each answer is a list of blocks: a string = paragraph, a string[] = bulleted list.
 type Block = string | string[];
 const faqs: { q: string; a: Block[] }[] = [
-  {
-    q: 'What kind of timeline should I expect?',
-    a: [
-      'A full web design and development process can take as little as 4 weeks. The average is about 6 weeks but every client is different. In my experience, those who are responsive and prepared with content end up launching on schedule. Other factors that can increase the timeline include building custom integrations with CRMs or booking software or building e-commerce functionality to allow users to book on-site. These are challenges I LOVE to take on but they do increase the timeline of the project.',
-    ],
-  },
-  {
-    q: 'Do you provide marketing strategy?',
-    a: [
-      'I help guide overall site architecture, UX, and the language used on your site, but I’m primarily focused on design and development. I give you a website and the integrations you need to implement your own successful marketing strategy.',
-    ],
-  },
-  {
-    q: 'Will you develop a website I’ve already designed?',
-    a: [
-      'Unfortunately, no. I believe design and development are intrinsically linked, and I want to create the absolute best products for my clients. That process starts with design.',
-    ],
-  },
-  {
-    q: 'Will you design a website but let me build it?',
-    a: [
-      'Possibly, but I don’t think it’s in your best interest. The sites I design often include user interaction that requires expert engineers. Building a website can be pretty straightforward but building one that is highly performant, usable across devices, and rock solid for your users can be quite challenging. Let me handle the process for you, end-to-end, and I think you’ll be grateful you did!',
-    ],
-  },
-  {
-    q: 'Why shouldn’t I just use Squarespace/Wix/GoDaddy/etc to build my own site?',
-    a: [
-      'You’re free to do that and I wish you the best of luck! But these are generic tools for building generic websites to accommodate any company in any industry. EdTrek focuses specifically on educational travel companies so you’ll get a bespoke website that’s tailored to your niche.',
-    ],
-  },
-  {
-    q: 'Why should I hire you vs. a bigger agency?',
-    a: [
-      'The first answer is focus and attention. I only work with about 3 clients per quarter so I can give each of them the time and attention they deserve.',
-      'Second, I’m passionate about travel, having lived abroad with my family for the last 12 years. I’m married to an educator who vets and hires educational travel companies like yours and many of my friends are teachers and administrators, so I’m steeped in the world of education, your target market. I understand what they’re looking for when hiring student travel companies and how you can communicate your offering to inspire trust and credibility.',
-    ],
-  },
-  {
-    q: 'What guarantees can you give me?',
-    a: [
-      'Once I receive your deposit, I guarantee you:',
-      ['A Discovery process to learn about your business', 'An audit of your current site', 'A new homepage design you’ll love.'],
-      'If you’re not happy with any part of that process, I’ll refund your deposit. No hard feelings!'
-    ],
-  },
-  {
-    q: 'What do you need from me?',
-    a: [
-      'There are two main parts of my process that require client involvement. First, the Discovery phase and, later, the content entry phase.',
-      'Discovery starts with a questionnaire you fill out on your own followed by a call to discuss your responses. On this call I want to learn as much as I can about you and gain a clear picture of what your unique qualities are. This is also your opportunity to provide anything and everything I might need to build you an amazing site. Images, Video, Testimonials, inspiration, other sites you might like, etc. The more I have to work with, the better the outcome.',
-      'Content Entry is the process of entering text, image, and video content into your new site. I want to empower my clients to actually use the sites I build for them so you’ll get a full content entry training session once it’s close to completion. I’m also happy to help with content entry if it seems like an overwhelming task.',
-    ],
-  },
+    {
+        q: 'What kind of timeline should I expect?',
+        a: [
+            'A full web design and development process can take as little as 4 weeks. The average is about 6 weeks but every client is different. In my experience, those who are responsive and prepared with content end up launching on schedule. Other factors that can increase the timeline include building custom integrations with CRMs or booking software or building e-commerce functionality to allow users to book on-site. These are challenges I LOVE to take on but they do increase the timeline of the project.',
+        ],
+    },
+    {
+        q: 'Do you provide marketing strategy?',
+        a: [
+            'I help guide overall site architecture, UX, and the language used on your site, but I’m primarily focused on design and development. I give you a website and the integrations you need to implement your own successful marketing strategy.',
+        ],
+    },
+    {
+        q: 'Will you develop a website I’ve already designed?',
+        a: [
+            'Unfortunately, no. I believe design and development are intrinsically linked, and I want to create the absolute best products for my clients. That process starts with design.',
+        ],
+    },
+    {
+        q: 'Will you design a website but let me build it?',
+        a: [
+            'Possibly, but I don’t think it’s in your best interest. The sites I design often include user interaction that requires expert engineers. Building a website can be pretty straightforward but building one that is highly performant, usable across devices, and rock solid for your users can be quite challenging. Let me handle the process for you, end-to-end, and I think you’ll be grateful you did!',
+        ],
+    },
+    {
+        q: 'Why shouldn’t I just use Squarespace/Wix/GoDaddy/etc to build my own site?',
+        a: [
+            'You’re free to do that and I wish you the best of luck! But these are generic tools for building generic websites to accommodate any company in any industry. EdTrek focuses specifically on educational travel companies so you’ll get a bespoke website that’s tailored to your niche.',
+        ],
+    },
+    {
+        q: 'Why should I hire you vs. a bigger agency?',
+        a: [
+            'The first answer is focus and attention. I only work with about 3 clients per quarter so I can give each of them the time and attention they deserve.',
+            'Second, I’m passionate about travel, having lived abroad with my family for the last 12 years. I’m married to an educator who vets and hires educational travel companies like yours and many of my friends are teachers and administrators, so I’m steeped in the world of education, your target market. I understand what they’re looking for when hiring student travel companies and how you can communicate your offering to inspire trust and credibility.',
+        ],
+    },
+    {
+        q: 'What guarantees can you give me?',
+        a: [
+            'Once I receive your deposit, I guarantee you:',
+            ['A Discovery process to learn about your business', 'An audit of your current site', 'A new homepage design you’ll love.'],
+            'If you’re not happy with any part of that process, I’ll refund your deposit. No hard feelings!'
+        ],
+    },
+    {
+        q: 'What do you need from me?',
+        a: [
+            'There are two main parts of my process that require client involvement. First, the Discovery phase and, later, the content entry phase.',
+            'Discovery starts with a questionnaire you fill out on your own followed by a call to discuss your responses. On this call I want to learn as much as I can about you and gain a clear picture of what your unique qualities are. This is also your opportunity to provide anything and everything I might need to build you an amazing site. Images, Video, Testimonials, inspiration, other sites you might like, etc. The more I have to work with, the better the outcome.',
+            'Content Entry is the process of entering text, image, and video content into your new site. I want to empower my clients to actually use the sites I build for them so you’ll get a full content entry training session once it’s close to completion. I’m also happy to help with content entry if it seems like an overwhelming task.',
+        ],
+    },
 ];
 ---
 
 <section id="faq" class="faq veil section-pad" aria-labelledby="faq-title" data-faq data-trail-section>
-  <div class="faq-inner container-site above-map" data-trail-end>
-    <Waypoint />
-    <h2 id="faq-title" class="type-h2 faq-title"><strong class="font-bold">Questions</strong> you might have</h2>
+    <div class="faq-inner container-site above-map" data-trail-end>
+        <Waypoint />
+        <h2 id="faq-title" class="type-h2 faq-title"><strong class="font-bold">Questions</strong> you might have</h2>
 
-    <div class="faq-list">
-      {
-        faqs.map((f, i) => (
-          <div class="faq-item">
-            <h3 class="type-h4">
-              <button
-                type="button"
-                class="faq-q"
-                aria-expanded="false"
-                aria-controls={`faq-a-${i}`}
-                id={`faq-q-${i}`}
-              >
-                <span class="faq-mark" aria-hidden="true">
-                  Q
-                </span>
-                <span class="faq-question">{f.q}</span>
-                <Icon name="chevron-down" size={24} class="faq-caret" />
-              </button>
-            </h3>
-            <div class="faq-panel" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
-              <div class="faq-panel-inner">
-                <div class="type-body faq-a">
-                  {f.a.map((block) =>
-                    Array.isArray(block) ? (
-                      <ul class="faq-list-items" role="list">
-                        {block.map((item) => <li>{item}</li>)}
-                      </ul>
-                    ) : (
-                      <p>{block}</p>
-                    ),
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))
-      }
+        <div class="faq-list">
+            {
+                faqs.map((f, i) => (
+                    <div class="faq-item">
+                        <h3 class="type-h4">
+                            <button
+                                type="button"
+                                class="faq-q"
+                                aria-expanded="false"
+                                aria-controls={`faq-a-${i}`}
+                                id={`faq-q-${i}`}
+                            >
+                                <span class="faq-mark" aria-hidden="true">
+                                    Q
+                                </span>
+                                <span class="faq-question">{f.q}</span>
+                                <Icon name="chevron-down" size={24} class="faq-caret" />
+                            </button>
+                        </h3>
+                        <div class="faq-panel" id={`faq-a-${i}`} role="region" aria-labelledby={`faq-q-${i}`}>
+                            <div class="faq-panel-inner">
+                                <div class="type-body faq-a">
+                                    {f.a.map((block) =>
+                                        Array.isArray(block) ? (
+                                            <ul class="faq-list-items" role="list">
+                                                {block.map((item) => <li>{item}</li>)}
+                                            </ul>
+                                        ) : (
+                                            <p>{block}</p>
+                                        ),
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
     </div>
-  </div>
 </section>
 
 <script>
-  const root = document.querySelector<HTMLElement>('[data-faq]');
-  if (root) {
-    root.dataset.drawers = ''; // switch on the collapsed styling only once JS runs
-    root.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        btn.setAttribute('aria-expanded', String(btn.getAttribute('aria-expanded') !== 'true'));
-      });
-    });
-  }
+    const root = document.querySelector<HTMLElement>('[data-faq]');
+    if (root) {
+        root.dataset.drawers = ''; // switch on the collapsed styling only once JS runs
+        root.querySelectorAll<HTMLButtonElement>('.faq-q').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                btn.setAttribute('aria-expanded', String(btn.getAttribute('aria-expanded') !== 'true'));
+            });
+        });
+    }
 </script>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    .faq-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
-    .faq-title {
-      max-width: 900px;
-      text-align: center;
-      text-wrap: balance;
-    }
+    @layer components {
+        .faq-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+        }
+        .faq-title {
+            max-width: 900px;
+            text-align: center;
+            text-wrap: balance;
+        }
 
-    .faq-list {
-      width: 100%;
-      max-width: 824px;
-      margin-top: 24px; /* Figma's 24px spacer frame → 48 below the heading */
-    }
-    .faq-item {
-      --q-gap: 16px; /* "Q" → question */
-      display: grid;
-      grid-template-columns: auto 1fr 24px;
-      column-gap: var(--q-gap);
-      padding-block: 24px;
-      border-bottom: 1px solid var(--color-hairline);
-    }
+        .faq-list {
+            width: 100%;
+            max-width: 824px;
+            margin-top: 24px; /* Figma's 24px spacer frame → 48 below the heading */
+        }
+        .faq-item {
+            --q-gap: 16px; /* "Q" → question */
+            display: grid;
+            grid-template-columns: auto 1fr 24px;
+            column-gap: var(--q-gap);
+            padding-block: 24px;
+            border-bottom: 1px solid var(--color-hairline);
+        }
 
-    /* Question row: Q | question | caret. Everything down to the answer is a
-       subgrid of the item, so the answer starts under the question text (the
-       "Q" column is sized by the H4 glyph) and stops short of the caret. */
-    .faq-item > h3,
-    .faq-q,
-    .faq-panel,
-    .faq-panel-inner {
-      display: grid;
-      grid-column: 1 / -1;
-      grid-template-columns: subgrid;
-    }
-    .faq-q {
-      align-items: center;
-      width: 100%;
-      /* hit area spans the item's 24px block padding without changing layout */
-      padding-block: 24px;
-      margin-block: -24px;
-      color: var(--color-bedrock);
-      text-align: left;
-      cursor: pointer;
+        /* Question row: Q | question | caret. Everything down to the answer is a
+           subgrid of the item, so the answer starts under the question text (the
+           "Q" column is sized by the H4 glyph) and stops short of the caret. */
+        .faq-item > h3,
+        .faq-q,
+        .faq-panel,
+        .faq-panel-inner {
+            display: grid;
+            grid-column: 1 / -1;
+            grid-template-columns: subgrid;
+        }
+        .faq-q {
+            align-items: center;
+            width: 100%;
+            /* hit area spans the item's 24px block padding without changing layout */
+            padding-block: 24px;
+            margin-block: -24px;
+            color: var(--color-bedrock);
+            text-align: left;
+            cursor: pointer;
 
-      &:focus-visible {
-        outline: 2px solid var(--color-bedrock);
-        outline-offset: 4px;
-      }
-    }
-    .faq-q :global(.faq-caret) {
-      margin-left: calc(24px - var(--q-gap)); /* question → caret = 24 */
-      transition: rotate 200ms var(--ease-brand);
-    }
-    .faq-q[aria-expanded='true'] :global(.faq-caret) {
-      rotate: 180deg;
-    }
-    .faq-mark {
-      color: var(--color-fire);
-    }
-    .faq-a {
-      grid-column: 2;
-      padding-top: 12px; /* question → answer */
-      padding-right: calc(48px - 24px - var(--q-gap)); /* Figma: 48px right inset */
-    }
-    .faq-a > * + * {
-      margin-top: 0.75em; /* paragraph spacing inside multi-part answers */
-    }
-    /* Bullets: 5px Lagoon squares, as in the Three Yeses lists */
-    .faq-list-items li {
-      position: relative;
-      padding-left: 17px;
+            &:focus-visible {
+                outline: 2px solid var(--color-bedrock);
+                outline-offset: 4px;
+            }
+        }
+        .faq-q :global(.faq-caret) {
+            margin-left: calc(24px - var(--q-gap)); /* question → caret = 24 */
+            transition: rotate 200ms var(--ease-brand);
+        }
+        .faq-q[aria-expanded='true'] :global(.faq-caret) {
+            rotate: 180deg;
+        }
+        .faq-mark {
+            color: var(--color-fire);
+        }
+        .faq-a {
+            grid-column: 2;
+            padding-top: 12px; /* question → answer */
+            padding-right: calc(48px - 24px - var(--q-gap)); /* Figma: 48px right inset */
+        }
+        .faq-a > * + * {
+            margin-top: 0.75em; /* paragraph spacing inside multi-part answers */
+        }
+        /* Bullets: 5px Lagoon squares, as in the Three Yeses lists */
+        .faq-list-items li {
+            position: relative;
+            padding-left: 17px;
 
-      & + li {
-        margin-top: 4px;
-      }
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0.62em;
-        width: 5px;
-        height: 5px;
-        background: var(--color-lagoon);
-      }
-    }
+            & + li {
+                margin-top: 4px;
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0.62em;
+                width: 5px;
+                height: 5px;
+                background: var(--color-lagoon);
+            }
+        }
 
-    /* Collapsing (JS only) */
-    [data-drawers] .faq-panel {
-      display: grid;
-      grid-template-rows: 0fr;
-      visibility: hidden;
-      transition:
-        grid-template-rows 260ms var(--ease-brand),
-        visibility 0s 260ms;
+        /* Collapsing (JS only) */
+        [data-drawers] .faq-panel {
+            display: grid;
+            grid-template-rows: 0fr;
+            visibility: hidden;
+            transition:
+                grid-template-rows 260ms var(--ease-brand),
+                visibility 0s 260ms;
 
-      & > .faq-panel-inner {
-        min-height: 0;
-        overflow: hidden;
-      }
-    }
-    [data-drawers] .faq-item:has(.faq-q[aria-expanded='true']) .faq-panel {
-      grid-template-rows: 1fr;
-      visibility: visible;
-      transition: grid-template-rows 260ms var(--ease-brand);
-    }
+            & > .faq-panel-inner {
+                min-height: 0;
+                overflow: hidden;
+            }
+        }
+        [data-drawers] .faq-item:has(.faq-q[aria-expanded='true']) .faq-panel {
+            grid-template-rows: 1fr;
+            visibility: visible;
+            transition: grid-template-rows 260ms var(--ease-brand);
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      .faq-q :global(.faq-caret),
-      .faq-panel {
-        transition: none !important;
-      }
+        @media (prefers-reduced-motion: reduce) {
+            .faq-q :global(.faq-caret),
+            .faq-panel {
+                transition: none !important;
+            }
+        }
     }
-  }
 </style>

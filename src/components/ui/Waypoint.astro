@@ -15,135 +15,135 @@
  * BrandMark's X (24px grid, 2px stroke).
  */
 interface Props {
-  class?: string;
+    class?: string;
 }
 const { class: className } = Astro.props;
 ---
 
 <span class:list={['wp', className]} data-waypoint aria-hidden="true">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    width="24"
-    height="24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="square"
-    focusable="false"
-  >
-    <circle class="wp-ghost" cx="12" cy="12" r="4" stroke-width="1" stroke-dasharray="1 1.5" />
-    <circle class="wp-ring" cx="12" cy="12" r="9" stroke-width="1" />
-    <g class="wp-x">
-      <path class="wp-stroke wp-stroke--1" d="M6.5 6.5L17.5 17.5" pathLength="1" />
-      <path class="wp-stroke wp-stroke--2" d="M17.5 6.5L6.5 17.5" pathLength="1" />
-    </g>
-  </svg>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="square"
+        focusable="false"
+    >
+        <circle class="wp-ghost" cx="12" cy="12" r="4" stroke-width="1" stroke-dasharray="1 1.5" />
+        <circle class="wp-ring" cx="12" cy="12" r="9" stroke-width="1" />
+        <g class="wp-x">
+            <path class="wp-stroke wp-stroke--1" d="M6.5 6.5L17.5 17.5" pathLength="1" />
+            <path class="wp-stroke wp-stroke--2" d="M17.5 6.5L6.5 17.5" pathLength="1" />
+        </g>
+    </svg>
 </span>
 
 <style>
-  @layer components {
-    .wp {
-      display: block;
-      flex: none;
-      width: 24px;
-      height: 24px;
-      color: var(--color-fire);
+    @layer components {
+        .wp {
+            display: block;
+            flex: none;
+            width: 24px;
+            height: 24px;
+            color: var(--color-fire);
 
-      & svg {
-        display: block;
-        overflow: visible;
-      }
-    }
-    .wp-ghost {
-      stroke: var(--trail-done, var(--color-bedrock));
-      opacity: 0;
-    }
-    .wp-ring {
-      opacity: 0;
-    }
-    .wp-x,
-    .wp-ring {
-      transform-box: view-box;
-      transform-origin: 12px 12px;
-    }
+            & svg {
+                display: block;
+                overflow: visible;
+            }
+        }
+        .wp-ghost {
+            stroke: var(--trail-done, var(--color-bedrock));
+            opacity: 0;
+        }
+        .wp-ring {
+            opacity: 0;
+        }
+        .wp-x,
+        .wp-ring {
+            transform-box: view-box;
+            transform-origin: 12px 12px;
+        }
 
-    /* Waiting for the trail (JS running, not yet stamped) */
-    :global([data-trail-js]) .wp:not([data-stamped]) {
-      & .wp-stroke {
-        stroke-dasharray: 1 2;
-        stroke-dashoffset: 1;
-        opacity: 0;
-      }
-      & .wp-ghost {
-        opacity: 0.6;
-      }
-    }
+        /* Waiting for the trail (JS running, not yet stamped) */
+        :global([data-trail-js]) .wp:not([data-stamped]) {
+            & .wp-stroke {
+                stroke-dasharray: 1 2;
+                stroke-dashoffset: 1;
+                opacity: 0;
+            }
+            & .wp-ghost {
+                opacity: 0.6;
+            }
+        }
 
-    /* The stamp */
-    .wp[data-stamped='play'] {
-      & .wp-stroke {
-        stroke-dasharray: 1 2;
-        animation: wp-draw 100ms cubic-bezier(0.3, 0, 0.2, 1) both;
-      }
-      & .wp-stroke--2 {
-        animation-delay: 100ms;
-      }
-      & .wp-ghost {
-        animation: wp-ghost-out 120ms ease-out both;
-      }
-      & .wp-x {
-        animation: wp-pop 250ms 200ms both;
-      }
-      & .wp-ring {
-        animation: wp-ring 450ms 200ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards; /* hidden during the delay */
-      }
-    }
+        /* The stamp */
+        .wp[data-stamped='play'] {
+            & .wp-stroke {
+                stroke-dasharray: 1 2;
+                animation: wp-draw 100ms cubic-bezier(0.3, 0, 0.2, 1) both;
+            }
+            & .wp-stroke--2 {
+                animation-delay: 100ms;
+            }
+            & .wp-ghost {
+                animation: wp-ghost-out 120ms ease-out both;
+            }
+            & .wp-x {
+                animation: wp-pop 250ms 200ms both;
+            }
+            & .wp-ring {
+                animation: wp-ring 450ms 200ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards; /* hidden during the delay */
+            }
+        }
 
-    @keyframes wp-draw {
-      0% {
-        stroke-dashoffset: 1;
-        opacity: 0;
-      }
-      1% {
-        opacity: 1;
-      }
-      100% {
-        stroke-dashoffset: 0;
-        opacity: 1;
-      }
+        @keyframes wp-draw {
+            0% {
+                stroke-dashoffset: 1;
+                opacity: 0;
+            }
+            1% {
+                opacity: 1;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+        }
+        @keyframes wp-ghost-out {
+            from {
+                opacity: 0.6;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+        /* ease-out-back feel: quick swell to 125%, settle */
+        @keyframes wp-pop {
+            0% {
+                scale: 1;
+                animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
+            }
+            40% {
+                scale: 1.25;
+                animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            100% {
+                scale: 1;
+            }
+        }
+        @keyframes wp-ring {
+            from {
+                opacity: 0.9;
+                scale: 0.6;
+            }
+            to {
+                opacity: 0;
+                scale: 2.2;
+            }
+        }
     }
-    @keyframes wp-ghost-out {
-      from {
-        opacity: 0.6;
-      }
-      to {
-        opacity: 0;
-      }
-    }
-    /* ease-out-back feel: quick swell to 125%, settle */
-    @keyframes wp-pop {
-      0% {
-        scale: 1;
-        animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
-      }
-      40% {
-        scale: 1.25;
-        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      100% {
-        scale: 1;
-      }
-    }
-    @keyframes wp-ring {
-      from {
-        opacity: 0.9;
-        scale: 0.6;
-      }
-      to {
-        opacity: 0;
-        scale: 2.2;
-      }
-    }
-  }
 </style>

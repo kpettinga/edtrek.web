@@ -6,33 +6,33 @@
 import type { HTMLAttributes } from 'astro/types';
 
 type Props = {
-  tone?: 'white' | 'air' | 'bedrock';
-  /** Skip the standard block padding (e.g. the hero). */
-  flush?: boolean;
-  /** Render children without the container wrapper (full-bleed content). */
-  bleed?: boolean;
-  as?: 'section' | 'header' | 'footer' | 'div';
-  class?: string;
-  containerClass?: string;
+    tone?: 'white' | 'air' | 'bedrock';
+    /** Skip the standard block padding (e.g. the hero). */
+    flush?: boolean;
+    /** Render children without the container wrapper (full-bleed content). */
+    bleed?: boolean;
+    as?: 'section' | 'header' | 'footer' | 'div';
+    class?: string;
+    containerClass?: string;
 } & Omit<HTMLAttributes<'section'>, 'class'>;
 
 const {
-  tone = 'white',
-  flush = false,
-  bleed = false,
-  as: Tag = 'section',
-  class: className,
-  containerClass,
-  ...rest
+    tone = 'white',
+    flush = false,
+    bleed = false,
+    as: Tag = 'section',
+    class: className,
+    containerClass,
+    ...rest
 } = Astro.props;
 
 const toneClass = {
-  white: 'veil text-bedrock', // translucent white over the topo map
-  air: 'bg-air text-bedrock',
-  bedrock: 'bg-bedrock text-mist',
+    white: 'veil text-bedrock', // translucent white over the topo map
+    air: 'bg-air text-bedrock',
+    bedrock: 'bg-bedrock text-mist',
 }[tone];
 ---
 
 <Tag {...rest} class:list={['relative', toneClass, !flush && 'section-pad', className]}>
-  {bleed ? <slot /> : <div class:list={['container-site above-map', containerClass]}><slot /></div>}
+    {bleed ? <slot /> : <div class:list={['container-site above-map', containerClass]}><slot /></div>}
 </Tag>

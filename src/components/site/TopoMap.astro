@@ -31,57 +31,57 @@ const TILES = 4; // ≥ viewport height + max vertical travel at every breakpoin
 ---
 
 <div class="topo" style={`--topo-src: url(${topoUrl})`} aria-hidden="true" data-topo-reveal>
-  <div class="topo-tiles">
-    {Array.from({ length: TILES }, () => <div class="topo-tile" />)}
-  </div>
+    <div class="topo-tiles">
+        {Array.from({ length: TILES }, () => <div class="topo-tile" />)}
+    </div>
 </div>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    .topo {
-      /* Rendered width of one tile (Figma: 2045px frame on mobile/tablet, ~1500px at 1440 desktop) */
-      --topo-width: 2130px;
-      --topo-peak: 0.26; /* line strength under the pointer */
-      --topo-base: 0.28; /* fraction of peak shown everywhere else */
-      position: fixed;
-      inset: 0;
-      z-index: 1;
-      overflow: hidden;
-      pointer-events: none;
-      mix-blend-mode: difference;
-      opacity: var(--topo-peak);
-      mask-image: radial-gradient(
-        circle var(--reveal-r, 0px) at var(--mx, 50%) var(--my, 50%),
-        #000 0%,
-        rgb(0 0 0 / 0.6) 45%,
-        rgb(0 0 0 / var(--topo-base)) 100%
-      );
+    @layer components {
+        .topo {
+            /* Rendered width of one tile (Figma: 2045px frame on mobile/tablet, ~1500px at 1440 desktop) */
+            --topo-width: 2130px;
+            --topo-peak: 0.26; /* line strength under the pointer */
+            --topo-base: 0.28; /* fraction of peak shown everywhere else */
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+            mix-blend-mode: difference;
+            opacity: var(--topo-peak);
+            mask-image: radial-gradient(
+                circle var(--reveal-r, 0px) at var(--mx, 50%) var(--my, 50%),
+                #000 0%,
+                rgb(0 0 0 / 0.6) 45%,
+                rgb(0 0 0 / var(--topo-base)) 100%
+            );
 
-      @variant desktop {
-        --topo-width: max(1500px, 104.2vw);
-      }
-      /* Touch / no hover: faint static map */
-      @media not ((hover: hover) and (pointer: fine)) {
-        mask-image: none;
-        opacity: calc(var(--topo-peak) * var(--topo-base));
-      }
-    }
+            @variant desktop {
+                --topo-width: max(1500px, 104.2vw);
+            }
+            /* Touch / no hover: faint static map */
+            @media not ((hover: hover) and (pointer: fine)) {
+                mask-image: none;
+                opacity: calc(var(--topo-peak) * var(--topo-base));
+            }
+        }
 
-    .topo-tiles {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: var(--topo-width);
-      margin-left: calc(var(--topo-width) / -2);
-      transform-origin: 50% 50vh; /* zoom about the viewport center */
-      transform: translate3d(0, var(--map-y, 0px), 0) scale(var(--map-scale, 1));
-      will-change: transform;
+        .topo-tiles {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: var(--topo-width);
+            margin-left: calc(var(--topo-width) / -2);
+            transform-origin: 50% 50vh; /* zoom about the viewport center */
+            transform: translate3d(0, var(--map-y, 0px), 0) scale(var(--map-scale, 1));
+            will-change: transform;
+        }
+        .topo-tile {
+            aspect-ratio: 3 / 2;
+            background: var(--topo-src) center / 100% 100% no-repeat;
+        }
     }
-    .topo-tile {
-      aspect-ratio: 3 / 2;
-      background: var(--topo-src) center / 100% 100% no-repeat;
-    }
-  }
 </style>

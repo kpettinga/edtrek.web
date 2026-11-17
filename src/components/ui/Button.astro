@@ -9,20 +9,20 @@ import type { HTMLAttributes } from 'astro/types';
 import Icon, { type IconName } from './Icon.astro';
 
 type Props = {
-  variant?: 'primary' | 'secondary';
-  size?: 'standard' | 'small';
-  icon?: IconName;
-  href?: string;
-  class?: string;
+    variant?: 'primary' | 'secondary';
+    size?: 'standard' | 'small';
+    icon?: IconName;
+    href?: string;
+    class?: string;
 } & Omit<HTMLAttributes<'a'> & HTMLAttributes<'button'>, 'class'>;
 
 const {
-  variant = 'primary',
-  size = 'standard',
-  icon,
-  href,
-  class: className,
-  ...rest
+    variant = 'primary',
+    size = 'standard',
+    icon,
+    href,
+    class: className,
+    ...rest
 } = Astro.props;
 
 const Tag = href ? 'a' : 'button';
@@ -30,115 +30,115 @@ const tagProps = href ? { href } : { type: (rest as { type?: string }).type ?? '
 ---
 
 <Tag
-  {...rest}
-  {...tagProps}
-  class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}
+    {...rest}
+    {...tagProps}
+    class:list={['btn', `btn--${variant}`, `btn--${size}`, className]}
 >
-  {icon && <Icon name={icon} size={size === 'small' ? 16 : 20} />}
-  <span><slot /></span>
+    {icon && <Icon name={icon} size={size === 'small' ? 16 : 20} />}
+    <span><slot /></span>
 </Tag>
 
 <style>
-  @layer components {
-    .btn {
-      position: relative;
-      isolation: isolate;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--color-bedrock);
-      color: var(--color-bedrock);
-      text-decoration: none;
-      white-space: nowrap;
-      cursor: pointer;
-      transition:
-        transform 80ms ease-out,
-        box-shadow 80ms ease-out;
-    }
-    .btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      transform: scale(0);
-      transform-origin: center;
-      transition: transform 220ms var(--ease-brand);
-    }
+    @layer components {
+        .btn {
+            position: relative;
+            isolation: isolate;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--color-bedrock);
+            color: var(--color-bedrock);
+            text-decoration: none;
+            white-space: nowrap;
+            cursor: pointer;
+            transition:
+                transform 80ms ease-out,
+                box-shadow 80ms ease-out;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            transform: scale(0);
+            transform-origin: center;
+            transition: transform 220ms var(--ease-brand);
+        }
 
-    /* Sizes */
-    .btn--standard {
-      gap: 12px;
-      padding: 16px 24px;
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: var(--text-label);
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-    .btn--small {
-      gap: 8px;
-      padding: 10px 16px;
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: var(--text-caption);
-      line-height: 1.4;
-      letter-spacing: 0;
-    }
+        /* Sizes */
+        .btn--standard {
+            gap: 12px;
+            padding: 16px 24px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-label);
+            line-height: 1.2;
+            letter-spacing: 0;
+        }
+        .btn--small {
+            gap: 8px;
+            padding: 10px 16px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: var(--text-caption);
+            line-height: 1.4;
+            letter-spacing: 0;
+        }
 
-    /* Primary */
-    .btn--primary {
-      background: #fff;
-    }
-    .btn--primary::before {
-      background: var(--color-fire-tint);
-    }
-    .btn--primary.btn--standard {
-      box-shadow: var(--shadow-fire);
-    }
-    .btn--primary.btn--small {
-      box-shadow: var(--shadow-fire-sm);
-    }
-    /* Press "into" the shadow: the Fire edge stays put as the button moves. */
-    .btn--primary.btn--standard:active {
-      transform: translate(4px, 4px);
-      box-shadow: var(--shadow-fire-pressed);
-    }
-    .btn--primary.btn--small:active {
-      transform: translate(2px, 2px);
-      box-shadow: var(--shadow-fire-pressed);
-    }
+        /* Primary */
+        .btn--primary {
+            background: #fff;
+        }
+        .btn--primary::before {
+            background: var(--color-fire-tint);
+        }
+        .btn--primary.btn--standard {
+            box-shadow: var(--shadow-fire);
+        }
+        .btn--primary.btn--small {
+            box-shadow: var(--shadow-fire-sm);
+        }
+        /* Press "into" the shadow: the Fire edge stays put as the button moves. */
+        .btn--primary.btn--standard:active {
+            transform: translate(4px, 4px);
+            box-shadow: var(--shadow-fire-pressed);
+        }
+        .btn--primary.btn--small:active {
+            transform: translate(2px, 2px);
+            box-shadow: var(--shadow-fire-pressed);
+        }
 
-    /* Secondary */
-    .btn--secondary {
-      background: transparent;
-      box-shadow: none;
-    }
-    .btn--secondary::before {
-      background: var(--color-air);
-    }
-    .btn--secondary:active {
-      transform: translateY(2px);
-    }
+        /* Secondary */
+        .btn--secondary {
+            background: transparent;
+            box-shadow: none;
+        }
+        .btn--secondary::before {
+            background: var(--color-air);
+        }
+        .btn--secondary:active {
+            transform: translateY(2px);
+        }
 
-    /* States */
-    @media (hover: hover) {
-      .btn:hover::before {
-        transform: scale(1);
-      }
-    }
-    .btn:focus-visible::before {
-      transform: scale(1);
-    }
-    .btn:focus-visible {
-      outline: 2px solid var(--color-lagoon);
-      outline-offset: 4px;
-    }
+        /* States */
+        @media (hover: hover) {
+            .btn:hover::before {
+                transform: scale(1);
+            }
+        }
+        .btn:focus-visible::before {
+            transform: scale(1);
+        }
+        .btn:focus-visible {
+            outline: 2px solid var(--color-lagoon);
+            outline-offset: 4px;
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      .btn,
-      .btn::before {
-        transition: none;
-      }
+        @media (prefers-reduced-motion: reduce) {
+            .btn,
+            .btn::before {
+                transition: none;
+            }
+        }
     }
-  }
 </style>

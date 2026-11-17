@@ -28,588 +28,588 @@ import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 
 const steps = [
-  {
-    key: 'discovery',
-    mark: 'circle',
-    title: 'Discovery',
-    text: 'I take the time to learn your business and build a foundation on what makes you unique in educational travel.',
-    deliverable: 'Research & site audit',
-  },
-  {
-    key: 'design',
-    mark: 'triangle',
-    title: 'Design',
-    text: 'With the foundation in place, I bring out the best in your organization through an immersive, inspiring site.',
-    deliverable: 'Click-through prototype',
-  },
-  {
-    key: 'development',
-    mark: 'square',
-    title: 'Development',
-    text: 'It all comes to life. I build your blazing-fast, SEO-optimized site — with regular updates as we go.',
-    deliverable: 'Regular progress previews',
-  },
-  {
-    key: 'launch',
-    mark: 'rocket',
-    title: 'Launch',
-    text: 'After rigorous testing and QA, your site goes live as one of your most valuable tools for educators, parents, and students.',
-    deliverable: '30 days of FREE support',
-  },
+    {
+        key: 'discovery',
+        mark: 'circle',
+        title: 'Discovery',
+        text: 'I take the time to learn your business and build a foundation on what makes you unique in educational travel.',
+        deliverable: 'Research & site audit',
+    },
+    {
+        key: 'design',
+        mark: 'triangle',
+        title: 'Design',
+        text: 'With the foundation in place, I bring out the best in your organization through an immersive, inspiring site.',
+        deliverable: 'Click-through prototype',
+    },
+    {
+        key: 'development',
+        mark: 'square',
+        title: 'Development',
+        text: 'It all comes to life. I build your blazing-fast, SEO-optimized site — with regular updates as we go.',
+        deliverable: 'Regular progress previews',
+    },
+    {
+        key: 'launch',
+        mark: 'rocket',
+        title: 'Launch',
+        text: 'After rigorous testing and QA, your site goes live as one of your most valuable tools for educators, parents, and students.',
+        deliverable: '30 days of FREE support',
+    },
 ] as const;
 ---
 
 <section id="roadmap" class="roadmap veil section-pad" aria-labelledby="roadmap-title" data-roadmap data-trail-section>
-  <div class="roadmap-inner container-site above-map" data-trail-end>
-    <Waypoint />
-    <h2 id="roadmap-title" class="type-h2 roadmap-title">
-      <strong class="font-bold">Your path</strong> to a website that makes schools, parents, and students say “<em
-        >yes</em
-      >”
-    </h2>
+    <div class="roadmap-inner container-site above-map" data-trail-end>
+        <Waypoint />
+        <h2 id="roadmap-title" class="type-h2 roadmap-title">
+            <strong class="font-bold">Your path</strong> to a website that makes schools, parents, and students say “<em
+                >yes</em
+            >”
+        </h2>
 
-    <ol class="steps" role="list" data-steps>
-      {
-        steps.map((s, i) => {
-          const first = i === 0;
-          const last = i === steps.length - 1;
-          const num = `Step 0${i + 1}`;
-          return (
-            <li class="step" style={`--i:${i}`} data-open={first ? '' : undefined}>
-              {/* Waypoint: a row on tablet+, the left rail on mobile */}
-              <div class="step-way" aria-hidden="true">
-                <span class:list={['trail trail--in', first && 'trail--none']}>
-                  <span class="trail-fill" />
-                </span>
-                {s.mark === 'rocket' ? (
-                  <span class="step-rocket">
-                    <Icon name="rocket" size={24} class="step-mark" />
-                  </span>
-                ) : (
-                  <BrandMark shape={s.mark} size={24} class="step-mark step-shape" />
-                )}
-                <span class:list={['trail trail--out', last && 'trail--none']}>
-                  {!last && <span class="trail-fill" />}
-                </span>
-              </div>
+        <ol class="steps" role="list" data-steps>
+            {
+                steps.map((s, i) => {
+                    const first = i === 0;
+                    const last = i === steps.length - 1;
+                    const num = `Step 0${i + 1}`;
+                    return (
+                        <li class="step" style={`--i:${i}`} data-open={first ? '' : undefined}>
+                            {/* Waypoint: a row on tablet+, the left rail on mobile */}
+                            <div class="step-way" aria-hidden="true">
+                                <span class:list={['trail trail--in', first && 'trail--none']}>
+                                    <span class="trail-fill" />
+                                </span>
+                                {s.mark === 'rocket' ? (
+                                    <span class="step-rocket">
+                                        <Icon name="rocket" size={24} class="step-mark" />
+                                    </span>
+                                ) : (
+                                    <BrandMark shape={s.mark} size={24} class="step-mark step-shape" />
+                                )}
+                                <span class:list={['trail trail--out', last && 'trail--none']}>
+                                    {!last && <span class="trail-fill" />}
+                                </span>
+                            </div>
 
-              <div class="step-body">
-                {/* Static heading (tablet+, and mobile without JS) */}
-                <div class="step-head">
-                  <p class="type-eyebrow step-num">
-                    {num}
-                  </p>
-                  <h3 class="type-h3">{s.title}</h3>
-                </div>
-                {/* Mobile drawer toggle */}
-                <h3 class="step-toggle-wrap">
-                  <button
-                    type="button"
-                    class="step-toggle"
-                    aria-expanded={first ? 'true' : 'false'}
-                    aria-controls={`step-${s.key}`}
-                  >
-                    <span class="step-toggle-titles">
-                      <span class="type-eyebrow step-num">
-                        {num}
-                      </span>
-                      <span class="type-h3">{s.title}</span>
-                    </span>
-                    <Icon name="chevron-down" size={16} class="step-caret" />
-                  </button>
-                </h3>
+                            <div class="step-body">
+                                {/* Static heading (tablet+, and mobile without JS) */}
+                                <div class="step-head">
+                                    <p class="type-eyebrow step-num">
+                                        {num}
+                                    </p>
+                                    <h3 class="type-h3">{s.title}</h3>
+                                </div>
+                                {/* Mobile drawer toggle */}
+                                <h3 class="step-toggle-wrap">
+                                    <button
+                                        type="button"
+                                        class="step-toggle"
+                                        aria-expanded={first ? 'true' : 'false'}
+                                        aria-controls={`step-${s.key}`}
+                                    >
+                                        <span class="step-toggle-titles">
+                                            <span class="type-eyebrow step-num">
+                                                {num}
+                                            </span>
+                                            <span class="type-h3">{s.title}</span>
+                                        </span>
+                                        <Icon name="chevron-down" size={16} class="step-caret" />
+                                    </button>
+                                </h3>
 
-                <div class="step-panel" id={`step-${s.key}`}>
-                  <div class="step-panel-inner">
-                    <p class="type-body-sm">{s.text}</p>
-                    <p class="type-caption-bold step-deliverable">{s.deliverable}</p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          );
-        })
-      }
-    </ol>
+                                <div class="step-panel" id={`step-${s.key}`}>
+                                    <div class="step-panel-inner">
+                                        <p class="type-body-sm">{s.text}</p>
+                                        <p class="type-caption-bold step-deliverable">{s.deliverable}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    );
+                })
+            }
+        </ol>
 
-    <div class="roadmap-cta">
-      <p class="type-body">Ready to start?</p>
-      <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket">Let’s Build Your Site</Button>
+        <div class="roadmap-cta">
+            <p class="type-body">Ready to start?</p>
+            <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket">Let’s Build Your Site</Button>
+        </div>
     </div>
-  </div>
 </section>
 
 <script>
-  const root = document.querySelector<HTMLElement>('[data-roadmap]');
-  const list = root?.querySelector<HTMLElement>('[data-steps]');
+    const root = document.querySelector<HTMLElement>('[data-roadmap]');
+    const list = root?.querySelector<HTMLElement>('[data-steps]');
 
-  if (root && list) {
-    // Mobile drawers (toggles only display on mobile once data-drawers is set).
-    root.dataset.drawers = '';
-    root.querySelectorAll<HTMLButtonElement>('.step-toggle').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const open = btn.getAttribute('aria-expanded') !== 'true';
-        btn.setAttribute('aria-expanded', String(open));
-        btn.closest('.step')?.toggleAttribute('data-open', open);
-      });
-    });
+    if (root && list) {
+        // Mobile drawers (toggles only display on mobile once data-drawers is set).
+        root.dataset.drawers = '';
+        root.querySelectorAll<HTMLButtonElement>('.step-toggle').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const open = btn.getAttribute('aria-expanded') !== 'true';
+                btn.setAttribute('aria-expanded', String(open));
+                btn.closest('.step')?.toggleAttribute('data-open', open);
+            });
+        });
 
-    // Trail animation: play once when the list's top crosses the middle of
-    // the viewport, then stay complete for the rest of the session.
-    const KEY = 'edtrek:roadmap-trail';
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    // Persist only in production, so the animation replays on every reload in dev.
-    const persist = !import.meta.env.DEV;
-    let seen = false;
-    try {
-      seen = persist && sessionStorage.getItem(KEY) === '1';
-    } catch {}
+        // Trail animation: play once when the list's top crosses the middle of
+        // the viewport, then stay complete for the rest of the session.
+        const KEY = 'edtrek:roadmap-trail';
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        // Persist only in production, so the animation replays on every reload in dev.
+        const persist = !import.meta.env.DEV;
+        let seen = false;
+        try {
+            seen = persist && sessionStorage.getItem(KEY) === '1';
+        } catch {}
 
-    const finish = (instant: boolean) => {
-      if (instant) root.dataset.instant = '';
-      root.dataset.run = '';
-      try {
-        if (persist) sessionStorage.setItem(KEY, '1');
-      } catch {}
-    };
+        const finish = (instant: boolean) => {
+            if (instant) root.dataset.instant = '';
+            root.dataset.run = '';
+            try {
+                if (persist) sessionStorage.setItem(KEY, '1');
+            } catch {}
+        };
 
-    if (seen || reduce) {
-      finish(true);
-    } else {
-      root.dataset.armed = ''; // hide step content + CTA until the line reaches them
-      const io = new IntersectionObserver(
-        (entries) => {
-          const e = entries[0];
-          const passed = e.boundingClientRect.bottom < 0; // loaded already scrolled past it
-          if (!e.isIntersecting && !passed) return;
-          io.disconnect();
-          finish(passed);
-        },
-        { rootMargin: '0px 0px -50% 0px' }, // bottom edge of the root = viewport middle
-      );
-      io.observe(list);
+        if (seen || reduce) {
+            finish(true);
+        } else {
+            root.dataset.armed = ''; // hide step content + CTA until the line reaches them
+            const io = new IntersectionObserver(
+                (entries) => {
+                    const e = entries[0];
+                    const passed = e.boundingClientRect.bottom < 0; // loaded already scrolled past it
+                    if (!e.isIntersecting && !passed) return;
+                    io.disconnect();
+                    finish(passed);
+                },
+                { rootMargin: '0px 0px -50% 0px' }, // bottom edge of the root = viewport middle
+            );
+            io.observe(list);
+        }
     }
-  }
 </script>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    .roadmap {
-      position: relative;
+    @layer components {
+        .roadmap {
+            position: relative;
 
-      /* Trail timing. Segment k (mark k → mark k+1) is two pieces: the
-         --out piece leaving step k, then the --in piece arriving at step k+1.
-         Segment k starts at k × (out + in + hold). */
-      --out: 220ms;
-      --in: 220ms;
-      --hold: 80ms; /* pause at each mark */
-      --out-ease: cubic-bezier(0.5, 0, 1, 1); /* the two halves of one ease-in-out */
-      --in-ease: cubic-bezier(0, 0, 0.5, 1);
-      --gap: 32px;
+            /* Trail timing. Segment k (mark k → mark k+1) is two pieces: the
+               --out piece leaving step k, then the --in piece arriving at step k+1.
+               Segment k starts at k × (out + in + hold). */
+            --out: 220ms;
+            --in: 220ms;
+            --hold: 80ms; /* pause at each mark */
+            --out-ease: cubic-bezier(0.5, 0, 1, 1); /* the two halves of one ease-in-out */
+            --in-ease: cubic-bezier(0, 0, 0.5, 1);
+            --gap: 32px;
 
-      @variant max-tablet {
-        /* mobile: long run down the step, short piece into the next mark */
-        --out: 340ms;
-        --in: 80ms;
-        --out-ease: cubic-bezier(0.55, 0, 0.35, 1);
-        --in-ease: linear;
-      }
-    }
-    .roadmap-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
-    .roadmap-title {
-      max-width: 780px;
-      text-align: center;
-      text-wrap: balance;
-    }
-
-    /* ---- steps ---- */
-    .steps {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      width: 100%;
-      margin-top: 24px; /* + 24 gap = Figma's spacer */
-
-      @variant tablet {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        column-gap: var(--gap);
-        row-gap: 56px;
-      }
-      @variant desktop {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-    .step {
-      /* when the line reaches this step's mark (step 0: the start) */
-      --arrive: max(0ms, calc((var(--i) - 1) * (var(--out) + var(--in) + var(--hold)) + var(--out) + var(--in)));
-      display: flex;
-      gap: 16px; /* rail → content (mobile) */
-
-      @variant tablet {
-        flex-direction: column;
-        gap: 16px;
-      }
-    }
-
-    /* waypoint: column rail on mobile, row on tablet+ */
-    .step-way {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      flex: none;
-      width: 24px;
-
-      /* tablet+: mark centred over the step, half a trail either side; the
-         halves reach into the column gap so neighbours meet in its middle */
-      @variant tablet {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        gap: 12px;
-        width: auto;
-        height: 32px;
-        margin-inline: calc(var(--gap) / -2);
-      }
-    }
-    :global(.step-mark) {
-      flex: none;
-      color: var(--color-bedrock);
-    }
-    /* Marks fill as the line reaches them (step i's mark: end of segment i − 1).
-       The circle starts filled; the rocket pulses instead (below). */
-    .step-way :global(.step-shape :is(rect, circle, path)) {
-      fill: transparent;
-      transition: fill 160ms var(--ease-brand) var(--arrive);
-    }
-    .step:first-child .step-way :global(.step-shape circle),
-    [data-run] .step-way :global(.step-shape :is(rect, circle, path)) {
-      fill: currentColor;
-    }
-
-    /* drawn at 28px so the outline holds its own next to the solid shapes
-       (the 24px-grid stroke scales with it, ≈2.3px) */
-    .step-rocket :global(.step-mark) {
-      width: 28px;
-      height: 28px;
-    }
-    .step-rocket {
-      position: relative;
-      display: grid;
-      flex: none;
-      place-items: center;
-
-      /* pulse ring */
-      &::before {
-        content: '';
-        position: absolute;
-        inset: -6px;
-        border: 2px solid var(--color-fire);
-        border-radius: 50%;
-        opacity: 0;
-        pointer-events: none;
-      }
-    }
-    [data-run] .step-rocket::before {
-      animation: rocket-ring 600ms ease-out var(--arrive) 2;
-    }
-    /* flat rules: Astro doesn't rewrite :global() nested under & */
-    /* the rocket starts Bedrock and turns Fire on arrival */
-    .step-rocket :global(.step-mark) {
-      transition: color 160ms var(--ease-brand) var(--arrive);
-    }
-    [data-run] .step-rocket :global(.step-mark) {
-      color: var(--color-fire);
-      animation: rocket-bump 600ms var(--ease-brand) var(--arrive) 2;
-    }
-    @keyframes rocket-ring {
-      0% {
-        opacity: 0.7;
-        scale: 0.6;
-      }
-      100% {
-        opacity: 0;
-        scale: 1.9;
-      }
-    }
-    @keyframes rocket-bump {
-      0%,
-      100% {
-        scale: 1;
-      }
-      30% {
-        scale: 1.2;
-      }
-    }
-
-    /* trail pieces: dashed Mist road + dashed Bedrock fill on top */
-    .trail {
-      position: relative;
-      flex: none;
-      width: 2px;
-      /* the road ahead: same dashes as the travelled part, in Mist */
-      background: repeating-linear-gradient(to bottom, var(--color-mist) 0 4px, transparent 4px 8px);
-
-      @variant tablet {
-        align-self: center;
-        width: auto;
-        height: 2px;
-        background: repeating-linear-gradient(to right, var(--color-mist) 0 4px, transparent 4px 8px);
-        background-size: 8px 100%; /* one dash tile, so background-position can phase it */
-      }
-    }
-    .trail--in {
-      /* mobile: lines up the mark with the step title (eyebrow 16 + gap 8 − gap 6) */
-      height: 18px;
-
-      @variant tablet {
-        height: 2px;
-      }
-    }
-    .trail--none {
-      visibility: hidden;
-    }
-    /* tablet 2×2: no line across the row break (Design → Development); the
-       hidden pieces still hold their timing slot */
-    .step:nth-child(2n) .trail--out,
-    .step:nth-child(2n + 1) .trail--in {
-      @variant tablet {
-        @variant max-desktop {
-          visibility: hidden;
+            @variant max-tablet {
+                /* mobile: long run down the step, short piece into the next mark */
+                --out: 340ms;
+                --in: 80ms;
+                --out-ease: cubic-bezier(0.55, 0, 0.35, 1);
+                --in-ease: linear;
+            }
         }
-      }
-    }
-    .trail--out {
-      flex: 1 1 auto; /* mobile: runs to the bottom of the step */
-    }
-    /* tablet+: anchor the outgoing piece's dashes to its far end (ending on a
-       gap) so they continue unbroken into the next step's incoming piece */
-    .step-way .trail--out,
-    .step-way .trail--out .trail-fill {
-      @variant tablet {
-        background-position: right center;
-      }
-    }
-    /* travelled: dashed Bedrock, revealed with clip-path (scaling would squash the dashes) */
-    .trail-fill {
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(to bottom, var(--color-bedrock) 0 4px, transparent 4px 8px);
-      clip-path: inset(0 0 100% 0);
-      /* the piece leaving step i */
-      transition: clip-path var(--out) var(--out-ease) calc(var(--i) * (var(--out) + var(--in) + var(--hold)));
-
-      @variant tablet {
-        background: repeating-linear-gradient(to right, var(--color-bedrock) 0 4px, transparent 4px 8px);
-        background-size: 8px 100%; /* one dash tile, so background-position can phase it */
-        clip-path: inset(0 100% 0 0);
-      }
-    }
-    .trail--in .trail-fill {
-      /* finishes the previous step's segment, into this mark */
-      transition: clip-path var(--in) var(--in-ease) calc(var(--arrive) - var(--in));
-    }
-    [data-run] .trail-fill {
-      clip-path: inset(0);
-    }
-    /* Step content flies in from the left in quick succession (its own
-       stagger, ahead of the trail), with a slight overshoot as it lands.
-       JS only: hidden only once [data-armed] is set. Transitions apply only on
-       the reveal, so arming hides instantly. */
-    [data-run] .step-body {
-      --fly-at: calc(var(--i) * 90ms);
-      transition:
-        opacity 300ms ease-out var(--fly-at),
-        translate 550ms cubic-bezier(0.22, 1.25, 0.36, 1) var(--fly-at);
-    }
-    [data-armed]:not([data-run]) .step-body {
-      opacity: 0;
-      translate: -48px 0;
-    }
-    /* CTA fades up once the rocket has arrived and pulsed once */
-    [data-run] .roadmap-cta {
-      --cta-at: calc(3 * (var(--out) + var(--in) + var(--hold)) - var(--hold) + 600ms);
-      transition:
-        opacity 350ms var(--ease-brand) var(--cta-at),
-        translate 450ms var(--ease-brand) var(--cta-at);
-    }
-    [data-armed]:not([data-run]) .roadmap-cta {
-      opacity: 0;
-      translate: 0 16px;
-    }
-
-    [data-instant] .step-body,
-    [data-instant] .roadmap-cta,
-    [data-instant] .trail-fill,
-    [data-instant] .step-rocket :global(.step-mark),
-    [data-instant] .step-way :global(.step-shape :is(rect, circle, path)) {
-      transition: none;
-    }
-    [data-instant] .step-rocket::before,
-    [data-instant] .step-rocket :global(.step-mark) {
-      animation: none;
-    }
-
-    .step-body {
-      display: flex;
-      flex: 1 1 auto;
-      flex-direction: column;
-      gap: 16px;
-      min-width: 0;
-      padding-bottom: 32px; /* mobile: space between drawers */
-
-      @variant tablet {
-        align-items: center;
-        padding-bottom: 0;
-        text-align: center; /* centred under the mark */
-      }
-    }
-    .step:last-child .step-body {
-      padding-bottom: 0;
-    }
-    .step-head {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      @variant max-tablet {
-        gap: 8px;
-      }
-    }
-    .step-num {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--color-lagoon);
-
-      @variant tablet {
-        justify-content: center;
-      }
-
-    }
-    .step-panel-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 16px;
-      
-      @variant tablet {
-        align-items: center;
-      }
-
-      @variant desktop {
-        padding-inline: 1.25rem;
-      }
-
-      @variant wide {
-        padding-inline: 2rem;
-      }
-    }
-    .step-deliverable {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px 6px 10px;
-      background: var(--color-air);
-
-      &::before {
-        content: '';
-        flex: none;
-        width: 6px;
-        height: 6px;
-        background: var(--color-fire);
-      }
-    }
-
-    /* ---- mobile drawers ---- */
-    .step-toggle-wrap {
-      display: none;
-    }
-    .step-toggle {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-    }
-    .step-toggle-titles {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      gap: 8px;
-    }
-    :global(.step-caret) {
-      flex: none;
-      align-self: flex-end;
-      margin-bottom: 4px;
-      color: var(--color-lagoon);
-      transition: rotate 220ms var(--ease-brand);
-    }
-    .step-toggle[aria-expanded='true'] :global(.step-caret) {
-      rotate: 180deg;
-    }
-
-    [data-drawers] .step-head {
-      @variant max-tablet {
-        display: none;
-      }
-    }
-    [data-drawers] .step-toggle-wrap {
-      @variant max-tablet {
-        display: block;
-      }
-    }
-    [data-drawers] .step-panel {
-      @variant max-tablet {
-        display: grid;
-        grid-template-rows: 0fr;
-        margin-top: -16px; /* collapse the body gap while closed */
-        visibility: hidden;
-        transition:
-          grid-template-rows 260ms var(--ease-brand),
-          margin-top 260ms var(--ease-brand),
-          visibility 0s 260ms;
-
-        & > .step-panel-inner {
-          min-height: 0;
-          overflow: hidden;
+        .roadmap-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
         }
-      }
-    }
-    [data-drawers] .step[data-open] .step-panel {
-      @variant max-tablet {
-        grid-template-rows: 1fr;
-        margin-top: 0;
-        visibility: visible;
-        transition:
-          grid-template-rows 260ms var(--ease-brand),
-          margin-top 260ms var(--ease-brand);
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .step-panel,
-      :global(.step-caret) {
-        transition: none !important;
-      }
-    }
+        .roadmap-title {
+            max-width: 780px;
+            text-align: center;
+            text-wrap: balance;
+        }
 
-    /* ---- CTA ---- */
-    .roadmap-cta {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      padding-top: 24px;
+        /* ---- steps ---- */
+        .steps {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr);
+            width: 100%;
+            margin-top: 24px; /* + 24 gap = Figma's spacer */
 
-      @variant tablet {
-        flex-direction: row;
-      }
+            @variant tablet {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                column-gap: var(--gap);
+                row-gap: 56px;
+            }
+            @variant desktop {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+        .step {
+            /* when the line reaches this step's mark (step 0: the start) */
+            --arrive: max(0ms, calc((var(--i) - 1) * (var(--out) + var(--in) + var(--hold)) + var(--out) + var(--in)));
+            display: flex;
+            gap: 16px; /* rail → content (mobile) */
+
+            @variant tablet {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* waypoint: column rail on mobile, row on tablet+ */
+        .step-way {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            flex: none;
+            width: 24px;
+
+            /* tablet+: mark centred over the step, half a trail either side; the
+               halves reach into the column gap so neighbours meet in its middle */
+            @variant tablet {
+                display: grid;
+                grid-template-columns: 1fr auto 1fr;
+                gap: 12px;
+                width: auto;
+                height: 32px;
+                margin-inline: calc(var(--gap) / -2);
+            }
+        }
+        :global(.step-mark) {
+            flex: none;
+            color: var(--color-bedrock);
+        }
+        /* Marks fill as the line reaches them (step i's mark: end of segment i − 1).
+           The circle starts filled; the rocket pulses instead (below). */
+        .step-way :global(.step-shape :is(rect, circle, path)) {
+            fill: transparent;
+            transition: fill 160ms var(--ease-brand) var(--arrive);
+        }
+        .step:first-child .step-way :global(.step-shape circle),
+        [data-run] .step-way :global(.step-shape :is(rect, circle, path)) {
+            fill: currentColor;
+        }
+
+        /* drawn at 28px so the outline holds its own next to the solid shapes
+           (the 24px-grid stroke scales with it, ≈2.3px) */
+        .step-rocket :global(.step-mark) {
+            width: 28px;
+            height: 28px;
+        }
+        .step-rocket {
+            position: relative;
+            display: grid;
+            flex: none;
+            place-items: center;
+
+            /* pulse ring */
+            &::before {
+                content: '';
+                position: absolute;
+                inset: -6px;
+                border: 2px solid var(--color-fire);
+                border-radius: 50%;
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+        [data-run] .step-rocket::before {
+            animation: rocket-ring 600ms ease-out var(--arrive) 2;
+        }
+        /* flat rules: Astro doesn't rewrite :global() nested under & */
+        /* the rocket starts Bedrock and turns Fire on arrival */
+        .step-rocket :global(.step-mark) {
+            transition: color 160ms var(--ease-brand) var(--arrive);
+        }
+        [data-run] .step-rocket :global(.step-mark) {
+            color: var(--color-fire);
+            animation: rocket-bump 600ms var(--ease-brand) var(--arrive) 2;
+        }
+        @keyframes rocket-ring {
+            0% {
+                opacity: 0.7;
+                scale: 0.6;
+            }
+            100% {
+                opacity: 0;
+                scale: 1.9;
+            }
+        }
+        @keyframes rocket-bump {
+            0%,
+            100% {
+                scale: 1;
+            }
+            30% {
+                scale: 1.2;
+            }
+        }
+
+        /* trail pieces: dashed Mist road + dashed Bedrock fill on top */
+        .trail {
+            position: relative;
+            flex: none;
+            width: 2px;
+            /* the road ahead: same dashes as the travelled part, in Mist */
+            background: repeating-linear-gradient(to bottom, var(--color-mist) 0 4px, transparent 4px 8px);
+
+            @variant tablet {
+                align-self: center;
+                width: auto;
+                height: 2px;
+                background: repeating-linear-gradient(to right, var(--color-mist) 0 4px, transparent 4px 8px);
+                background-size: 8px 100%; /* one dash tile, so background-position can phase it */
+            }
+        }
+        .trail--in {
+            /* mobile: lines up the mark with the step title (eyebrow 16 + gap 8 − gap 6) */
+            height: 18px;
+
+            @variant tablet {
+                height: 2px;
+            }
+        }
+        .trail--none {
+            visibility: hidden;
+        }
+        /* tablet 2×2: no line across the row break (Design → Development); the
+           hidden pieces still hold their timing slot */
+        .step:nth-child(2n) .trail--out,
+        .step:nth-child(2n + 1) .trail--in {
+            @variant tablet {
+                @variant max-desktop {
+                    visibility: hidden;
+                }
+            }
+        }
+        .trail--out {
+            flex: 1 1 auto; /* mobile: runs to the bottom of the step */
+        }
+        /* tablet+: anchor the outgoing piece's dashes to its far end (ending on a
+           gap) so they continue unbroken into the next step's incoming piece */
+        .step-way .trail--out,
+        .step-way .trail--out .trail-fill {
+            @variant tablet {
+                background-position: right center;
+            }
+        }
+        /* travelled: dashed Bedrock, revealed with clip-path (scaling would squash the dashes) */
+        .trail-fill {
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(to bottom, var(--color-bedrock) 0 4px, transparent 4px 8px);
+            clip-path: inset(0 0 100% 0);
+            /* the piece leaving step i */
+            transition: clip-path var(--out) var(--out-ease) calc(var(--i) * (var(--out) + var(--in) + var(--hold)));
+
+            @variant tablet {
+                background: repeating-linear-gradient(to right, var(--color-bedrock) 0 4px, transparent 4px 8px);
+                background-size: 8px 100%; /* one dash tile, so background-position can phase it */
+                clip-path: inset(0 100% 0 0);
+            }
+        }
+        .trail--in .trail-fill {
+            /* finishes the previous step's segment, into this mark */
+            transition: clip-path var(--in) var(--in-ease) calc(var(--arrive) - var(--in));
+        }
+        [data-run] .trail-fill {
+            clip-path: inset(0);
+        }
+        /* Step content flies in from the left in quick succession (its own
+           stagger, ahead of the trail), with a slight overshoot as it lands.
+           JS only: hidden only once [data-armed] is set. Transitions apply only on
+           the reveal, so arming hides instantly. */
+        [data-run] .step-body {
+            --fly-at: calc(var(--i) * 90ms);
+            transition:
+                opacity 300ms ease-out var(--fly-at),
+                translate 550ms cubic-bezier(0.22, 1.25, 0.36, 1) var(--fly-at);
+        }
+        [data-armed]:not([data-run]) .step-body {
+            opacity: 0;
+            translate: -48px 0;
+        }
+        /* CTA fades up once the rocket has arrived and pulsed once */
+        [data-run] .roadmap-cta {
+            --cta-at: calc(3 * (var(--out) + var(--in) + var(--hold)) - var(--hold) + 600ms);
+            transition:
+                opacity 350ms var(--ease-brand) var(--cta-at),
+                translate 450ms var(--ease-brand) var(--cta-at);
+        }
+        [data-armed]:not([data-run]) .roadmap-cta {
+            opacity: 0;
+            translate: 0 16px;
+        }
+
+        [data-instant] .step-body,
+        [data-instant] .roadmap-cta,
+        [data-instant] .trail-fill,
+        [data-instant] .step-rocket :global(.step-mark),
+        [data-instant] .step-way :global(.step-shape :is(rect, circle, path)) {
+            transition: none;
+        }
+        [data-instant] .step-rocket::before,
+        [data-instant] .step-rocket :global(.step-mark) {
+            animation: none;
+        }
+
+        .step-body {
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            gap: 16px;
+            min-width: 0;
+            padding-bottom: 32px; /* mobile: space between drawers */
+
+            @variant tablet {
+                align-items: center;
+                padding-bottom: 0;
+                text-align: center; /* centred under the mark */
+            }
+        }
+        .step:last-child .step-body {
+            padding-bottom: 0;
+        }
+        .step-head {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+
+            @variant max-tablet {
+                gap: 8px;
+            }
+        }
+        .step-num {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--color-lagoon);
+
+            @variant tablet {
+                justify-content: center;
+            }
+
+        }
+        .step-panel-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+
+            @variant tablet {
+                align-items: center;
+            }
+
+            @variant desktop {
+                padding-inline: 1.25rem;
+            }
+
+            @variant wide {
+                padding-inline: 2rem;
+            }
+        }
+        .step-deliverable {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px 6px 10px;
+            background: var(--color-air);
+
+            &::before {
+                content: '';
+                flex: none;
+                width: 6px;
+                height: 6px;
+                background: var(--color-fire);
+            }
+        }
+
+        /* ---- mobile drawers ---- */
+        .step-toggle-wrap {
+            display: none;
+        }
+        .step-toggle {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+        }
+        .step-toggle-titles {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            gap: 8px;
+        }
+        :global(.step-caret) {
+            flex: none;
+            align-self: flex-end;
+            margin-bottom: 4px;
+            color: var(--color-lagoon);
+            transition: rotate 220ms var(--ease-brand);
+        }
+        .step-toggle[aria-expanded='true'] :global(.step-caret) {
+            rotate: 180deg;
+        }
+
+        [data-drawers] .step-head {
+            @variant max-tablet {
+                display: none;
+            }
+        }
+        [data-drawers] .step-toggle-wrap {
+            @variant max-tablet {
+                display: block;
+            }
+        }
+        [data-drawers] .step-panel {
+            @variant max-tablet {
+                display: grid;
+                grid-template-rows: 0fr;
+                margin-top: -16px; /* collapse the body gap while closed */
+                visibility: hidden;
+                transition:
+                    grid-template-rows 260ms var(--ease-brand),
+                    margin-top 260ms var(--ease-brand),
+                    visibility 0s 260ms;
+
+                & > .step-panel-inner {
+                    min-height: 0;
+                    overflow: hidden;
+                }
+            }
+        }
+        [data-drawers] .step[data-open] .step-panel {
+            @variant max-tablet {
+                grid-template-rows: 1fr;
+                margin-top: 0;
+                visibility: visible;
+                transition:
+                    grid-template-rows 260ms var(--ease-brand),
+                    margin-top 260ms var(--ease-brand);
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .step-panel,
+            :global(.step-caret) {
+                transition: none !important;
+            }
+        }
+
+        /* ---- CTA ---- */
+        .roadmap-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding-top: 24px;
+
+            @variant tablet {
+                flex-direction: row;
+            }
+        }
     }
-  }
 </style>

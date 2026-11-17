@@ -12,23 +12,23 @@ import Faq from '../components/sections/Faq.astro';
 ---
 
 <BaseLayout>
-  <TopoMap slot="backdrop" />
-  <SiteNav slot="header" />
+    <TopoMap slot="backdrop" />
+    <SiteNav slot="header" />
 
-  <Hero />
-  <ThreeYeses />
-  <Services />
-  <Roadmap />
-  <About />
-  <Faq />
-  <Footer slot="footer" />
+    <Hero />
+    <ThreeYeses />
+    <Services />
+    <Roadmap />
+    <About />
+    <Faq />
+    <Footer slot="footer" />
 </BaseLayout>
 
 <script>
-  import { initScrollScene } from '../scripts/scroll-scene';
-  import { initTopoReveal } from '../scripts/topo-reveal';
-  import { initTrail } from '../scripts/trail';
-  initScrollScene();
-  initTopoReveal();
-  initTrail();
+    import { initScrollScene } from '../scripts/scroll-scene';
+    import { initTopoReveal } from '../scripts/topo-reveal';
+    import { initTrail } from '../scripts/trail';
+    initScrollScene();
+    initTopoReveal();
+    initTrail();
 </script>

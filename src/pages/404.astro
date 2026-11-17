@@ -15,73 +15,73 @@ import Icon from '../components/ui/Icon.astro';
 ---
 
 <BaseLayout title="Page not found — EdTrek Digital" noindex>
-  <TopoMap slot="backdrop" />
-  <SiteNav slot="header" />
+    <TopoMap slot="backdrop" />
+    <SiteNav slot="header" />
 
-  <section class="nf container-site above-map" aria-labelledby="nf-title">
-    <Icon name="sign-right" size={48} class="text-bedrock" />
-    <h1 id="nf-title" class="type-h1 nf-title">404</h1>
-    <p class="type-body nf-body">
-      This trail doesn’t go anywhere.
-    </p>
-    <div class="nf-ctas">
-      <Button href="/" variant="secondary">Back to Homepage</Button>
-    </div>
-  </section>
+    <section class="nf container-site above-map" aria-labelledby="nf-title">
+        <Icon name="sign-right" size={48} class="text-bedrock" />
+        <h1 id="nf-title" class="type-h1 nf-title">404</h1>
+        <p class="type-body nf-body">
+            This trail doesn’t go anywhere.
+        </p>
+        <div class="nf-ctas">
+            <Button href="/" variant="secondary">Back to Homepage</Button>
+        </div>
+    </section>
 
-  <Footer slot="footer" />
+    <Footer slot="footer" />
 </BaseLayout>
 
 <script>
-  // Nav compaction + map drift, and the pointer reveal. No page trail here
-  // (there are no waypoints to route through).
-  import { initScrollScene } from '../scripts/scroll-scene';
-  import { initTopoReveal } from '../scripts/topo-reveal';
-  initScrollScene();
-  initTopoReveal();
+    // Nav compaction + map drift, and the pointer reveal. No page trail here
+    // (there are no waypoints to route through).
+    import { initScrollScene } from '../scripts/scroll-scene';
+    import { initTopoReveal } from '../scripts/topo-reveal';
+    initScrollScene();
+    initTopoReveal();
 </script>
 
 <style>
-  @reference "../styles/global.css";
+    @reference "../styles/global.css";
 
-  @layer components {
-    /* Standard section rhythm; the top also clears the fixed nav (top state:
-       88px, 132px from tablet), with half a section's padding on top of that. */
-    .nf {
-      --nav-clear: 88px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding-top: calc(var(--nav-clear) + var(--section-padding-block) / 2);
-      padding-bottom: var(--section-padding-block);
+    @layer components {
+        /* Standard section rhythm; the top also clears the fixed nav (top state:
+           88px, 132px from tablet), with half a section's padding on top of that. */
+        .nf {
+            --nav-clear: 88px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding-top: calc(var(--nav-clear) + var(--section-padding-block) / 2);
+            padding-bottom: var(--section-padding-block);
 
-      @variant tablet {
-        --nav-clear: 132px;
-      }
-    }
-    .nf-title {
-      margin-top: 16px;
-    }
-    .nf-body {
-      max-width: 480px;
-      margin-top: 16px;
-      text-wrap: pretty;
+            @variant tablet {
+                --nav-clear: 132px;
+            }
+        }
+        .nf-title {
+            margin-top: 16px;
+        }
+        .nf-body {
+            max-width: 480px;
+            margin-top: 16px;
+            text-wrap: pretty;
 
-      @variant tablet {
-        margin-top: 20px;
-      }
-    }
-    .nf-ctas {
-      display: flex;
-      flex-wrap: wrap; /* side by side; stacks only when the column is too narrow */
-      justify-content: center;
-      gap: 16px 20px;
-      margin-top: 28px;
+            @variant tablet {
+                margin-top: 20px;
+            }
+        }
+        .nf-ctas {
+            display: flex;
+            flex-wrap: wrap; /* side by side; stacks only when the column is too narrow */
+            justify-content: center;
+            gap: 16px 20px;
+            margin-top: 28px;
 
-      @variant tablet {
-        margin-top: 32px;
-      }
+            @variant tablet {
+                margin-top: 32px;
+            }
+        }
     }
-  }
 </style>

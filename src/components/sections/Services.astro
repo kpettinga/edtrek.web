@@ -23,500 +23,500 @@ import Waypoint from '../ui/Waypoint.astro';
 import Icon from '../ui/Icon.astro';
 
 const rows = [
-  [
-    'How do I design an engaging site?',
-    'Who will build it?',
-    'Which platform should I use?',
-    'Can it take online bookings?',
-    'Does it work on phones?',
-    'Is it accessible?',
-    'Who picks the fonts and colors?',
-  ],
-  [
-    'How do I show up in Google results?',
-    'How do I keep my old content?',
-    'Will my old links break?',
-    'Where will the site be hosted?',
-    'Who renews the domain?',
-    'Is the SSL certificate set up?',
-  ],
-  [
-    'How do I say everything I want to say?',
-    'Why does the site feel slow?',
-    'Are the images optimized?',
-    'How do I connect my CRM?',
-    'Is analytics tracking anything?',
-    'Can my team edit pages?',
-  ],
-  [
-    'Who do I call when something breaks?',
-    'Are backups running?',
-    'Who installs the updates?',
-    'Is the site secure?',
-    'Are form submissions reaching anyone?',
-    'Will it hold up in enrollment season?',
-  ],
+    [
+        'How do I design an engaging site?',
+        'Who will build it?',
+        'Which platform should I use?',
+        'Can it take online bookings?',
+        'Does it work on phones?',
+        'Is it accessible?',
+        'Who picks the fonts and colors?',
+    ],
+    [
+        'How do I show up in Google results?',
+        'How do I keep my old content?',
+        'Will my old links break?',
+        'Where will the site be hosted?',
+        'Who renews the domain?',
+        'Is the SSL certificate set up?',
+    ],
+    [
+        'How do I say everything I want to say?',
+        'Why does the site feel slow?',
+        'Are the images optimized?',
+        'How do I connect my CRM?',
+        'Is analytics tracking anything?',
+        'Can my team edit pages?',
+    ],
+    [
+        'Who do I call when something breaks?',
+        'Are backups running?',
+        'Who installs the updates?',
+        'Is the site secure?',
+        'Are form submissions reaching anyone?',
+        'Will it hold up in enrollment season?',
+    ],
 ];
 
 const groups = [
-  {
-    name: 'Design & build',
-    cards: [
-      { icon: 'tools', title: 'Web Design', text: 'Aligned with your brand. Don’t have one yet? I’ll help you create it.' },
-      {
-        icon: 'terminal-2',
-        title: 'End-to-End Development',
-        text: 'A turnkey build that delivers a polished site on the front and back ends.',
-      },
-    ],
-  },
-  {
-    name: 'Connect & move',
-    cards: [
-      {
-        icon: 'plug-connected',
-        title: 'Custom Integrations',
-        text: 'Connect your booking platforms, payment gateways, CRMs, and more.',
-      },
-      {
-        icon: 'database-export',
-        title: 'Content Migration',
-        text: 'Switching to a different CMS? I’ll move your content over safely.',
-      },
-    ],
-  },
-  {
-    name: 'Perform & support',
-    cards: [
-      {
-        icon: 'gauge',
-        title: 'SEO & Performance',
-        text: 'Get a blazing fast site built for Search Engines and AI.',
-      },
-      {
-        icon: 'lifebuoy',
-        title: 'Post-Launch Support',
-        text: 'Get 30 days of FREE support + more if you need it.',
-      },
-    ],
-  },
-  {
-    name: 'Host & more',
-    cards: [
-      {
-        icon: 'cloud-code',
-        title: 'Site Hosting',
-        text: 'Forget handling your own IT. Managed hosting keeps your site up-to-date and problem free.',
-      },
-      {
-        icon: 'zoom-question',
-        title: 'Need Something Else?',
-        text: 'I love challenges! Tell me about your needs and we\'ll build a solution together.',
-      },
-    ],
-  },
+    {
+        name: 'Design & build',
+        cards: [
+            { icon: 'tools', title: 'Web Design', text: 'Aligned with your brand. Don’t have one yet? I’ll help you create it.' },
+            {
+                icon: 'terminal-2',
+                title: 'End-to-End Development',
+                text: 'A turnkey build that delivers a polished site on the front and back ends.',
+            },
+        ],
+    },
+    {
+        name: 'Connect & move',
+        cards: [
+            {
+                icon: 'plug-connected',
+                title: 'Custom Integrations',
+                text: 'Connect your booking platforms, payment gateways, CRMs, and more.',
+            },
+            {
+                icon: 'database-export',
+                title: 'Content Migration',
+                text: 'Switching to a different CMS? I’ll move your content over safely.',
+            },
+        ],
+    },
+    {
+        name: 'Perform & support',
+        cards: [
+            {
+                icon: 'gauge',
+                title: 'SEO & Performance',
+                text: 'Get a blazing fast site built for Search Engines and AI.',
+            },
+            {
+                icon: 'lifebuoy',
+                title: 'Post-Launch Support',
+                text: 'Get 30 days of FREE support + more if you need it.',
+            },
+        ],
+    },
+    {
+        name: 'Host & more',
+        cards: [
+            {
+                icon: 'cloud-code',
+                title: 'Site Hosting',
+                text: 'Forget handling your own IT. Managed hosting keeps your site up-to-date and problem free.',
+            },
+            {
+                icon: 'zoom-question',
+                title: 'Need Something Else?',
+                text: 'I love challenges! Tell me about your needs and we\'ll build a solution together.',
+            },
+        ],
+    },
 ] as const;
 ---
 
 <section id="services" class="svc section-pad" aria-labelledby="svc-title" data-services data-trail-section>
-  <div class="above-map" data-trail-end>
-    <!-- ---- Problem ---- -->
-    <div class="svc-problem">
-      <div class="svc-intro container-site">
-        <Waypoint />
-        <p class="type-eyebrow text-white">The catch…</p>
-        <h2 class="type-h2 svc-heading">
-          A website that converts is <span class="block"><strong class="font-bold">more work than it looks</strong>.</span>
-        </h2>
-        <p class="type-body svc-body">
-          I’ve built sites for all kinds of organizations, and every one turned out bigger than it looked at the start.
-          Before launch day, someone has to answer all of this:
-        </p>
-      </div>
-
-      <div class="chips" aria-label="Questions every website project has to answer">
-        {
-          rows.map((row, r) => (
-            <div class:list={['chip-row', r % 2 === 1 && 'chip-row--right']} style={`--dur:${row.length * 16}s`}>
-              <div class="chip-track">
-                {[false, true, true, true].map((clone) => (
-                  <ul class="chip-set" role={clone ? undefined : 'list'} aria-hidden={clone ? 'true' : undefined}>
-                    {row.map((q) => (
-                      <li class="chip type-body-sm">{q}</li>
-                    ))}
-                  </ul>
-                ))}
-              </div>
+    <div class="above-map" data-trail-end>
+        <!-- ---- Problem ---- -->
+        <div class="svc-problem">
+            <div class="svc-intro container-site">
+                <Waypoint />
+                <p class="type-eyebrow text-white">The catch…</p>
+                <h2 class="type-h2 svc-heading">
+                    A website that converts is <span class="block"><strong class="font-bold">more work than it looks</strong>.</span>
+                </h2>
+                <p class="type-body svc-body">
+                    I’ve built sites for all kinds of organizations, and every one turned out bigger than it looked at the start.
+                    Before launch day, someone has to answer all of this:
+                </p>
             </div>
-          ))
-        }
-      </div>
-    </div>
 
-    <!-- ---- Trail ---- -->
-    <div class="page-trail page-trail--flow svc-trail" aria-hidden="true" data-trail></div>
-
-    <!-- ---- Solution ---- -->
-    <div class="svc-solution container-site">
-      <h2 id="svc-title" class="type-h2 svc-heading">
-        <strong class="font-bold block">I’ll partner with you,</strong> from first idea to launch.
-      </h2>
-      <p class="type-body svc-body">
-        I handle every piece of it, from the first mockup to a live, lightning-fast site, so you can get back to creating
-        immersive learning experiences for students.
-      </p>
-      <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket" class="svc-cta">Let’s Build Your Site</Button>
-      <p class="type-eyebrow text-white">Services</p>
-
-      <div class="svc-slider">
-        <div class="svc-track" data-track>
-          {
-            groups.map((g) => (
-              <div class="svc-slide" role="group" aria-label={g.name}>
-                {g.cards.map((c) => (
-                  <article class="svc-card">
-                    <Icon name={c.icon} size={32} class='text-lagoon'/>
-                    <h3 class="type-h4">{c.title}</h3>
-                    <p class="type-body-sm">{c.text}</p>
-                  </article>
-                ))}
-              </div>
-            ))
-          }
+            <div class="chips" aria-label="Questions every website project has to answer">
+                {
+                    rows.map((row, r) => (
+                        <div class:list={['chip-row', r % 2 === 1 && 'chip-row--right']} style={`--dur:${row.length * 16}s`}>
+                            <div class="chip-track">
+                                {[false, true, true, true].map((clone) => (
+                                    <ul class="chip-set" role={clone ? undefined : 'list'} aria-hidden={clone ? 'true' : undefined}>
+                                        {row.map((q) => (
+                                            <li class="chip type-body-sm">{q}</li>
+                                        ))}
+                                    </ul>
+                                ))}
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
         </div>
-        <div class="svc-dots" data-dots hidden></div>
-      </div>
+
+        <!-- ---- Trail ---- -->
+        <div class="page-trail page-trail--flow svc-trail" aria-hidden="true" data-trail></div>
+
+        <!-- ---- Solution ---- -->
+        <div class="svc-solution container-site">
+            <h2 id="svc-title" class="type-h2 svc-heading">
+                <strong class="font-bold block">I’ll partner with you,</strong> from first idea to launch.
+            </h2>
+            <p class="type-body svc-body">
+                I handle every piece of it, from the first mockup to a live, lightning-fast site, so you can get back to creating
+                immersive learning experiences for students.
+            </p>
+            <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket" class="svc-cta">Let’s Build Your Site</Button>
+            <p class="type-eyebrow text-white">Services</p>
+
+            <div class="svc-slider">
+                <div class="svc-track" data-track>
+                    {
+                        groups.map((g) => (
+                            <div class="svc-slide" role="group" aria-label={g.name}>
+                                {g.cards.map((c) => (
+                                    <article class="svc-card">
+                                        <Icon name={c.icon} size={32} class='text-lagoon'/>
+                                        <h3 class="type-h4">{c.title}</h3>
+                                        <p class="type-body-sm">{c.text}</p>
+                                    </article>
+                                ))}
+                            </div>
+                        ))
+                    }
+                </div>
+                <div class="svc-dots" data-dots hidden></div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <script>
-  // Slider pagination (tablet/mobile). One dot per distinct snap stop of the
-  // slides that snap, so it follows the CSS (tablet pages by twos → 2 dots;
-  // mobile → 4).
-  // Desktop shows the grid: no scrolling, so no dots.
-  const root = document.querySelector<HTMLElement>('[data-services]');
-  const track = root?.querySelector<HTMLElement>('[data-track]');
-  const dotsEl = root?.querySelector<HTMLElement>('[data-dots]');
+    // Slider pagination (tablet/mobile). One dot per distinct snap stop of the
+    // slides that snap, so it follows the CSS (tablet pages by twos → 2 dots;
+    // mobile → 4).
+    // Desktop shows the grid: no scrolling, so no dots.
+    const root = document.querySelector<HTMLElement>('[data-services]');
+    const track = root?.querySelector<HTMLElement>('[data-track]');
+    const dotsEl = root?.querySelector<HTMLElement>('[data-dots]');
 
-  if (track && dotsEl) {
-    const slides = [...track.querySelectorAll<HTMLElement>('.svc-slide')];
-    let stops: number[] = [];
-    let dots: HTMLButtonElement[] = [];
+    if (track && dotsEl) {
+        const slides = [...track.querySelectorAll<HTMLElement>('.svc-slide')];
+        let stops: number[] = [];
+        let dots: HTMLButtonElement[] = [];
 
-    const build = () => {
-      const max = track.scrollWidth - track.clientWidth;
-      const pad = parseFloat(getComputedStyle(track).scrollPaddingInlineStart) || 0;
-      const snapping = slides.filter((s) => getComputedStyle(s).scrollSnapAlign !== 'none');
-      stops = max < 2 ? [] : [...new Set(snapping.map((s) => Math.round(Math.min(max, Math.max(0, s.offsetLeft - pad)))))];
-      dotsEl.hidden = stops.length < 2;
-      dotsEl.replaceChildren(
-        ...stops.map((x, i) => {
-          const b = document.createElement('button');
-          b.type = 'button';
-          b.className = 'svc-dot';
-          b.setAttribute('aria-label', `Show services ${i + 1} of ${stops.length}`);
-          b.addEventListener('click', () => track.scrollTo({ left: x }));
-          return b;
-        }),
-      );
-      dots = [...dotsEl.querySelectorAll('button')];
-      sync();
-    };
+        const build = () => {
+            const max = track.scrollWidth - track.clientWidth;
+            const pad = parseFloat(getComputedStyle(track).scrollPaddingInlineStart) || 0;
+            const snapping = slides.filter((s) => getComputedStyle(s).scrollSnapAlign !== 'none');
+            stops = max < 2 ? [] : [...new Set(snapping.map((s) => Math.round(Math.min(max, Math.max(0, s.offsetLeft - pad)))))];
+            dotsEl.hidden = stops.length < 2;
+            dotsEl.replaceChildren(
+                ...stops.map((x, i) => {
+                    const b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'svc-dot';
+                    b.setAttribute('aria-label', `Show services ${i + 1} of ${stops.length}`);
+                    b.addEventListener('click', () => track.scrollTo({ left: x }));
+                    return b;
+                }),
+            );
+            dots = [...dotsEl.querySelectorAll('button')];
+            sync();
+        };
 
-    const sync = () => {
-      if (!stops.length) return;
-      const x = track.scrollLeft;
-      let active = 0;
-      stops.forEach((s, i) => {
-        if (Math.abs(s - x) < Math.abs(stops[active] - x)) active = i;
-      });
-      dots.forEach((d, i) => d.toggleAttribute('aria-current', i === active));
-    };
+        const sync = () => {
+            if (!stops.length) return;
+            const x = track.scrollLeft;
+            let active = 0;
+            stops.forEach((s, i) => {
+                if (Math.abs(s - x) < Math.abs(stops[active] - x)) active = i;
+            });
+            dots.forEach((d, i) => d.toggleAttribute('aria-current', i === active));
+        };
 
-    let raf = 0;
-    track.addEventListener('scroll', () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(sync);
-    }, { passive: true });
-    new ResizeObserver(build).observe(track);
-  }
+        let raf = 0;
+        track.addEventListener('scroll', () => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(sync);
+        }, { passive: true });
+        new ResizeObserver(build).observe(track);
+    }
 </script>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    .svc {
-      --gap: 32px; /* problem → trail → solution */
-      position: relative;
-      overflow-x: clip;
-      background: var(--color-bedrock);
-      color: var(--color-paper);
-      --trail-done: var(--color-mist);
-      --trail-ahead: rgb(198 207 204 / 0.22);
-      --trail-mark: #fff;
+    @layer components {
+        .svc {
+            --gap: 32px; /* problem → trail → solution */
+            position: relative;
+            overflow-x: clip;
+            background: var(--color-bedrock);
+            color: var(--color-paper);
+            --trail-done: var(--color-mist);
+            --trail-ahead: rgb(198 207 204 / 0.22);
+            --trail-mark: #fff;
 
-      @variant tablet {
-        --gap: 40px;
-      }
-      @variant desktop {
-        --gap: 48px;
-      }
-    }
-    .svc-heading {
-      color: #fff;
-      text-wrap: balance;
-    }
-    .svc-body {
-      max-width: 640px;
-      color: #fff;
-    }
-
-    /* ---- Problem ---- */
-    .svc-problem {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-
-      @variant tablet {
-        gap: 48px;
-      }
-      @variant desktop {
-        gap: 64px;
-      }
-    }
-    .svc-intro,
-    .svc-solution {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      text-align: center;
-    }
-
-    /* Complexity marquee: full-bleed rows with an alpha edge fade */
-    .chips {
-      --fade: 40px;
-      --row-gap: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: var(--row-gap);
-      mask-image: linear-gradient(
-        to right,
-        transparent,
-        #000 var(--fade),
-        #000 calc(100% - var(--fade)),
-        transparent
-      );
-
-      @variant tablet {
-        --fade: 80px;
-        --row-gap: 12px;
-      }
-      @variant desktop {
-        --fade: 200px;
-        --row-gap: 16px;
-      }
-    }
-    .chip-row {
-      overflow: hidden;
-    }
-    .chip-track {
-      display: flex;
-      width: max-content;
-    }
-    .chip-set {
-      display: flex;
-      gap: var(--chip-gap, 10px);
-      padding-right: var(--chip-gap, 10px); /* = gap, so every copy is the same width */
-
-      @variant tablet {
-        --chip-gap: 12px;
-      }
-    }
-    .chip {
-      flex: none;
-      padding: 12px 20px;
-      white-space: nowrap;
-      color: var(--color-mist);
-      background: rgb(246 244 238 / 0.04);
-      border: 1px solid rgb(246 244 238 / 0.18);
-    }
-    /* Each row's chips are rendered 4× and the track slides by exactly one
-       copy (25%), so there's always chip-filled track on both sides of the
-       viewport — no visible ends, even on very wide screens. Rows start at
-       different points in the loop (negative delay) so they don't line up. */
-    .chip-row:nth-child(1) { --start: -0.05; }
-    .chip-row:nth-child(2) { --start: -0.4; }
-    .chip-row:nth-child(3) { --start: -0.2; }
-    .chip-row:nth-child(4) { --start: -0.6; }
-    .chip-track {
-      translate: calc(var(--start, 0) * 25%) 0; /* same stagger when static */
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .chip-track {
-        animation: chips-left var(--dur, 100s) linear infinite;
-        animation-delay: calc(var(--start, 0) * var(--dur, 100s));
-      }
-      .chip-row--right .chip-track {
-        animation-name: chips-right;
-      }
-    }
-    @keyframes chips-left {
-      from { translate: 0 0; }
-      to { translate: -25% 0; }
-    }
-    @keyframes chips-right {
-      from { translate: -25% 0; }
-      to { translate: 0 0; }
-    }
-
-    /* ---- Trail connector ---- */
-    .svc-trail {
-      height: 64px;
-      margin-block: var(--gap);
-
-      @variant tablet {
-        height: 80px;
-      }
-      @variant desktop {
-        height: 96px;
-      }
-    }
-
-    /* ---- Solution: cards ---- */
-    .svc-slider {
-      width: 100%;
-    }
-    :global(.svc-cta) {
-      margin-block: 8px 24px; /* 32 below the intro, 48 above the "Services" eyebrow */
-    }
-    .svc-track {
-      --col-gap: 12px;
-      --row-gap: 12px;
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: calc(100% - 24px); /* mobile: one slide + a peek */
-      grid-template-rows: auto auto;
-      column-gap: var(--col-gap);
-      row-gap: var(--row-gap);
-      /* bleed to the viewport edge so the peeking slide runs off-screen */
-      margin-inline: calc(-1 * var(--section-padding-inline));
-      padding-inline: var(--section-padding-inline);
-      scroll-padding-inline: var(--section-padding-inline);
-      overflow-x: auto;
-      overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      text-align: left;
-
-      @variant tablet {
-        --col-gap: 24px;
-        --row-gap: 24px;
-        grid-auto-columns: calc((100% - var(--col-gap)) / 2);
-      }
-      @variant desktop {
-        --col-gap: 40px;
-        --row-gap: 40px;
-        grid-auto-flow: row;
-        grid-template-columns: repeat(2, minmax(0, 1fr)); /* one group per row */
-        grid-template-rows: none;
-        margin-inline: 0;
-        padding-inline: 0;
-        overflow: visible;
-        scroll-snap-type: none;
-      }
-      /* 4 across (pairs side by side) once cards can be ≥ ~250px wide */
-      @media (width >= 75rem) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-    .svc-track::-webkit-scrollbar {
-      display: none;
-    }
-    .svc-slide {
-      display: grid;
-      grid-row: span 2;
-      grid-template-rows: subgrid; /* top cards share a height, bottom cards too */
-      row-gap: var(--row-gap);
-      scroll-snap-align: start;
-
-      /* tablet shows two groups per view: page by twos */
-      &:nth-child(even) {
-        @variant tablet {
-          scroll-snap-align: none;
+            @variant tablet {
+                --gap: 40px;
+            }
+            @variant desktop {
+                --gap: 48px;
+            }
         }
-      }
-
-      @variant desktop {
-        display: contents; /* pairs flow into the desktop grid */
-      }
-    }
-    .svc-card {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 32px 28px;
-      color: var(--color-bedrock);
-      background: #fff;
-      border: 1px solid var(--color-card-border);
-
-      @variant desktop {
-        transition:
-          translate 220ms var(--ease-brand),
-          border-color 220ms var(--ease-brand),
-          box-shadow 220ms var(--ease-brand);
-      }
-    }
-    @media (hover: hover) {
-      .svc-card:hover {
-        @variant desktop {
-          translate: 0 -4px;
-          border-color: var(--color-bedrock);
-          box-shadow: 6px 6px 0 var(--color-mist); /* Tile offset, in Mist so it reads on Bedrock */
+        .svc-heading {
+            color: #fff;
+            text-wrap: balance;
         }
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .svc-card {
-        transition: none;
-      }
-    }
+        .svc-body {
+            max-width: 640px;
+            color: #fff;
+        }
 
-    /* Pagination: active = Fire bar, inactive = Paper 30% squares */
-    .svc-dots {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 24px;
+        /* ---- Problem ---- */
+        .svc-problem {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
 
-      &[hidden] {
-        display: none;
-      }
+            @variant tablet {
+                gap: 48px;
+            }
+            @variant desktop {
+                gap: 64px;
+            }
+        }
+        .svc-intro,
+        .svc-solution {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            text-align: center;
+        }
+
+        /* Complexity marquee: full-bleed rows with an alpha edge fade */
+        .chips {
+            --fade: 40px;
+            --row-gap: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--row-gap);
+            mask-image: linear-gradient(
+                to right,
+                transparent,
+                #000 var(--fade),
+                #000 calc(100% - var(--fade)),
+                transparent
+            );
+
+            @variant tablet {
+                --fade: 80px;
+                --row-gap: 12px;
+            }
+            @variant desktop {
+                --fade: 200px;
+                --row-gap: 16px;
+            }
+        }
+        .chip-row {
+            overflow: hidden;
+        }
+        .chip-track {
+            display: flex;
+            width: max-content;
+        }
+        .chip-set {
+            display: flex;
+            gap: var(--chip-gap, 10px);
+            padding-right: var(--chip-gap, 10px); /* = gap, so every copy is the same width */
+
+            @variant tablet {
+                --chip-gap: 12px;
+            }
+        }
+        .chip {
+            flex: none;
+            padding: 12px 20px;
+            white-space: nowrap;
+            color: var(--color-mist);
+            background: rgb(246 244 238 / 0.04);
+            border: 1px solid rgb(246 244 238 / 0.18);
+        }
+        /* Each row's chips are rendered 4× and the track slides by exactly one
+           copy (25%), so there's always chip-filled track on both sides of the
+           viewport — no visible ends, even on very wide screens. Rows start at
+           different points in the loop (negative delay) so they don't line up. */
+        .chip-row:nth-child(1) { --start: -0.05; }
+        .chip-row:nth-child(2) { --start: -0.4; }
+        .chip-row:nth-child(3) { --start: -0.2; }
+        .chip-row:nth-child(4) { --start: -0.6; }
+        .chip-track {
+            translate: calc(var(--start, 0) * 25%) 0; /* same stagger when static */
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .chip-track {
+                animation: chips-left var(--dur, 100s) linear infinite;
+                animation-delay: calc(var(--start, 0) * var(--dur, 100s));
+            }
+            .chip-row--right .chip-track {
+                animation-name: chips-right;
+            }
+        }
+        @keyframes chips-left {
+            from { translate: 0 0; }
+            to { translate: -25% 0; }
+        }
+        @keyframes chips-right {
+            from { translate: -25% 0; }
+            to { translate: 0 0; }
+        }
+
+        /* ---- Trail connector ---- */
+        .svc-trail {
+            height: 64px;
+            margin-block: var(--gap);
+
+            @variant tablet {
+                height: 80px;
+            }
+            @variant desktop {
+                height: 96px;
+            }
+        }
+
+        /* ---- Solution: cards ---- */
+        .svc-slider {
+            width: 100%;
+        }
+        :global(.svc-cta) {
+            margin-block: 8px 24px; /* 32 below the intro, 48 above the "Services" eyebrow */
+        }
+        .svc-track {
+            --col-gap: 12px;
+            --row-gap: 12px;
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: calc(100% - 24px); /* mobile: one slide + a peek */
+            grid-template-rows: auto auto;
+            column-gap: var(--col-gap);
+            row-gap: var(--row-gap);
+            /* bleed to the viewport edge so the peeking slide runs off-screen */
+            margin-inline: calc(-1 * var(--section-padding-inline));
+            padding-inline: var(--section-padding-inline);
+            scroll-padding-inline: var(--section-padding-inline);
+            overflow-x: auto;
+            overscroll-behavior-x: contain;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            text-align: left;
+
+            @variant tablet {
+                --col-gap: 24px;
+                --row-gap: 24px;
+                grid-auto-columns: calc((100% - var(--col-gap)) / 2);
+            }
+            @variant desktop {
+                --col-gap: 40px;
+                --row-gap: 40px;
+                grid-auto-flow: row;
+                grid-template-columns: repeat(2, minmax(0, 1fr)); /* one group per row */
+                grid-template-rows: none;
+                margin-inline: 0;
+                padding-inline: 0;
+                overflow: visible;
+                scroll-snap-type: none;
+            }
+            /* 4 across (pairs side by side) once cards can be ≥ ~250px wide */
+            @media (width >= 75rem) {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+            }
+        }
+        .svc-track::-webkit-scrollbar {
+            display: none;
+        }
+        .svc-slide {
+            display: grid;
+            grid-row: span 2;
+            grid-template-rows: subgrid; /* top cards share a height, bottom cards too */
+            row-gap: var(--row-gap);
+            scroll-snap-align: start;
+
+            /* tablet shows two groups per view: page by twos */
+            &:nth-child(even) {
+                @variant tablet {
+                    scroll-snap-align: none;
+                }
+            }
+
+            @variant desktop {
+                display: contents; /* pairs flow into the desktop grid */
+            }
+        }
+        .svc-card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 32px 28px;
+            color: var(--color-bedrock);
+            background: #fff;
+            border: 1px solid var(--color-card-border);
+
+            @variant desktop {
+                transition:
+                    translate 220ms var(--ease-brand),
+                    border-color 220ms var(--ease-brand),
+                    box-shadow 220ms var(--ease-brand);
+            }
+        }
+        @media (hover: hover) {
+            .svc-card:hover {
+                @variant desktop {
+                    translate: 0 -4px;
+                    border-color: var(--color-bedrock);
+                    box-shadow: 6px 6px 0 var(--color-mist); /* Tile offset, in Mist so it reads on Bedrock */
+                }
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .svc-card {
+                transition: none;
+            }
+        }
+
+        /* Pagination: active = Fire bar, inactive = Paper 30% squares */
+        .svc-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+
+            &[hidden] {
+                display: none;
+            }
+        }
+        :global(.svc-dot) {
+            width: 8px;
+            height: 8px;
+            background: rgb(246 244 238 / 0.3);
+            cursor: pointer;
+            transition:
+                width 220ms var(--ease-brand),
+                background-color 220ms var(--ease-brand);
+        }
+        :global(.svc-dot[aria-current]) {
+            width: 24px;
+            background: var(--color-fire);
+        }
+        /* comfortable tap target without changing the drawn size */
+        :global(.svc-dot) {
+            position: relative;
+        }
+        :global(.svc-dot)::after {
+            content: '';
+            position: absolute;
+            inset: -12px -4px;
+        }
     }
-    :global(.svc-dot) {
-      width: 8px;
-      height: 8px;
-      background: rgb(246 244 238 / 0.3);
-      cursor: pointer;
-      transition:
-        width 220ms var(--ease-brand),
-        background-color 220ms var(--ease-brand);
-    }
-    :global(.svc-dot[aria-current]) {
-      width: 24px;
-      background: var(--color-fire);
-    }
-    /* comfortable tap target without changing the drawn size */
-    :global(.svc-dot) {
-      position: relative;
-    }
-    :global(.svc-dot)::after {
-      content: '';
-      position: absolute;
-      inset: -12px -4px;
-    }
-  }
 </style>

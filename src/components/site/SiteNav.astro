@@ -22,370 +22,370 @@ import Logo from '../ui/Logo.astro';
 import Button from '../ui/Button.astro';
 
 const links = [
-  { label: 'Approach', href: '/#three-yeses' },
-  { label: 'Services', href: '/#services' },
-  { label: 'About', href: '/#about' },
-  { label: 'FAQs', href: '/#faq' },
+    { label: 'Approach', href: '/#three-yeses' },
+    { label: 'Services', href: '/#services' },
+    { label: 'About', href: '/#about' },
+    { label: 'FAQs', href: '/#faq' },
 ];
 ---
 
 <header id="site-nav" class="site-nav" data-state="top" data-menu="closed">
-  <div class="nav-row container-site">
-    <span class="nav-mark nav-mark--start" aria-hidden="true"></span>
+    <div class="nav-row container-site">
+        <span class="nav-mark nav-mark--start" aria-hidden="true"></span>
 
-    <Logo size={28.5} class="text-bedrock" />
+        <Logo size={28.5} class="text-bedrock" />
 
-    <nav aria-label="Primary" class="ml-auto flex items-center">
-      <ul class="hidden desktop:flex items-center gap-9" role="list">
-        {
-          links.map((l) => (
-            <li>
-              <a href={l.href} class="nav-link type-label text-bedrock">
-                {l.label}
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </nav>
+        <nav aria-label="Primary" class="ml-auto flex items-center">
+            <ul class="hidden desktop:flex items-center gap-9" role="list">
+                {
+                    links.map((l) => (
+                        <li>
+                            <a href={l.href} class="nav-link type-label text-bedrock">
+                                {l.label}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </nav>
 
-    <div class="flex items-center gap-4 desktop:ml-9">
-      <button
-        type="button"
-        class="menu-btn desktop:hidden"
-        aria-label="Open menu"
-        aria-expanded="false"
-        aria-controls="site-menu"
-      >
-        <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
-      </button>
-      <Button data-modal-open="contact-modal" aria-haspopup="dialog" size="small" icon="phone-call" class="max-tablet:hidden">Book a Call</Button>
+        <div class="flex items-center gap-4 desktop:ml-9">
+            <button
+                type="button"
+                class="menu-btn desktop:hidden"
+                aria-label="Open menu"
+                aria-expanded="false"
+                aria-controls="site-menu"
+            >
+                <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
+            <Button data-modal-open="contact-modal" aria-haspopup="dialog" size="small" icon="phone-call" class="max-tablet:hidden">Book a Call</Button>
+        </div>
+
+        <span class="nav-mark nav-mark--end" aria-hidden="true"></span>
     </div>
 
-    <span class="nav-mark nav-mark--end" aria-hidden="true"></span>
-  </div>
+    <!-- Mobile/tablet menu overlay (sits under the nav row, above the page) -->
+    <div id="site-menu" class="menu desktop:hidden" inert>
+        <nav aria-label="Menu" class="menu-inner">
+            <ul class="menu-list" role="list">
+                {
+                    links.map((l, i) => (
+                        <li style={`--i: ${i}`}>
+                            <a href={l.href} class="menu-link type-h2">
+                                {l.label}
+                            </a>
+                        </li>
+                    ))
+                }
+                <li class="menu-cta tablet:hidden" style={`--i: ${links.length}`}>
+                    <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="phone-call">Book a Call</Button>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
-  <!-- Mobile/tablet menu overlay (sits under the nav row, above the page) -->
-  <div id="site-menu" class="menu desktop:hidden" inert>
-    <nav aria-label="Menu" class="menu-inner">
-      <ul class="menu-list" role="list">
-        {
-          links.map((l, i) => (
-            <li style={`--i: ${i}`}>
-              <a href={l.href} class="menu-link type-h2">
-                {l.label}
-              </a>
-            </li>
-          ))
-        }
-        <li class="menu-cta tablet:hidden" style={`--i: ${links.length}`}>
-          <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="phone-call">Book a Call</Button>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
-  <!-- Bottom edge = trail progress line (visible once compact/sticky) -->
-  <div class="nav-trail" aria-hidden="true">
-    <span class="nav-trail__done"></span>
-    <span class="nav-trail__head"></span>
-  </div>
+    <!-- Bottom edge = trail progress line (visible once compact/sticky) -->
+    <div class="nav-trail" aria-hidden="true">
+        <span class="nav-trail__done"></span>
+        <span class="nav-trail__head"></span>
+    </div>
 </header>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    .site-nav {
-      --nav-h: 88px;
-      --nav-h-compact: 64px;
-      position: fixed;
-      inset: 0 0 auto;
-      z-index: 50;
-      height: var(--nav-h);
-      background: rgb(255 255 255 / 0);
-      transition:
-        height 320ms var(--ease-brand),
-        background-color 320ms var(--ease-brand);
+    @layer components {
+        .site-nav {
+            --nav-h: 88px;
+            --nav-h-compact: 64px;
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 50;
+            height: var(--nav-h);
+            background: rgb(255 255 255 / 0);
+            transition:
+                height 320ms var(--ease-brand),
+                background-color 320ms var(--ease-brand);
 
-      @variant tablet {
-        --nav-h: 132px;
-        --nav-h-compact: 88px;
-      }
-    }
-    .site-nav:not([data-state='top']) {
-      height: var(--nav-h-compact);
-      background: #fff;
-    }
+            @variant tablet {
+                --nav-h: 132px;
+                --nav-h-compact: 88px;
+            }
+        }
+        .site-nav:not([data-state='top']) {
+            height: var(--nav-h-compact);
+            background: #fff;
+        }
 
-    .nav-row {
-      position: relative;
-      display: flex;
-      align-items: center;
-      height: 100%;
-    }
+        .nav-row {
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
 
-    /* Corner square marks — sit in the margin, a fixed gap outside the content edge.
-       --content-inset = the container's inline padding (0 once it switches to a fixed width). */
-    .nav-mark {
-      --mark-gap: 14px;
-      --content-inset: var(--section-padding-inline);
-      position: absolute;
-      top: 50%;
-      width: 12px;
-      height: 12px;
-      margin-top: -6px;
-      background: var(--color-bedrock);
-      display: none;
+        /* Corner square marks — sit in the margin, a fixed gap outside the content edge.
+           --content-inset = the container's inline padding (0 once it switches to a fixed width). */
+        .nav-mark {
+            --mark-gap: 14px;
+            --content-inset: var(--section-padding-inline);
+            position: absolute;
+            top: 50%;
+            width: 12px;
+            height: 12px;
+            margin-top: -6px;
+            background: var(--color-bedrock);
+            display: none;
 
-      @variant tablet {
-        display: block;
-      }
-      @variant desktop {
-        --mark-gap: 24px;
-      }
-      @variant wide {
-        --content-inset: 0px;
-      }
-    }
-    .nav-mark--start {
-      left: calc(var(--content-inset) - var(--mark-gap) - 12px);
-    }
-    .nav-mark--end {
-      right: calc(var(--content-inset) - var(--mark-gap) - 12px);
-    }
+            @variant tablet {
+                display: block;
+            }
+            @variant desktop {
+                --mark-gap: 24px;
+            }
+            @variant wide {
+                --content-inset: 0px;
+            }
+        }
+        .nav-mark--start {
+            left: calc(var(--content-inset) - var(--mark-gap) - 12px);
+        }
+        .nav-mark--end {
+            right: calc(var(--content-inset) - var(--mark-gap) - 12px);
+        }
 
-    .nav-link {
-      text-decoration: underline 2px transparent;
-      text-underline-offset: 6px;
-      transition: text-decoration-color 160ms ease-out;
-    }
-    @media (hover: hover) {
-      .nav-link:hover {
-        text-decoration-color: currentColor;
-      }
-    }
+        .nav-link {
+            text-decoration: underline 2px transparent;
+            text-underline-offset: 6px;
+            transition: text-decoration-color 160ms ease-out;
+        }
+        @media (hover: hover) {
+            .nav-link:hover {
+                text-decoration-color: currentColor;
+            }
+        }
 
-    .menu-btn {
-      display: grid;
-      place-items: center;
-      width: 40px;
-      height: 40px;
-      margin-right: -8px; /* optical: icon edge aligns with container edge on mobile */
-      color: var(--color-bedrock);
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+        .menu-btn {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            margin-right: -8px; /* optical: icon edge aligns with container edge on mobile */
+            color: var(--color-bedrock);
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
 
-      @variant tablet {
-        margin-right: 0;
-      }
-    }
+            @variant tablet {
+                margin-right: 0;
+            }
+        }
 
-    /* ---- Burger ⇄ X (matches Tabler menu-2: three 16px lines, 6px apart,
-       2px round stroke; the outer two rotate into an X, the middle collapses) */
-    .burger {
-      position: relative;
-      width: 16px;
-      height: 14px;
+        /* ---- Burger ⇄ X (matches Tabler menu-2: three 16px lines, 6px apart,
+           2px round stroke; the outer two rotate into an X, the middle collapses) */
+        .burger {
+            position: relative;
+            width: 16px;
+            height: 14px;
 
-      & > span {
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        border-radius: 1px;
-        background: currentColor;
-        transition:
-          translate 200ms var(--ease-brand),
-          rotate 200ms var(--ease-brand),
-          opacity 120ms ease-out,
-          scale 200ms var(--ease-brand);
-      }
-      & > span:nth-child(1) { top: 0; }
-      & > span:nth-child(2) { top: 6px; }
-      & > span:nth-child(3) { top: 12px; }
-    }
-    .site-nav[data-menu='open'] .burger > span {
-      &:nth-child(1) { translate: 0 6px; rotate: 45deg; }
-      &:nth-child(2) { opacity: 0; scale: 0 1; }
-      &:nth-child(3) { translate: 0 -6px; rotate: -45deg; }
-    }
+            & > span {
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                border-radius: 1px;
+                background: currentColor;
+                transition:
+                    translate 200ms var(--ease-brand),
+                    rotate 200ms var(--ease-brand),
+                    opacity 120ms ease-out,
+                    scale 200ms var(--ease-brand);
+            }
+            & > span:nth-child(1) { top: 0; }
+            & > span:nth-child(2) { top: 6px; }
+            & > span:nth-child(3) { top: 12px; }
+        }
+        .site-nav[data-menu='open'] .burger > span {
+            &:nth-child(1) { translate: 0 6px; rotate: 45deg; }
+            &:nth-child(2) { opacity: 0; scale: 0 1; }
+            &:nth-child(3) { translate: 0 -6px; rotate: -45deg; }
+        }
 
-    /* ---- Menu overlay ----
-       Fixed to the viewport, under the nav row (z 0 vs 1 inside the header's
-       stacking context). Open is fast (120ms); close is a short fade. */
-    .nav-row {
-      z-index: 1;
-    }
-    .menu {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      overflow-y: auto;
-      overscroll-behavior: contain;
-      background: #fff;
-      opacity: 0;
-      visibility: hidden;
-      transition:
-        opacity 160ms var(--ease-brand),
-        visibility 0s linear 160ms;
-    }
-    .site-nav[data-menu='open'] .menu {
-      opacity: 1;
-      visibility: visible;
-      transition:
-        opacity 120ms var(--ease-brand),
-        visibility 0s;
-    }
-    .site-nav[data-menu='open'] .nav-trail {
-      opacity: 0;
-    }
+        /* ---- Menu overlay ----
+           Fixed to the viewport, under the nav row (z 0 vs 1 inside the header's
+           stacking context). Open is fast (120ms); close is a short fade. */
+        .nav-row {
+            z-index: 1;
+        }
+        .menu {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            background: #fff;
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                opacity 160ms var(--ease-brand),
+                visibility 0s linear 160ms;
+        }
+        .site-nav[data-menu='open'] .menu {
+            opacity: 1;
+            visibility: visible;
+            transition:
+                opacity 120ms var(--ease-brand),
+                visibility 0s;
+        }
+        .site-nav[data-menu='open'] .nav-trail {
+            opacity: 0;
+        }
 
-    .menu-inner {
-      padding: calc(var(--nav-h) + 8px) var(--section-padding-inline) 40px;
+        .menu-inner {
+            padding: calc(var(--nav-h) + 8px) var(--section-padding-inline) 40px;
 
-      @variant tablet {
-        padding-top: var(--nav-h);
-      }
-    }
+            @variant tablet {
+                padding-top: var(--nav-h);
+            }
+        }
 
-    /* Items fade up one at a time: --i = position, 45ms apart. On close they
-       just drop out with the overlay (no reverse stagger, so it feels quick). */
-    .menu-list > li {
-      opacity: 0;
-      translate: 0 12px;
-      transition:
-        opacity 100ms ease-out,
-        translate 0s linear 160ms;
-    }
-    .site-nav[data-menu='open'] .menu-list > li {
-      --delay: calc(40ms + var(--i) * 45ms);
-      opacity: 1;
-      translate: 0 0;
-      transition:
-        opacity 220ms var(--ease-brand) var(--delay),
-        translate 280ms var(--ease-brand) var(--delay);
-    }
+        /* Items fade up one at a time: --i = position, 45ms apart. On close they
+           just drop out with the overlay (no reverse stagger, so it feels quick). */
+        .menu-list > li {
+            opacity: 0;
+            translate: 0 12px;
+            transition:
+                opacity 100ms ease-out,
+                translate 0s linear 160ms;
+        }
+        .site-nav[data-menu='open'] .menu-list > li {
+            --delay: calc(40ms + var(--i) * 45ms);
+            opacity: 1;
+            translate: 0 0;
+            transition:
+                opacity 220ms var(--ease-brand) var(--delay),
+                translate 280ms var(--ease-brand) var(--delay);
+        }
 
-    .menu-link {
-      display: block;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--color-hairline);
-      color: var(--color-bedrock);
-      text-decoration: underline 2px transparent;
-      text-underline-offset: 8px;
-      transition: text-decoration-color 160ms ease-out;
-      -webkit-tap-highlight-color: transparent;
+        .menu-link {
+            display: block;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-hairline);
+            color: var(--color-bedrock);
+            text-decoration: underline 2px transparent;
+            text-underline-offset: 8px;
+            transition: text-decoration-color 160ms ease-out;
+            -webkit-tap-highlight-color: transparent;
 
-      &:active {
-        color: var(--color-lagoon);
-      }
-    }
-    @media (hover: hover) {
-      .menu-link:hover {
-        text-decoration-color: currentColor;
-      }
-    }
-    .menu-cta {
-      padding-top: 32px;
-    }
+            &:active {
+                color: var(--color-lagoon);
+            }
+        }
+        @media (hover: hover) {
+            .menu-link:hover {
+                text-decoration-color: currentColor;
+            }
+        }
+        .menu-cta {
+            padding-top: 32px;
+        }
 
-    /* ---- Bottom edge = trail progress (Figma 50:757–50:759, simplified) ----
-       One 2px line across the bottom: Fire for the part of the page travelled,
-       Bedrock for the road ahead (2px = brand trail weight), plus the trail head. */
-    .nav-trail {
-      --trail-w: 2px;
-      --head: 8px;
-      position: absolute;
-      inset: auto 0 0;
-      height: var(--trail-w);
-      background: var(--color-mist); /* road ahead */
-      opacity: 0;
-      transition: opacity 200ms ease-out;
-      pointer-events: none;
-    }
-    .site-nav[data-state='compact'] .nav-trail {
-      opacity: 1;
-    }
-    .nav-trail__done {
-      /* path travelled, grows with page progress */
-      position: absolute;
-      inset: 0;
-      background: var(--color-fire);
-      transform-origin: left center;
-      transform: scaleX(var(--scroll-progress, 0));
-    }
-    .nav-trail__head {
-      position: absolute;
-      top: calc((var(--trail-w) - var(--head)) / 2);
-      left: 0;
-      width: var(--head);
-      height: var(--head);
-      border-radius: 50%;
-      margin-left: calc(var(--head) / -2);
-      background: var(--color-fire);
-      transform: translateX(calc(var(--scroll-progress, 0) * 100vw));
-    }
+        /* ---- Bottom edge = trail progress (Figma 50:757–50:759, simplified) ----
+           One 2px line across the bottom: Fire for the part of the page travelled,
+           Bedrock for the road ahead (2px = brand trail weight), plus the trail head. */
+        .nav-trail {
+            --trail-w: 2px;
+            --head: 8px;
+            position: absolute;
+            inset: auto 0 0;
+            height: var(--trail-w);
+            background: var(--color-mist); /* road ahead */
+            opacity: 0;
+            transition: opacity 200ms ease-out;
+            pointer-events: none;
+        }
+        .site-nav[data-state='compact'] .nav-trail {
+            opacity: 1;
+        }
+        .nav-trail__done {
+            /* path travelled, grows with page progress */
+            position: absolute;
+            inset: 0;
+            background: var(--color-fire);
+            transform-origin: left center;
+            transform: scaleX(var(--scroll-progress, 0));
+        }
+        .nav-trail__head {
+            position: absolute;
+            top: calc((var(--trail-w) - var(--head)) / 2);
+            left: 0;
+            width: var(--head);
+            height: var(--head);
+            border-radius: 50%;
+            margin-left: calc(var(--head) / -2);
+            background: var(--color-fire);
+            transform: translateX(calc(var(--scroll-progress, 0) * 100vw));
+        }
 
-    @media (prefers-reduced-motion: reduce) {
-      .site-nav,
-      .nav-trail,
-      .burger > span,
-      .menu,
-      .site-nav[data-menu] .menu-list > li {
-        transition: none;
-      }
+        @media (prefers-reduced-motion: reduce) {
+            .site-nav,
+            .nav-trail,
+            .burger > span,
+            .menu,
+            .site-nav[data-menu] .menu-list > li {
+                transition: none;
+            }
+        }
     }
-  }
 </style>
 
 <style is:global>
-  /* Page behind the open menu doesn't scroll; keep the gutter so nothing shifts. */
-  html.menu-open {
-    overflow: hidden;
-    scrollbar-gutter: stable;
-  }
+    /* Page behind the open menu doesn't scroll; keep the gutter so nothing shifts. */
+    html.menu-open {
+        overflow: hidden;
+        scrollbar-gutter: stable;
+    }
 </style>
 
 <script>
-  const nav = document.getElementById('site-nav');
-  const btn = nav?.querySelector<HTMLButtonElement>('.menu-btn');
-  const menu = document.getElementById('site-menu');
+    const nav = document.getElementById('site-nav');
+    const btn = nav?.querySelector<HTMLButtonElement>('.menu-btn');
+    const menu = document.getElementById('site-menu');
 
-  if (nav && btn && menu) {
-    const desktop = window.matchMedia('(min-width: 64rem)');
+    if (nav && btn && menu) {
+        const desktop = window.matchMedia('(min-width: 64rem)');
 
-    const setOpen = (open: boolean) => {
-      if ((nav.dataset.menu === 'open') === open) return;
-      nav.dataset.menu = open ? 'open' : 'closed';
-      btn.setAttribute('aria-expanded', String(open));
-      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      menu.inert = !open;
-      document.documentElement.classList.toggle('menu-open', open);
-      // Everything outside the nav is inert while the menu covers it.
-      for (const el of Array.from(document.body.children)) {
-        if (el !== nav && el instanceof HTMLElement && el.tagName !== 'SCRIPT') el.inert = open;
-      }
-    };
+        const setOpen = (open: boolean) => {
+            if ((nav.dataset.menu === 'open') === open) return;
+            nav.dataset.menu = open ? 'open' : 'closed';
+            btn.setAttribute('aria-expanded', String(open));
+            btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            menu.inert = !open;
+            document.documentElement.classList.toggle('menu-open', open);
+            // Everything outside the nav is inert while the menu covers it.
+            for (const el of Array.from(document.body.children)) {
+                if (el !== nav && el instanceof HTMLElement && el.tagName !== 'SCRIPT') el.inert = open;
+            }
+        };
 
-    btn.addEventListener('click', () => setOpen(nav.dataset.menu !== 'open'));
+        btn.addEventListener('click', () => setOpen(nav.dataset.menu !== 'open'));
 
-    // A tap on any link or the CTA closes first (synchronously), so hash
-    // scrolling and the contact modal work on a page that's no longer inert.
-    menu.addEventListener('click', (e) => {
-      if ((e.target as Element).closest('a, button')) setOpen(false);
-    });
+        // A tap on any link or the CTA closes first (synchronously), so hash
+        // scrolling and the contact modal work on a page that's no longer inert.
+        menu.addEventListener('click', (e) => {
+            if ((e.target as Element).closest('a, button')) setOpen(false);
+        });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nav.dataset.menu === 'open') {
-        setOpen(false);
-        btn.focus();
-      }
-    });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && nav.dataset.menu === 'open') {
+                setOpen(false);
+                btn.focus();
+            }
+        });
 
-    desktop.addEventListener('change', (e) => {
-      if (e.matches) setOpen(false);
-    });
-  }
+        desktop.addEventListener('change', (e) => {
+            if (e.matches) setOpen(false);
+        });
+    }
 </script>

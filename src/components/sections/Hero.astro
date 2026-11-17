@@ -15,166 +15,166 @@ import HeroTripCard from './HeroTripCard.astro';
 ---
 
 <section id="hero" class="hero" aria-labelledby="hero-title" data-trail-section>
-  <div class="hero-inner container-site above-map">
-    <div class="hero-main">
-      <div class="hero-copy">
-        <h1 id="hero-title" class="type-h1 hero-title">
-          Websites that make <span class="text-fire">schools</span> say <em class="text-fire">yes</em>
-          <span class="hero-title-end">to your student trips.</span>
-        </h1>
-        <p class="type-body hero-intro">
-          <strong>Hi, I’m Kirk, founder of EdTrek Digital.</strong> I design and build turnkey, lightning-fast websites,
-          integrated directly with your booking systems, taking the stress out of your tech so you can focus on creating
-          world-class travel experiences for students.
-        </p>
-        <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket" class="hero-cta">Let’s Build Your Site</Button>
-      </div>
+    <div class="hero-inner container-site above-map">
+        <div class="hero-main">
+            <div class="hero-copy">
+                <h1 id="hero-title" class="type-h1 hero-title">
+                    Websites that make <span class="text-fire">schools</span> say <em class="text-fire">yes</em>
+                    <span class="hero-title-end">to your student trips.</span>
+                </h1>
+                <p class="type-body hero-intro">
+                    <strong>Hi, I’m Kirk, founder of EdTrek Digital.</strong> I design and build turnkey, lightning-fast websites,
+                    integrated directly with your booking systems, taking the stress out of your tech so you can focus on creating
+                    world-class travel experiences for students.
+                </p>
+                <Button data-modal-open="contact-modal" aria-haspopup="dialog" icon="rocket" class="hero-cta">Let’s Build Your Site</Button>
+            </div>
 
-      <div class="hero-visual">
-        <HeroTripCard />
-      </div>
+            <div class="hero-visual">
+                <HeroTripCard />
+            </div>
+        </div>
+
+        <a href="#three-yeses" class="hero-cue">
+            <span class="type-label">Explore my Approach</span>
+            <span class="hero-cue-mark" aria-hidden="true" data-trail-end="8"></span>
+        </a>
     </div>
-
-    <a href="#three-yeses" class="hero-cue">
-      <span class="type-label">Explore my Approach</span>
-      <span class="hero-cue-mark" aria-hidden="true" data-trail-end="8"></span>
-    </a>
-  </div>
 </section>
 
 <style>
-  @reference "../../styles/global.css";
+    @reference "../../styles/global.css";
 
-  @layer components {
-    .hero {
-      position: relative;
-      overflow-x: clip; /* callouts may bleed toward the viewport edge */
+    @layer components {
+        .hero {
+            position: relative;
+            overflow-x: clip; /* callouts may bleed toward the viewport edge */
+        }
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            min-height: 100svh;
+            padding-bottom: 55px; /* room for the page trail under the cue mark */
+            /* clear the fixed nav (its top-state height) */
+            padding-top: calc(88px + 24px);
+
+            @variant tablet {
+                padding-top: calc(132px + 36px);
+            }
+            @variant desktop {
+                padding-top: 132px;
+            }
+        }
+
+        /* ---- main: stacked & centered → two columns on desktop ---- */
+        .hero-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 64px;
+            text-align: center;
+
+            @variant tablet {
+                gap: 88px;
+            }
+            @variant desktop {
+                display: grid;
+                grid-template-columns: repeat(12, minmax(0, 1fr));
+                column-gap: var(--grid-gutter);
+                align-items: center;
+                text-align: left;
+                padding-block: 40px;
+            }
+        }
+
+        .hero-copy {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            @variant desktop {
+                grid-column: 1 / span 7;
+                align-items: flex-start;
+            }
+        }
+        .hero-title {
+            max-width: 680px;
+            text-wrap: balance;
+
+            @variant desktop {
+                max-width: 627px;
+            }
+        }
+        .hero-title-end {
+            display: block;
+        }
+        .hero-intro {
+            max-width: 560px;
+            margin-top: 20px;
+
+            @variant tablet {
+                margin-top: 24px;
+            }
+            @variant desktop {
+                max-width: 540px;
+                margin-top: 28px;
+            }
+        }
+        :global(.hero-cta) {
+            margin-top: 28px;
+
+            @variant tablet {
+                margin-top: 32px;
+            }
+            @variant desktop {
+                margin-top: 26px;
+            }
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            text-align: left;
+
+            @variant desktop {
+                grid-column: 8 / -1;
+                justify-content: flex-start;
+                /* bleed into the page margin, stopping 20px short of the viewport edge */
+                width: auto;
+                margin-right: calc(20px - var(--section-padding-inline));
+            }
+            @variant wide {
+                margin-right: calc(20px - (100vw - clamp(1256px, 87.22vw, 1600px)) / 2);
+            }
+        }
+
+        /* ---- scroll cue ---- */
+        .hero-cue {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            align-self: center;
+            gap: 18px;
+            margin-top: 40px;
+            color: var(--color-bedrock);
+            text-decoration: none;
+
+            @variant tablet {
+                margin-top: 72px;
+            }
+        }
+        .hero-cue-mark {
+            width: 12px; /* = the page trail's start squares */
+            height: 12px;
+            background: var(--color-bedrock);
+        }
+        @media (hover: hover) {
+            .hero-cue:hover .type-label {
+                text-decoration: underline 2px;
+                text-underline-offset: 6px;
+            }
+        }
     }
-    .hero-inner {
-      display: flex;
-      flex-direction: column;
-      min-height: 100svh;
-      padding-bottom: 55px; /* room for the page trail under the cue mark */
-      /* clear the fixed nav (its top-state height) */
-      padding-top: calc(88px + 24px);
-
-      @variant tablet {
-        padding-top: calc(132px + 36px);
-      }
-      @variant desktop {
-        padding-top: 132px;
-      }
-    }
-
-    /* ---- main: stacked & centered → two columns on desktop ---- */
-    .hero-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 64px;
-      text-align: center;
-
-      @variant tablet {
-        gap: 88px;
-      }
-      @variant desktop {
-        display: grid;
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        column-gap: var(--grid-gutter);
-        align-items: center;
-        text-align: left;
-        padding-block: 40px;
-      }
-    }
-
-    .hero-copy {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      @variant desktop {
-        grid-column: 1 / span 7;
-        align-items: flex-start;
-      }
-    }
-    .hero-title {
-      max-width: 680px;
-      text-wrap: balance;
-
-      @variant desktop {
-        max-width: 627px;
-      }
-    }
-    .hero-title-end {
-      display: block;
-    }
-    .hero-intro {
-      max-width: 560px;
-      margin-top: 20px;
-
-      @variant tablet {
-        margin-top: 24px;
-      }
-      @variant desktop {
-        max-width: 540px;
-        margin-top: 28px;
-      }
-    }
-    :global(.hero-cta) {
-      margin-top: 28px;
-
-      @variant tablet {
-        margin-top: 32px;
-      }
-      @variant desktop {
-        margin-top: 26px;
-      }
-    }
-
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      text-align: left;
-
-      @variant desktop {
-        grid-column: 8 / -1;
-        justify-content: flex-start;
-        /* bleed into the page margin, stopping 20px short of the viewport edge */
-        width: auto;
-        margin-right: calc(20px - var(--section-padding-inline));
-      }
-      @variant wide {
-        margin-right: calc(20px - (100vw - clamp(1256px, 87.22vw, 1600px)) / 2);
-      }
-    }
-
-    /* ---- scroll cue ---- */
-    .hero-cue {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      align-self: center;
-      gap: 18px;
-      margin-top: 40px;
-      color: var(--color-bedrock);
-      text-decoration: none;
-
-      @variant tablet {
-        margin-top: 72px;
-      }
-    }
-    .hero-cue-mark {
-      width: 12px; /* = the page trail's start squares */
-      height: 12px;
-      background: var(--color-bedrock);
-    }
-    @media (hover: hover) {
-      .hero-cue:hover .type-label {
-        text-decoration: underline 2px;
-        text-underline-offset: 6px;
-      }
-    }
-  }
 </style>
